@@ -13,10 +13,10 @@
   <style>
     /* ─── CSS Variables ─────────────────────────────────────────── */
     :root {
-      --teal:       #0D6E6E;
-      --teal-dark:  #095555;
-      --teal-light: #E6F4F4;
-      --teal-mid:   #1A8A8A;
+      --teal:       #176E68;
+      --teal-dark:  #0F5550;
+      --teal-light: #E6F4F2;
+      --teal-mid:   #228A82;
       --orange:     #F97316;
       --orange-dark:#EA6100;
       --orange-light:#FFF0E6;
@@ -150,12 +150,12 @@
     .btn-teal {
       background: var(--teal);
       color: var(--white);
-      box-shadow: 0 4px 14px rgba(13,110,110,0.30);
+      box-shadow: 0 4px 14px rgba(23,110,104,0.30);
     }
     .btn-teal:hover {
       background: var(--teal-dark);
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(13,110,110,0.40);
+      box-shadow: 0 6px 20px rgba(23,110,104,0.40);
     }
     .btn-lg {
       padding: 17px 36px;
@@ -252,7 +252,7 @@
       right: -120px;
       width: 600px;
       height: 600px;
-      background: radial-gradient(ellipse, rgba(13,110,110,0.07) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(23,110,104,0.07) 0%, transparent 70%);
       pointer-events: none;
     }
     .hero::after {
@@ -278,7 +278,7 @@
       align-items: center;
       gap: 8px;
       background: var(--teal-light);
-      border: 1px solid rgba(13,110,110,0.2);
+      border: 1px solid rgba(23,110,104,0.2);
       border-radius: 50px;
       padding: 6px 16px;
       font-size: 0.8125rem;
@@ -343,45 +343,10 @@
       flex-shrink: 0;
     }
     .hero-image-area {
-      background: linear-gradient(145deg, #E8F5F5 0%, #D0EEEE 100%);
-      border: 2px dashed rgba(13,110,110,0.25);
       border-radius: var(--radius-lg);
+      overflow: hidden;
       aspect-ratio: 4/3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      text-align: center;
-      padding: 24px;
-    }
-    .hero-image-area .img-label {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--teal);
-      background: rgba(13,110,110,0.12);
-      padding: 4px 12px;
-      border-radius: 4px;
-    }
-    .hero-image-area .img-desc {
-      font-size: 0.875rem;
-      color: var(--gray-600);
-      max-width: 280px;
-    }
-    .hero-image-area .img-dims {
-      font-size: 0.75rem;
-      color: var(--gray-400);
-      font-weight: 500;
-    }
-    .hero-image-icon {
-      width: 56px;
-      height: 56px;
-      color: var(--teal);
-      opacity: 0.35;
-      stroke-width: 1;
+      box-shadow: var(--shadow-lg);
     }
 
     /* ─── Stats Band ────────────────────────────────────────────── */
@@ -581,44 +546,20 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
+      overflow: hidden;
     }
     .visual-box {
-      border: 2px dashed rgba(13,110,110,0.2);
       border-radius: var(--radius-lg);
-      background: linear-gradient(145deg, var(--teal-light) 0%, #D8EFEF 100%);
-      aspect-ratio: 4/3.2;
+      background: var(--white);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      text-align: center;
-      padding: 20px;
-      transition: border-color 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .visual-box:hover { border-color: var(--teal); }
-    .visual-box .vb-icon {
-      width: 44px;
-      height: 44px;
-      color: var(--teal);
-      opacity: 0.5;
-      stroke-width: 1.5;
-    }
-    .visual-box .vb-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--teal);
-      background: rgba(13,110,110,0.12);
-      padding: 3px 10px;
-      border-radius: 4px;
-    }
-    .visual-box .vb-desc {
-      font-size: 0.8rem;
-      color: var(--gray-600);
-      line-height: 1.5;
-      max-width: 200px;
+    .visual-box:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
     }
 
     /* ─── Features ──────────────────────────────────────────────── */
@@ -1124,7 +1065,7 @@
     .form-group input:focus,
     .form-group select:focus {
       border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(13,110,110,0.12);
+      box-shadow: 0 0 0 3px rgba(23,110,104,0.12);
     }
     .form-group select {
       cursor: pointer;
@@ -1238,7 +1179,7 @@
       .problem-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
       .steps-grid::before { display: none; }
-      .visuals-grid { grid-template-columns: 1fr; }
+      .visuals-grid { grid-template-columns: 1fr; overflow: hidden; }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .testi-grid { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
@@ -1272,7 +1213,7 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <img src="assets/logo-wordmark.jpg" alt="WanderAware" style="height:32px;width:auto;display:block;" />
+        <img src="assets/logo-wordmark.jpg" alt="WanderAware" style="height:52px;width:auto;display:block;" />
       </a>
       <ul class="nav-links">
         <li><a href="#how-it-works">How It Works</a></li>
@@ -1599,13 +1540,9 @@
 
       <!-- Starter -->
       <div class="price-card">
-        <div class="sold-out-badge">
-          <i data-lucide="alert-circle" style="width:13px;height:13px;"></i>
-          Sold Out
-        </div>
         <div class="price-tier">Starter</div>
         <h3>Single-Entry</h3>
-        <p class="price-hardware">Starting at <strong>$49 hardware</strong> (one-time)</p>
+        <p class="price-hardware"><strong>$49</strong> one-time hardware</p>
         <div class="price-amount">
           <span class="price-dollar">$79</span>
           <span class="price-per">/mo</span>
@@ -1634,20 +1571,16 @@
           </li>
         </ul>
         <button class="btn btn-teal btn-full open-checkout" data-plan="starter">
-          Join Waitlist →
+          Pre-Order Now →
         </button>
       </div>
 
       <!-- Professional -->
       <div class="price-card featured">
         <div class="popular-badge">&#11088; Most Popular</div>
-        <div class="sold-out-badge">
-          <i data-lucide="alert-circle" style="width:13px;height:13px;"></i>
-          Sold Out
-        </div>
         <div class="price-tier">Professional</div>
         <h3>Multi-Door Facility</h3>
-        <p class="price-hardware">Starting at <strong>$129 hardware</strong> (one-time)</p>
+        <p class="price-hardware"><strong>$129</strong> one-time hardware</p>
         <div class="price-amount">
           <span class="price-dollar">$99</span>
           <span class="price-per">/mo</span>
@@ -1680,7 +1613,7 @@
           </li>
         </ul>
         <button class="btn btn-primary btn-full open-checkout" data-plan="professional">
-          Join Waitlist →
+          Pre-Order Now →
         </button>
       </div>
 
@@ -1726,7 +1659,7 @@
 
     </div>
     <p class="pricing-note">
-      Hardware ships when your waitlist position opens. Subscription starts on first use. Cancel anytime.
+      Enter your details below. No payment is taken today — we'll contact you before charging your card.
     </p>
   </div>
 </section>
@@ -1761,11 +1694,8 @@
           <span>Monthly subscription</span>
           <span class="price" id="summaryMonthly">$99/mo</span>
         </div>
-        <div class="order-line total">
-          <span>Due today</span>
-          <span class="price" id="summaryDueToday">$129.00</span>
-        </div>
-        <p class="order-note">Subscription billing begins when your unit ships.</p>
+        <div class="order-line total"><span>Due today</span><span class="price">$0.00</span></div>
+        <p class="order-note"><i data-lucide="lock" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:4px;"></i>Your card will only be charged when your unit ships. You can cancel anytime before then.</p>
       </div>
 
       <!-- Right: Checkout Form -->
@@ -1819,7 +1749,7 @@
           <div class="form-divider"><span>Payment Information</span></div>
 
           <div class="form-group">
-            <label>Card Number</label>
+            <label>Card Number (charged only when unit ships)</label>
             <div class="card-input-wrap">
               <i data-lucide="credit-card"></i>
               <input type="text" placeholder="4242 4242 4242 4242" maxlength="19">
@@ -1961,14 +1891,14 @@
       label: 'Starter Plan',
       hardware: '$49.00',
       monthly: '$79/mo',
-      dueToday: '$49.00',
+      dueToday: '$0.00',
       planName: 'Starter'
     },
     professional: {
       label: 'Professional Plan',
       hardware: '$129.00',
       monthly: '$99/mo',
-      dueToday: '$129.00',
+      dueToday: '$0.00',
       planName: 'Professional'
     }
   };
@@ -1982,7 +1912,6 @@
     document.getElementById('selectedPlanLabel').textContent = config.label;
     document.getElementById('summaryHardware').textContent = config.hardware;
     document.getElementById('summaryMonthly').textContent = config.monthly;
-    document.getElementById('summaryDueToday').textContent = config.dueToday;
     document.getElementById('selected-plan-input').value = config.planName;
 
     // Show checkout section
