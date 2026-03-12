@@ -814,6 +814,40 @@
       color: var(--gray-500);
     }
 
+    /* ─── Home Caregivers ───────────────────────────────────────── */
+    .home-caregivers { background: var(--teal-light); }
+    .caregivers-inner {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .caregivers-content p { color: var(--gray-600); line-height: 1.7; margin-bottom: 12px; }
+    .caregivers-note { font-size: 0.85rem !important; color: var(--gray-400) !important; }
+    .caregivers-form {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .caregivers-form p { font-size: 0.9rem; color: var(--gray-700); margin-bottom: 16px; line-height: 1.6; }
+    .inline-form { display: flex; gap: 8px; flex-wrap: wrap; }
+    .inline-form input[type="email"] {
+      flex: 1;
+      min-width: 180px;
+      padding: 10px 14px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .inline-form input[type="email"]:focus { border-color: var(--teal); }
+    @media (max-width: 768px) {
+      .caregivers-inner { grid-template-columns: 1fr; }
+    }
+
     /* ─── FAQ ───────────────────────────────────────────────────── */
     .faq { background: var(--gray-50); }
     .faq-list {
@@ -951,220 +985,116 @@
       color: var(--gray-600);
     }
 
-    /* ─── Checkout Section ──────────────────────────────────────── */
-    .checkout-section {
-      background: var(--gray-50);
-      padding: 80px 0;
-    }
-    .checkout-container {
+    /* ─── Reservation Section ───────────────────────────────────── */
+    .reservation-section { background: var(--gray-50); }
+    .reservation-wrap {
       display: grid;
-      grid-template-columns: 380px 1fr;
+      grid-template-columns: 1fr 1.6fr;
       gap: 48px;
+      align-items: start;
       max-width: 960px;
       margin: 0 auto;
-      align-items: start;
-    }
-    .checkout-summary {
       background: var(--white);
       border-radius: var(--radius-lg);
-      padding: 32px 28px;
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--gray-200);
-      position: sticky;
-      top: 90px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
     }
-    .checkout-summary h3 {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
+    .reservation-summary {
+      background: var(--teal);
+      padding: 48px 32px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: rgba(255,255,255,0.9);
+    }
+    .res-plan-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 20px;
+      color: white;
+      margin-bottom: 8px;
     }
-    .selected-plan {
-      background: var(--teal-light);
-      border-radius: var(--radius-md);
-      padding: 12px 16px;
-      margin-bottom: 20px;
-      font-size: 0.9375rem;
-      font-weight: 600;
-      color: var(--teal-dark);
-    }
-    .order-line {
+    .res-price-line {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--gray-100);
-      font-size: 0.9375rem;
-      color: var(--gray-700);
+      font-size: 0.9rem;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
     }
-    .order-line:last-of-type { border-bottom: none; }
-    .order-line.total {
-      margin-top: 8px;
-      padding-top: 16px;
-      border-top: 2px solid var(--gray-200);
-      border-bottom: none;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--gray-900);
+    .res-price-line strong { color: white; font-size: 1rem; }
+    .res-divider { height: 1px; background: rgba(255,255,255,0.2); margin: 8px 0; }
+    .res-note {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.8);
     }
-    .order-line .price { font-weight: 600; color: var(--gray-900); }
-    .order-line.total .price { color: var(--teal); font-size: 1.1rem; }
-    .order-note {
-      margin-top: 16px;
-      font-size: 0.8125rem;
-      color: var(--gray-500);
-      line-height: 1.5;
-      font-style: italic;
+    .res-alt-cta {
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.2);
     }
-
-    .checkout-form-wrap {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      padding: 40px 40px;
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--gray-200);
+    .res-alt-cta p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
     }
-    .checkout-form-wrap h2 {
-      font-size: 1.75rem;
-      color: var(--gray-900);
-      margin-bottom: 10px;
+    .reservation-form-wrap {
+      padding: 48px 40px 48px 0;
     }
-    .checkout-subtitle {
-      font-size: 0.9375rem;
+    .res-subtitle {
       color: var(--gray-600);
       margin-bottom: 28px;
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .form-group {
+    .form-checkbox { margin: 20px 0; }
+    .checkbox-label {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-    .form-group label {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--gray-700);
-    }
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1px solid #E5E7EB;
-      border-radius: 12px;
-      font-family: var(--font-body);
-      font-size: 16px;
-      color: var(--gray-900);
-      background: var(--white);
-      transition: border-color 0.15s, box-shadow 0.15s;
-      outline: none;
-      -webkit-appearance: none;
-    }
-    .form-group input:focus,
-    .form-group select:focus {
-      border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(23,110,104,0.12);
-    }
-    .form-group select {
-      cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 42px;
-    }
-    .form-divider {
-      display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
-      margin: 24px 0 20px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--gray-700);
+      line-height: 1.5;
     }
-    .form-divider::before,
-    .form-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gray-200);
+    .checkbox-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 2px;
+      accent-color: var(--teal);
+      cursor: pointer;
     }
-    .form-divider span {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--gray-500);
-      white-space: nowrap;
-    }
-    .card-input-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-    .card-input-wrap i[data-lucide] {
-      position: absolute;
-      left: 14px;
-      width: 20px;
-      height: 20px;
-      color: var(--gray-400);
-      stroke-width: 1.5;
-      pointer-events: none;
-    }
-    .card-input-wrap input {
-      padding-left: 46px !important;
-    }
-    .field-note {
-      font-size: 0.78rem;
-      color: var(--gray-400);
-      margin-top: 5px;
-    }
-    .checkout-legal {
-      font-size: 0.78rem;
-      color: var(--gray-400);
+    .form-legal {
       text-align: center;
+      font-size: 0.78rem;
+      color: var(--gray-400);
       margin-top: 12px;
       line-height: 1.5;
     }
-
-    /* ─── Sold-Out Result ───────────────────────────────────────── */
-    .sold-out-result {
-      display: none;
+    .res-success-state {
+      text-align: center;
+      padding: 40px 20px;
+      display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      padding: 60px 40px;
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--gray-200);
-      max-width: 560px;
-      margin: 0 auto;
+      gap: 16px;
     }
-    .sold-out-result.shown { display: flex; }
-    .sold-out-result h2 {
-      font-size: 1.75rem;
+    .res-success-state h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
       color: var(--gray-900);
-      margin: 24px 0 14px;
     }
-    .sold-out-result p {
-      font-size: 0.9375rem;
+    .res-success-state p {
       color: var(--gray-600);
-      line-height: 1.7;
-      max-width: 440px;
+      max-width: 380px;
+      line-height: 1.6;
     }
-    .sold-out-note {
-      font-size: 0.8125rem !important;
+    .res-success-note {
+      font-size: 0.82rem !important;
       color: var(--gray-400) !important;
-      margin-top: 10px;
-    }
-    .sold-out-actions {
-      margin-top: 28px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
     }
 
     /* ─── Responsive ─────────────────────────────────────────────── */
@@ -1190,17 +1120,11 @@
       .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
       .stats-grid { grid-template-columns: 1fr; gap: 32px; }
       .section { padding: 72px 0; }
-      .checkout-container {
-        grid-template-columns: 1fr;
-        padding: 0 16px;
+      @media (max-width: 768px) {
+        .reservation-wrap { grid-template-columns: 1fr; }
+        .reservation-summary { padding: 32px 24px; }
+        .reservation-form-wrap { padding: 32px 24px; }
       }
-      .checkout-summary {
-        position: static;
-      }
-      .checkout-form-wrap {
-        padding: 28px 20px;
-      }
-    }
 
     @media (max-width: 540px) {
       .features-grid { grid-template-columns: 1fr; }
@@ -1228,7 +1152,7 @@
         <li><a href="#faq">FAQ</a></li>
       </ul>
       <div class="nav-cta">
-        <button class="btn btn-primary btn-sm open-checkout" data-plan="professional">Pre-Order Now</button>
+        <button class="btn btn-primary btn-sm open-checkout" data-plan="professional">Reserve Your Spot</button>
         <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
       </div>
     </div>
@@ -1237,7 +1161,7 @@
       <a href="#features" onclick="closeMobileMenu()">Features</a>
       <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
       <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
-      <button class="btn btn-primary open-checkout" data-plan="professional" onclick="closeMobileMenu()">Pre-Order Now</button>
+      <button class="btn btn-primary open-checkout" data-plan="professional" onclick="closeMobileMenu()">Reserve Your Spot</button>
     </div>
   </div>
 </nav>
@@ -1258,7 +1182,7 @@
         <div class="hero-ctas">
           <button class="btn btn-primary btn-lg open-checkout" data-plan="professional">
             <i data-lucide="bell-ring" class="icon-inline"></i>
-            Pre-Order Now
+            Reserve Your Spot
           </button>
           <a href="#how-it-works" class="btn btn-secondary btn-lg">
             See How It Works ↓
@@ -1577,7 +1501,7 @@
           </li>
         </ul>
         <button class="btn btn-teal btn-full open-checkout" data-plan="starter">
-          Pre-Order Now →
+          Reserve Your Spot →
         </button>
       </div>
 
@@ -1619,7 +1543,7 @@
           </li>
         </ul>
         <button class="btn btn-primary btn-full open-checkout" data-plan="professional">
-          Pre-Order Now →
+          Reserve Your Spot →
         </button>
       </div>
 
@@ -1670,118 +1594,150 @@
   </div>
 </section>
 
-<!-- ───────────────────────────────────────────────── CHECKOUT -->
-<section id="checkout" class="checkout-section" style="display:none;">
+<!-- ───────────────────────────────────────────────── RESERVATION FORM -->
+<section id="checkout" class="section reservation-section">
   <div class="container">
+    <div class="reservation-wrap">
 
-    <!-- Sold-out result (shown after submit) -->
-    <div class="sold-out-result" id="soldOutResult">
-      <i data-lucide="package-x" style="width:64px;height:64px;color:var(--teal);stroke-width:1;"></i>
-      <h2>This batch just sold out.</h2>
-      <p>You're on the waitlist. We'll email you at <strong id="waitlist-email"></strong> when the next production run opens — typically within 6–8 weeks.</p>
-      <p class="sold-out-note">No charge has been made to your card. You'll receive a confirmation email shortly.</p>
-      <div class="sold-out-actions">
-        <a href="mailto:oopslabai@gmail.com?subject=WanderAware Inquiry" class="btn btn-secondary">Talk to us directly</a>
-      </div>
-    </div>
-
-    <!-- Checkout form (hidden after submit) -->
-    <div class="checkout-container" id="checkoutFormContainer">
-
-      <!-- Left: Order Summary -->
-      <div class="checkout-summary">
-        <h3>Order Summary</h3>
-        <div class="selected-plan" id="selectedPlanLabel">Professional Plan</div>
-        <div class="order-line">
+      <!-- Left: Summary -->
+      <div class="reservation-summary">
+        <div class="res-plan-name" id="res-plan-name">Professional Plan</div>
+        <div class="res-price-line">
           <span>Hardware (one-time)</span>
-          <span class="price" id="summaryHardware">$129.00</span>
+          <strong id="res-hw-price">$129</strong>
         </div>
-        <div class="order-line">
+        <div class="res-price-line">
           <span>Monthly subscription</span>
-          <span class="price" id="summaryMonthly">$99/mo</span>
+          <strong id="res-mo-price">$99/mo</strong>
         </div>
-        <div class="order-line total"><span>Due today</span><span class="price">$0.00</span></div>
-        <p class="order-note"><i data-lucide="lock" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:4px;"></i>Your card will only be charged when your unit ships. You can cancel anytime before then.</p>
+        <div class="res-divider"></div>
+        <p class="res-note">
+          <i data-lucide="info" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:4px;"></i>
+          No payment is collected today. This reserves your spot in the first production batch. We'll reach out before any charge is made.
+        </p>
+        <div class="res-alt-cta">
+          <p>Prefer to talk first?</p>
+          <a href="mailto:oopslabai@gmail.com?subject=WanderAware Demo Request" class="btn btn-secondary btn-sm">
+            <i data-lucide="calendar" style="width:16px;height:16px;display:inline;vertical-align:middle;margin-right:6px;"></i>
+            Book a Free Demo
+          </a>
+        </div>
       </div>
 
-      <!-- Right: Checkout Form -->
-      <div class="checkout-form-wrap">
-        <h2>Reserve Your WanderAware System</h2>
-        <p class="checkout-subtitle">Complete your pre-order. We'll contact you when your unit is ready to ship.</p>
+      <!-- Right: Form -->
+      <div class="reservation-form-wrap">
+        <h2>Reserve Your Spot</h2>
+        <p class="res-subtitle">First production batch is limited. Lock in your place — no payment required today.</p>
 
-        <form id="checkout-form" action="https://formsubmit.co/oopslabai@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="WanderAware Pre-order Attempt">
+        <div id="res-form-container">
+          <form id="reservation-form" action="https://formsubmit.co/oopslabai@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="WanderAware Reservation">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="plan" id="res-plan-input" value="professional">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name *</label>
+                <input type="text" name="first_name" placeholder="Jane" required>
+              </div>
+              <div class="form-group">
+                <label>Last Name *</label>
+                <input type="text" name="last_name" placeholder="Smith" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Facility Name *</label>
+              <input type="text" name="facility_name" placeholder="Sunrise Adult Day Care" required>
+            </div>
+
+            <div class="form-group">
+              <label>Work Email *</label>
+              <input type="email" name="email" id="res-email-input" placeholder="jane@facility.com" required>
+            </div>
+
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="(555) 000-0000">
+            </div>
+
+            <div class="form-group">
+              <label>Number of exit doors to monitor *</label>
+              <select name="door_count" required>
+                <option value="">Select...</option>
+                <option value="1">1 door</option>
+                <option value="2">2 doors</option>
+                <option value="3" selected>3 doors</option>
+                <option value="4">4 doors</option>
+                <option value="5+">5+ doors</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>How many at-risk patients do you currently support?</label>
+              <select name="patient_count">
+                <option value="">Select...</option>
+                <option value="1-10">1–10</option>
+                <option value="11-25">11–25</option>
+                <option value="26-50">26–50</option>
+                <option value="51+">51+</option>
+              </select>
+            </div>
+
+            <div class="form-group form-checkbox">
+              <label class="checkbox-label">
+                <input type="checkbox" name="price_acknowledgment" value="acknowledged" required>
+                <span>I understand pricing starts at <strong>$49 hardware + $79/month</strong> and is subject to change before launch.</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full btn-lg">
+              Reserve My Spot →
+            </button>
+
+            <p class="form-legal">
+              <i data-lucide="lock" style="width:12px;height:12px;display:inline;vertical-align:middle;margin-right:4px;"></i>
+              No payment collected. No spam. Unsubscribe anytime.
+            </p>
+          </form>
+        </div>
+
+        <!-- Success state (hidden until form submit) -->
+        <div id="res-success" style="display:none;" class="res-success-state">
+          <i data-lucide="check-circle-2" style="width:56px;height:56px;color:#176E68;stroke-width:1.5;"></i>
+          <h3>You're on the list.</h3>
+          <p>We'll reach out to <strong id="res-success-email"></strong> when the first batch is ready to ship — typically within 6–8 weeks.</p>
+          <p class="res-success-note">No payment has been collected. We'll contact you before anything changes.</p>
+          <a href="mailto:oopslabai@gmail.com?subject=WanderAware Demo Request" class="btn btn-secondary" style="margin-top:1.5rem;">
+            Want to talk sooner? Book a demo →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────────────── HOME CAREGIVERS -->
+<section class="section home-caregivers">
+  <div class="container">
+    <div class="caregivers-inner">
+      <div class="caregivers-content">
+        <div class="section-label">For Families</div>
+        <h2>Caring for a loved one at home?</h2>
+        <p>WanderAware for home caregivers is in early planning. A single-door, battery-powered kit designed for family homes. No facility required.</p>
+        <p class="caregivers-note">We're focused on day care centers first — but if there's enough demand, we'll build a home version next.</p>
+      </div>
+      <div class="caregivers-form">
+        <p><strong>Interested in a home version?</strong><br>Leave your email and we'll let you know if it happens.</p>
+        <form action="https://formsubmit.co/oopslabai@gmail.com" method="POST" class="inline-form">
+          <input type="hidden" name="_subject" value="WanderAware Home Caregiver Interest">
           <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="">
-          <input type="hidden" name="plan" id="selected-plan-input" value="Professional">
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>First Name</label>
-              <input type="text" name="first_name" placeholder="Jane" required>
-            </div>
-            <div class="form-group">
-              <label>Last Name</label>
-              <input type="text" name="last_name" placeholder="Smith" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Facility Name</label>
-            <input type="text" name="facility_name" placeholder="Sunrise Adult Day Care" required>
-          </div>
-
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" name="email" id="checkout-email" placeholder="jane@facility.com" required>
-          </div>
-
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="tel" name="phone" placeholder="(555) 000-0000">
-          </div>
-
-          <div class="form-group">
-            <label>Number of exit doors to monitor</label>
-            <select name="door_count">
-              <option>1 door</option>
-              <option>2 doors</option>
-              <option selected>3 doors</option>
-              <option>4 doors</option>
-              <option>5+ doors</option>
-            </select>
-          </div>
-
-          <div class="form-divider"><span>Payment Information</span></div>
-
-          <div class="form-group">
-            <label>Card Number (charged only when unit ships)</label>
-            <div class="card-input-wrap">
-              <i data-lucide="credit-card"></i>
-              <input type="text" placeholder="4242 4242 4242 4242" maxlength="19">
-            </div>
-            <p class="field-note">We won't charge your card until your unit ships.</p>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Expiry</label>
-              <input type="text" placeholder="MM / YY" maxlength="7">
-            </div>
-            <div class="form-group">
-              <label>CVC</label>
-              <input type="text" placeholder="&bull;&bull;&bull;" maxlength="4">
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-full" style="background:#F97316;font-size:1.0625rem;padding:17px 28px;margin-top:8px;">
-            Place Pre-order →
-          </button>
-
-          <p class="checkout-legal">By placing your pre-order you agree to our Terms of Service and Privacy Policy. No charge until your unit ships.</p>
+          <input type="hidden" name="type" value="home_caregiver">
+          <input type="email" name="email" placeholder="your@email.com" required>
+          <button type="submit" class="btn btn-primary">Notify Me</button>
         </form>
       </div>
-
     </div>
   </div>
 </section>
@@ -1891,89 +1847,61 @@
 
 <!-- ───────────────────────────────────────────────── SCRIPTS -->
 <script>
-  // ── Plan config ─────────────────────────────────────────────────
-  const planConfig = {
-    starter: {
-      label: 'Starter Plan',
-      hardware: '$49.00',
-      monthly: '$79/mo',
-      dueToday: '$0.00',
-      planName: 'Starter'
-    },
-    professional: {
-      label: 'Professional Plan',
-      hardware: '$129.00',
-      monthly: '$99/mo',
-      dueToday: '$0.00',
-      planName: 'Professional'
-    }
-  };
+  // Reservation form
+  const reservationForm = document.getElementById('reservation-form');
+  const resSuccess = document.getElementById('res-success');
+  const resFormContainer = document.getElementById('res-form-container');
 
-  // ── Open checkout ────────────────────────────────────────────────
-  function openCheckout(plan) {
-    const checkoutSection = document.getElementById('checkout');
-    const config = planConfig[plan] || planConfig.professional;
-
-    // Update order summary
-    document.getElementById('selectedPlanLabel').textContent = config.label;
-    document.getElementById('summaryHardware').textContent = config.hardware;
-    document.getElementById('summaryMonthly').textContent = config.monthly;
-    document.getElementById('selected-plan-input').value = config.planName;
-
-    // Show checkout section
-    checkoutSection.style.display = 'block';
-
-    // Reset to form view (in case sold-out was shown before)
-    document.getElementById('checkoutFormContainer').style.display = '';
-    document.getElementById('soldOutResult').classList.remove('shown');
-
-    // Smooth scroll
-    setTimeout(() => {
-      checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50);
-
-    // Re-init Lucide icons inside the checkout section
-    if (window.lucide) lucide.createIcons();
+  if (reservationForm) {
+    reservationForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('res-email-input').value;
+      const formData = new FormData(reservationForm);
+      
+      // Submit to FormSubmit via fetch
+      try {
+        await fetch('https://formsubmit.co/ajax/oopslabai@gmail.com', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+      } catch(err) { /* silent fail — show success regardless */ }
+      
+      // Show success state
+      resFormContainer.style.display = 'none';
+      resSuccess.style.display = 'flex';
+      const emailEl = document.getElementById('res-success-email');
+      if (emailEl) emailEl.textContent = email;
+      lucide.createIcons();
+    });
   }
 
-  // ── Attach open-checkout to all CTA buttons ───────────────────────
+  // Plan selection updates summary
+  const planConfig = {
+    starter:      { name: 'Starter Plan',      hw: '$49',  mo: '$79/mo'  },
+    professional: { name: 'Professional Plan', hw: '$129', mo: '$99/mo'  },
+    enterprise:   { name: 'Enterprise Plan',   hw: 'Custom', mo: 'Custom' }
+  };
+
+  function openCheckout(plan) {
+    const cfg = planConfig[plan] || planConfig['professional'];
+    const el = document.getElementById('checkout');
+    if (!el) return;
+    
+    document.getElementById('res-plan-name').textContent = cfg.name;
+    document.getElementById('res-hw-price').textContent = cfg.hw;
+    document.getElementById('res-mo-price').textContent = cfg.mo;
+    document.getElementById('res-plan-input').value = plan;
+    
+    el.style.display = 'block';
+    setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+
   document.querySelectorAll('.open-checkout').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const plan = this.getAttribute('data-plan') || 'professional';
+    btn.addEventListener('click', () => {
+      const plan = btn.dataset.plan || 'professional';
       openCheckout(plan);
     });
-  });
-
-  // ── Checkout form submit ──────────────────────────────────────────
-  document.getElementById('checkout-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const email = document.getElementById('checkout-email').value;
-    const data = new FormData(form);
-
-    // Submit to FormSubmit in background
-    fetch('https://formsubmit.co/ajax/oopslabai@gmail.com', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).catch(() => {}); // Silent fail — still show sold-out result
-
-    // Show email in sold-out message
-    document.getElementById('waitlist-email').textContent = email;
-
-    // Hide form, show sold-out result
-    document.getElementById('checkoutFormContainer').style.display = 'none';
-    const result = document.getElementById('soldOutResult');
-    result.classList.add('shown');
-
-    // Scroll to result
-    setTimeout(() => {
-      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 50);
-
-    // Re-init Lucide icons
-    if (window.lucide) lucide.createIcons();
   });
 
   // ── FAQ accordion ────────────────────────────────────────────────
