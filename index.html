@@ -2114,7 +2114,15 @@
     'utm_content',
     'gclid',
     'fbclid',
-    'msclkid'
+    'msclkid',
+    'ref',
+    'source',
+    'outreach_id',
+    'email_id',
+    'batch',
+    'audience',
+    'persona',
+    'variant'
   ];
 
   function getCampaignParams() {
@@ -2135,6 +2143,10 @@
   }
 
   const campaignParams = getCampaignParams();
+
+  if (window.posthog && Object.keys(campaignParams).length && typeof window.posthog.register === 'function') {
+    window.posthog.register(campaignParams);
+  }
 
   function trackEvent(eventName, properties = {}) {
     const payload = {
@@ -2164,6 +2176,37 @@
     if (section.tagName.toLowerCase() === 'nav') return 'navigation';
     if (section.tagName.toLowerCase() === 'footer') return 'footer';
     return 'unknown';
+  }
+
+  function safeClickText(element) {
+    const text = element.textContent.trim().replace(/\s+/g, ' ').slice(0, 90);
+    if (!text) return '';
+    if (text.includes('@')) return '[email]';
+    return text;
+  }
+
+  function clickTarget(element) {
+    if (element.tagName.toLowerCase() !== 'a') return 'button';
+    const href = element.getAttribute('href') || '';
+    if (href.startsWith('#')) return `anchor:${href}`;
+    if (href.startsWith('mailto:')) return 'mailto';
+    if (href.startsWith('tel:')) return 'tel';
+    try {
+      const url = new URL(href, window.location.href);
+      return url.origin === window.location.origin ? `internal:${url.pathname}${url.hash}` : `external:${url.hostname}`;
+    } catch(err) {
+      return 'link';
+    }
+  }
+
+  function clickIntent(element) {
+    if (element.classList.contains('open-waitlist')) return 'waitlist';
+    if (element.classList.contains('open-checkout')) return 'reserve';
+    if (element.closest('.faq-q')) return 'faq';
+    const target = clickTarget(element);
+    if (target === 'mailto') return 'email';
+    if (target.startsWith('anchor:')) return 'learn_more';
+    return target === 'button' ? 'button' : 'link';
   }
 
   function addHiddenField(form, name, value) {
@@ -2199,6 +2242,19 @@
   }
 
   trackEvent('landing_page_view');
+
+  document.addEventListener('click', event => {
+    const clickable = event.target.closest('button, a');
+    if (!clickable || !document.body.contains(clickable)) return;
+
+    trackEvent('site_click', {
+      click_location: ctaLocation(clickable),
+      click_intent: clickIntent(clickable),
+      click_text: safeClickText(clickable),
+      click_target: clickTarget(clickable),
+      element_type: clickable.tagName.toLowerCase()
+    });
+  });
 
   const waitlistForm = document.getElementById('waitlist-form');
   const waitlistFormContainer = document.getElementById('waitlist-form-container');
