@@ -2188,11 +2188,23 @@
     return field ? field.value : '';
   }
 
+  function trackFormStart(form, eventName, properties = {}) {
+    if (!form) return;
+    let hasStarted = false;
+    form.addEventListener('focusin', () => {
+      if (hasStarted) return;
+      hasStarted = true;
+      trackEvent(eventName, properties);
+    });
+  }
+
   trackEvent('landing_page_view');
 
   const waitlistForm = document.getElementById('waitlist-form');
   const waitlistFormContainer = document.getElementById('waitlist-form-container');
   const waitlistSuccess = document.getElementById('waitlist-success');
+
+  trackFormStart(waitlistForm, 'waitlist_form_start');
 
   if (waitlistForm) {
     waitlistForm.addEventListener('submit', async function(e) {
@@ -2241,6 +2253,8 @@
   const reservationForm = document.getElementById('reservation-form');
   const resSuccess = document.getElementById('res-success');
   const resFormContainer = document.getElementById('res-form-container');
+
+  trackFormStart(reservationForm, 'reserve_form_start');
 
   if (reservationForm) {
     reservationForm.addEventListener('submit', async function(e) {
@@ -2361,21 +2375,6 @@
         cta_text: link.textContent.trim().replace(/\s+/g, ' ')
       });
     });
-  });
-
-  ['waitlist', 'pricing', 'how-it-works', 'features', 'faq'].forEach(sectionId => {
-    const section = document.getElementById(sectionId);
-    if (!section || !('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        trackEvent(`${sectionId.replace(/-/g, '_')}_view`, {
-          section_id: sectionId
-        });
-        observer.unobserve(section);
-      });
-    }, { threshold: 0.35 });
-    observer.observe(section);
   });
 
   function toggleFAQ(btn) {
