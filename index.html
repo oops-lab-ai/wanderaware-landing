@@ -2363,7 +2363,7 @@
     });
   });
 
-  ['waitlist', 'pricing', 'checkout', 'how-it-works', 'features', 'faq'].forEach(sectionId => {
+  ['waitlist', 'pricing', 'how-it-works', 'features', 'faq'].forEach(sectionId => {
     const section = document.getElementById(sectionId);
     if (!section || !('IntersectionObserver' in window)) return;
     const observer = new IntersectionObserver(entries => {
