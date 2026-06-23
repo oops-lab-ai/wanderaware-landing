@@ -1191,6 +1191,80 @@
     }
 
     /* ─── Responsive ─────────────────────────────────────────────── */
+    /* Waitlist */
+    .waitlist-section {
+      background: var(--white);
+      padding: 54px 0 66px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .waitlist-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 36px;
+      align-items: center;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 34px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      background: linear-gradient(135deg, #FFFFFF 0%, #FAFFFE 100%);
+    }
+    .waitlist-copy h2 {
+      color: var(--gray-900);
+      margin-bottom: 12px;
+      font-size: clamp(1.8rem, 3vw, 2.35rem);
+    }
+    .waitlist-copy p {
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .waitlist-points {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--gray-700);
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+    .waitlist-points span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .waitlist-points i[data-lucide] {
+      width: 17px;
+      height: 17px;
+      color: var(--teal);
+      stroke-width: 2.2;
+    }
+    .waitlist-form-wrap {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+    .waitlist-form-wrap h3 {
+      color: var(--gray-900);
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+    .waitlist-form-wrap p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+    .waitlist-success {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .waitlist-success h3 { color: var(--gray-900); font-size: 1.35rem; }
+    .waitlist-success p { margin-bottom: 4px; }
+
     @media (max-width: 900px) {
       .nav-links, .nav-cta .btn-primary { display: none; }
       .nav-hamburger {
@@ -1212,6 +1286,7 @@
       .testi-grid { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
       .stats-grid { grid-template-columns: 1fr; gap: 32px; }
+      .waitlist-card { grid-template-columns: 1fr; }
       .section { padding: 72px 0; }
       @media (max-width: 768px) {
         .reservation-wrap { grid-template-columns: 1fr; }
@@ -1245,7 +1320,7 @@
         <li><a href="#faq">FAQ</a></li>
       </ul>
       <div class="nav-cta">
-        <button class="btn btn-primary btn-sm open-checkout" data-plan="professional">Reserve Your Spot</button>
+        <button class="btn btn-primary btn-sm open-waitlist">Join the Waitlist</button>
         <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
       </div>
     </div>
@@ -1254,7 +1329,7 @@
       <a href="#features" onclick="closeMobileMenu()">Features</a>
       <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
       <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
-      <button class="btn btn-primary open-checkout" data-plan="professional" onclick="closeMobileMenu()">Reserve Your Spot</button>
+      <button class="btn btn-primary open-waitlist" onclick="closeMobileMenu()">Join the Waitlist</button>
     </div>
   </div>
 </nav>
@@ -1273,9 +1348,9 @@
           Tiny RFID stickers hidden inside shoes and clothing. A small reader beside each exit door. The moment an at-risk patient approaches, staff get an instant alert on their phone — <strong>without triggering alarms for everyone else.</strong>
         </p>
         <div class="hero-ctas">
-          <button class="btn btn-primary btn-lg open-checkout" data-plan="professional">
-            <i data-lucide="bell-ring" class="icon-inline"></i>
-            Reserve Your Spot
+          <button class="btn btn-primary btn-lg open-waitlist">
+            <i data-lucide="mail-plus" class="icon-inline"></i>
+            Join the Waitlist
           </button>
           <a href="#how-it-works" class="btn btn-secondary btn-lg">
             See How It Works ↓
@@ -1304,6 +1379,89 @@
 </section>
 
 <!-- ───────────────────────────────────────────────── STATS BAND -->
+<section class="waitlist-section" id="waitlist">
+  <div class="container">
+    <div class="waitlist-card">
+      <div class="waitlist-copy">
+        <div class="section-label">Early Access</div>
+        <h2>Join the adult day care waitlist</h2>
+        <p>Use this lighter first step if you want updates, launch timing, and early access details before making a reservation decision.</p>
+        <div class="waitlist-points">
+          <span><i data-lucide="check-circle"></i> No payment or commitment today</span>
+          <span><i data-lucide="check-circle"></i> Built for facility operators and care teams</span>
+          <span><i data-lucide="check-circle"></i> Option to reserve first-batch access after signup</span>
+        </div>
+      </div>
+      <div class="waitlist-form-wrap">
+        <div id="waitlist-form-container">
+          <h3>Get early access updates</h3>
+          <p>Tell us where you fit so we can prioritize the right facilities during outreach.</p>
+          <form id="waitlist-form" action="https://formsubmit.co/oopslabai@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="WanderAware Waitlist Signup">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="type" value="facility_waitlist">
+
+            <div class="form-group">
+              <label>Work Email *</label>
+              <input type="email" name="email" id="waitlist-email-input" placeholder="jane@facility.com" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Role</label>
+                <select name="role" id="waitlist-role-input">
+                  <option value="">Select...</option>
+                  <option value="owner_or_operator">Owner / Operator</option>
+                  <option value="administrator">Administrator</option>
+                  <option value="care_director">Care Director</option>
+                  <option value="family_caregiver">Family Caregiver</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Facility Type</label>
+                <select name="facility_type" id="waitlist-facility-type-input">
+                  <option value="">Select...</option>
+                  <option value="adult_day_care">Adult Day Care</option>
+                  <option value="memory_care">Memory Care</option>
+                  <option value="assisted_living">Assisted Living</option>
+                  <option value="home_care">Home Care</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Interest Timeline</label>
+              <select name="interest_timeline" id="waitlist-timeline-input">
+                <option value="">Select...</option>
+                <option value="now">We need something soon</option>
+                <option value="30_90_days">Exploring for the next 30-90 days</option>
+                <option value="future">Future planning</option>
+                <option value="research">Just researching</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              Join the Waitlist
+            </button>
+            <p class="form-legal">No spam. We will only send WanderAware launch and early access updates.</p>
+          </form>
+        </div>
+
+        <div id="waitlist-success" class="waitlist-success">
+          <i data-lucide="check-circle-2" style="width:44px;height:44px;color:#176E68;stroke-width:1.6;"></i>
+          <h3>You're on the waitlist.</h3>
+          <p>We will send early access updates to <strong id="waitlist-success-email"></strong>.</p>
+          <button class="btn btn-secondary open-checkout" data-plan="professional">
+            Reserve first-batch access
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="stats-band">
   <div class="container">
     <div class="stats-grid">
@@ -1912,9 +2070,9 @@
     <h2>Give your staff an extra layer<br>they can actually rely on</h2>
     <p>Join over 200 day care administrators already on the waitlist. First batch ships to waitlist members first.</p>
     <div class="cta-band-btns">
-      <button class="btn btn-white btn-lg open-checkout" data-plan="professional">
-        <i data-lucide="check-circle-2" class="icon-inline" style="color:var(--teal);"></i>
-        Reserve My Spot — Free
+      <button class="btn btn-white btn-lg open-waitlist">
+        <i data-lucide="mail-plus" class="icon-inline" style="color:var(--teal);"></i>
+        Join the Waitlist
       </button>
       <a href="#how-it-works" class="btn btn-outline-white btn-lg">Learn More</a>
     </div>
@@ -1998,6 +2156,7 @@
     if (!section) return 'unknown';
     if (section.id) return section.id;
     if (section.classList.contains('hero')) return 'hero';
+    if (section.classList.contains('waitlist-section')) return 'waitlist';
     if (section.classList.contains('cta-band')) return 'final_cta';
     if (section.classList.contains('reservation-section')) return 'reservation';
     if (section.classList.contains('pricing')) return 'pricing';
@@ -2030,6 +2189,53 @@
   }
 
   trackEvent('landing_page_view');
+
+  const waitlistForm = document.getElementById('waitlist-form');
+  const waitlistFormContainer = document.getElementById('waitlist-form-container');
+  const waitlistSuccess = document.getElementById('waitlist-success');
+
+  if (waitlistForm) {
+    waitlistForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('waitlist-email-input').value;
+      const role = selectedValue(waitlistForm, '#waitlist-role-input');
+      const facilityType = selectedValue(waitlistForm, '#waitlist-facility-type-input');
+      const interestTimeline = selectedValue(waitlistForm, '#waitlist-timeline-input');
+      enrichFormSubmission(waitlistForm, 'facility_waitlist', {
+        cta_location: 'waitlist'
+      });
+      const formData = new FormData(waitlistForm);
+
+      trackEvent('waitlist_form_submit_attempt', {
+        role,
+        facility_type: facilityType,
+        interest_timeline: interestTimeline
+      });
+
+      let deliveryStatus = 'sent';
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/oopslabai@gmail.com', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+        deliveryStatus = response.ok ? 'sent' : 'unknown';
+      } catch(err) { deliveryStatus = 'unknown'; }
+
+      trackEvent('waitlist_form_submit_success', {
+        role,
+        facility_type: facilityType,
+        interest_timeline: interestTimeline,
+        delivery_status: deliveryStatus
+      });
+
+      waitlistFormContainer.style.display = 'none';
+      waitlistSuccess.style.display = 'flex';
+      const emailEl = document.getElementById('waitlist-success-email');
+      if (emailEl) emailEl.textContent = email;
+      lucide.createIcons();
+    });
+  }
 
   // Reservation form
   const reservationForm = document.getElementById('reservation-form');
@@ -2107,6 +2313,21 @@
     setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
+  function openWaitlist(sourceEl) {
+    const el = document.getElementById('waitlist');
+    if (!el) return;
+
+    trackEvent('waitlist_cta_click', {
+      cta_location: sourceEl ? ctaLocation(sourceEl) : 'unknown',
+      cta_text: sourceEl ? sourceEl.textContent.trim().replace(/\s+/g, ' ') : 'Join the Waitlist'
+    });
+    setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+
+  document.querySelectorAll('.open-waitlist').forEach(btn => {
+    btn.addEventListener('click', () => openWaitlist(btn));
+  });
+
   document.querySelectorAll('.open-checkout').forEach(btn => {
     btn.addEventListener('click', () => {
       const plan = btn.dataset.plan || 'professional';
@@ -2142,7 +2363,7 @@
     });
   });
 
-  ['pricing', 'checkout', 'how-it-works', 'features', 'faq'].forEach(sectionId => {
+  ['waitlist', 'pricing', 'checkout', 'how-it-works', 'features', 'faq'].forEach(sectionId => {
     const section = document.getElementById(sectionId);
     if (!section || !('IntersectionObserver' in window)) return;
     const observer = new IntersectionObserver(entries => {
