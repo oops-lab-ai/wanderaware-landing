@@ -28,6 +28,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="xi Si init Ni Bi pr qi Ui $i capture calculateEventProperties Zi register register_once register_for_session unregister unregister_for_session Yi getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Ki identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags reset resetGroups setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Qi Wi createPersonProfile setInternalOrTestUser Ji Fi tn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing zi debug mr it getPageViewId captureTraceFeedback captureTraceMetric Ri".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_tJ9nPfxaDQTBKmPihotxFHU3uESrKEnpiBzWeGeuwM95', {
+      api_host: 'https://us.i.posthog.com',
+      defaults: '2026-05-30',
+      person_profiles: 'identified_only',
+      capture_pageview: true,
+      capture_pageleave: true,
+      autocapture: false,
+      disable_session_recording: true
+    });
+  </script>
 
   <style>
     /* ─── CSS Variables ─────────────────────────────────────────── */
@@ -1934,6 +1946,91 @@
 
 <!-- ───────────────────────────────────────────────── SCRIPTS -->
 <script>
+  window.dataLayer = window.dataLayer || [];
+
+  const TRACKING_PARAM_KEYS = [
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_term',
+    'utm_content',
+    'gclid',
+    'fbclid',
+    'msclkid'
+  ];
+
+  function getCampaignParams() {
+    const params = new URLSearchParams(window.location.search);
+    const storedParams = JSON.parse(sessionStorage.getItem('wanderaware_campaign') || '{}');
+    const currentParams = {};
+
+    TRACKING_PARAM_KEYS.forEach(key => {
+      const value = params.get(key);
+      if (value) currentParams[key] = value;
+    });
+
+    const campaign = { ...storedParams, ...currentParams };
+    if (Object.keys(currentParams).length) {
+      sessionStorage.setItem('wanderaware_campaign', JSON.stringify(campaign));
+    }
+    return campaign;
+  }
+
+  const campaignParams = getCampaignParams();
+
+  function trackEvent(eventName, properties = {}) {
+    const payload = {
+      ...campaignParams,
+      page_path: window.location.pathname,
+      page_url: window.location.href,
+      ...properties
+    };
+
+    window.dataLayer.push({ event: eventName, ...payload });
+
+    if (window.posthog && typeof window.posthog.capture === 'function') {
+      window.posthog.capture(eventName, payload);
+    }
+  }
+
+  function ctaLocation(element) {
+    const section = element.closest('section, nav, footer');
+    if (!section) return 'unknown';
+    if (section.id) return section.id;
+    if (section.classList.contains('hero')) return 'hero';
+    if (section.classList.contains('cta-band')) return 'final_cta';
+    if (section.classList.contains('reservation-section')) return 'reservation';
+    if (section.classList.contains('pricing')) return 'pricing';
+    if (section.classList.contains('home-caregivers')) return 'home_caregivers';
+    if (section.tagName.toLowerCase() === 'nav') return 'navigation';
+    if (section.tagName.toLowerCase() === 'footer') return 'footer';
+    return 'unknown';
+  }
+
+  function addHiddenField(form, name, value) {
+    if (!value || form.querySelector(`input[name="${name}"]`)) return;
+    const field = document.createElement('input');
+    field.type = 'hidden';
+    field.name = name;
+    field.value = value;
+    form.appendChild(field);
+  }
+
+  function enrichFormSubmission(form, formType, extra = {}) {
+    addHiddenField(form, 'form_type', formType);
+    addHiddenField(form, 'page_url', window.location.href);
+    addHiddenField(form, 'page_path', window.location.pathname);
+    Object.entries(campaignParams).forEach(([key, value]) => addHiddenField(form, key, value));
+    Object.entries(extra).forEach(([key, value]) => addHiddenField(form, key, value));
+  }
+
+  function selectedValue(form, selector) {
+    const field = form.querySelector(selector);
+    return field ? field.value : '';
+  }
+
+  trackEvent('landing_page_view');
+
   // Reservation form
   const reservationForm = document.getElementById('reservation-form');
   const resSuccess = document.getElementById('res-success');
@@ -1943,17 +2040,42 @@
     reservationForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       const email = document.getElementById('res-email-input').value;
+      const plan = selectedValue(reservationForm, '#res-plan-input') || 'professional';
+      const doorCount = selectedValue(reservationForm, 'select[name="door_count"]');
+      const patientCount = selectedValue(reservationForm, 'select[name="patient_count"]');
+      const hasPhone = Boolean(selectedValue(reservationForm, 'input[name="phone"]'));
+      enrichFormSubmission(reservationForm, 'facility_reservation', {
+        selected_plan: plan,
+        cta_location: 'reservation'
+      });
       const formData = new FormData(reservationForm);
+
+      trackEvent('reserve_form_submit_attempt', {
+        plan,
+        door_count: doorCount,
+        patient_count: patientCount,
+        has_phone: hasPhone
+      });
       
       // Submit to FormSubmit via fetch
+      let deliveryStatus = 'sent';
       try {
-        await fetch('https://formsubmit.co/ajax/oopslabai@gmail.com', {
+        const response = await fetch('https://formsubmit.co/ajax/oopslabai@gmail.com', {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
           body: formData
         });
-      } catch(err) { /* silent fail — show success regardless */ }
+        deliveryStatus = response.ok ? 'sent' : 'unknown';
+      } catch(err) { deliveryStatus = 'unknown'; }
       
+      trackEvent('reserve_form_submit_success', {
+        plan,
+        door_count: doorCount,
+        patient_count: patientCount,
+        has_phone: hasPhone,
+        delivery_status: deliveryStatus
+      });
+
       // Show success state
       resFormContainer.style.display = 'none';
       resSuccess.style.display = 'flex';
@@ -1981,22 +2103,70 @@
     document.getElementById('res-plan-input').value = plan;
     
     el.style.display = 'block';
+    trackEvent('reserve_form_view', { plan });
     setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
   document.querySelectorAll('.open-checkout').forEach(btn => {
     btn.addEventListener('click', () => {
       const plan = btn.dataset.plan || 'professional';
+      trackEvent('reserve_cta_click', {
+        plan,
+        cta_location: ctaLocation(btn),
+        cta_text: btn.textContent.trim().replace(/\s+/g, ' ')
+      });
       openCheckout(plan);
     });
   });
 
   // ── FAQ accordion ────────────────────────────────────────────────
+  document.querySelectorAll('.home-caregivers form').forEach(form => {
+    form.addEventListener('submit', () => {
+      enrichFormSubmission(form, 'home_caregiver_interest', {
+        cta_location: 'home_caregivers'
+      });
+      trackEvent('home_caregiver_signup_success', {
+        cta_location: 'home_caregivers'
+      });
+    });
+  });
+
+  document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const subject = new URL(link.href).searchParams.get('subject') || 'contact';
+      trackEvent('email_cta_click', {
+        subject,
+        cta_location: ctaLocation(link),
+        cta_text: link.textContent.trim().replace(/\s+/g, ' ')
+      });
+    });
+  });
+
+  ['pricing', 'checkout', 'how-it-works', 'features', 'faq'].forEach(sectionId => {
+    const section = document.getElementById(sectionId);
+    if (!section || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        trackEvent(`${sectionId.replace(/-/g, '_')}_view`, {
+          section_id: sectionId
+        });
+        observer.unobserve(section);
+      });
+    }, { threshold: 0.35 });
+    observer.observe(section);
+  });
+
   function toggleFAQ(btn) {
     const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
+    if (!isOpen) {
+      item.classList.add('open');
+      trackEvent('faq_open', {
+        question: btn.textContent.trim().replace(/\s+/g, ' ')
+      });
+    }
   }
 
   // ── Mobile menu ───────────────────────────────────────────────────
