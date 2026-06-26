@@ -2119,6 +2119,12 @@
     'source',
     'outreach_id',
     'email_id',
+    'lead_id',
+    'recipient_id',
+    'contact_id',
+    'lead_hash',
+    'email_hash',
+    'company_id',
     'batch',
     'audience',
     'persona',
@@ -2146,6 +2152,31 @@
 
   if (window.posthog && Object.keys(campaignParams).length && typeof window.posthog.register === 'function') {
     window.posthog.register(campaignParams);
+  }
+
+  function getLeadIdentity() {
+    const leadId = campaignParams.lead_id || campaignParams.recipient_id || campaignParams.contact_id || campaignParams.email_id || '';
+    if (!leadId) return null;
+
+    return {
+      distinctId: `lead:${leadId}`,
+      properties: {
+        lead_id: leadId,
+        outreach_id: campaignParams.outreach_id,
+        batch: campaignParams.batch,
+        audience: campaignParams.audience,
+        persona: campaignParams.persona,
+        variant: campaignParams.variant,
+        company_id: campaignParams.company_id,
+        email_hash: campaignParams.email_hash || campaignParams.lead_hash
+      }
+    };
+  }
+
+  const leadIdentity = getLeadIdentity();
+
+  if (window.posthog && leadIdentity && typeof window.posthog.identify === 'function') {
+    window.posthog.identify(leadIdentity.distinctId, leadIdentity.properties);
   }
 
   function trackEvent(eventName, properties = {}) {
