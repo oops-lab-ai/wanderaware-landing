@@ -1,0 +1,22 @@
+# ----- Secrets / Env ----------------------------------------
+.env
+.env.*
+!.env.example
+
+# ----- Amplify / CDK ----------------------------------------
+.amplify/
+amplify/.config/
+amplify_outputs.json
+amplify_outputs*.json
+amplifyconfiguration.json
+amplifyconfiguration*.json
+amplify/backend/api/**/build
+amplify/backend/auth/**/build
+amplify/backend/function/**/build
+cdk.out/
+.cdk.staging/
+.cdk/
+
+# ----- Node --------------------------------------------------
+node_modules/
+npm-debug.log*

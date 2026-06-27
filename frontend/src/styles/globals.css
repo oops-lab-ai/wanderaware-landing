@@ -1,0 +1,216 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Theme preset styles: these override CSS variables based on the selected data-theme-preset */
+@import "../styles/presets/brutalist.css";
+@import "../styles/presets/soft-pop.css";
+@import "../styles/presets/tangerine.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Default theme styles (used when no data-theme-preset is set or when 'default' is selected).
+These serve as the fallback; there is no separate default.css file. */
+:root {
+  --radius: 0.625rem;
+  --background: #fbfbf9;
+  --foreground: #213331;
+  --card: #ffffff;
+  --card-foreground: #213331;
+  --popover: #ffffff;
+  --popover-foreground: #213331;
+  --primary: #176e68;
+  --primary-foreground: #ffffff;
+  --secondary: #e6f4f2;
+  --secondary-foreground: #12413d;
+  --muted: #f1f5f3;
+  --muted-foreground: #66736f;
+  --accent: #f97316;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --border: #dce6e3;
+  --input: #dce6e3;
+  --ring: #176e68;
+  --chart-1: #176e68;
+  --chart-2: #f97316;
+  --chart-3: #3a9088;
+  --chart-4: #f59e0b;
+  --chart-5: #64748b;
+  --sidebar: #f7fbfa;
+  --sidebar-foreground: #213331;
+  --sidebar-primary: #176e68;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e6f4f2;
+  --sidebar-accent-foreground: #12413d;
+  --sidebar-border: #dce6e3;
+  --sidebar-ring: #176e68;
+
+  /* fonts */
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-geist-mono);
+}
+
+.dark {
+  /* Matches landing page: bg #0a0e17, card #111827, border #1e293b, accent #6366f1 */
+  --background: oklch(0.098 0.02 264);
+  --foreground: oklch(0.961 0.008 250);
+  --card: oklch(0.145 0.022 264);
+  --card-foreground: oklch(0.961 0.008 250);
+  --popover: oklch(0.145 0.022 264);
+  --popover-foreground: oklch(0.961 0.008 250);
+  --primary: oklch(0.546 0.245 262.881);
+  --primary-foreground: oklch(0.98 0.005 260);
+  --secondary: oklch(0.185 0.025 264);
+  --secondary-foreground: oklch(0.93 0.01 250);
+  --muted: oklch(0.185 0.025 264);
+  --muted-foreground: oklch(0.6 0.02 260);
+  --accent: oklch(0.185 0.025 264);
+  --accent-foreground: oklch(0.93 0.01 250);
+  --destructive: oklch(0.711 0.166 22.2);
+  --border: oklch(0.24 0.025 260);
+  --input: oklch(0.27 0.025 260);
+  --ring: oklch(0.546 0.245 262.881);
+  --chart-1: oklch(0.546 0.245 262.881);
+  --chart-2: oklch(0.777 0.152 194.769);
+  --chart-3: oklch(0.765 0.166 162.48);
+  --chart-4: oklch(0.623 0.214 259.815);
+  --chart-5: oklch(0.424 0.199 265.638);
+  --sidebar: oklch(0.13 0.02 264);
+  --sidebar-foreground: oklch(0.961 0.008 250);
+  --sidebar-primary: oklch(0.546 0.245 262.881);
+  --sidebar-primary-foreground: oklch(0.98 0.005 260);
+  --sidebar-accent: oklch(0.185 0.025 264);
+  --sidebar-accent-foreground: oklch(0.93 0.01 250);
+  --sidebar-border: oklch(0.24 0.025 260);
+  --sidebar-ring: oklch(0.546 0.245 262.881);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  [data-theme-preset]:not([data-theme-preset="default"]) .shadow-2xs {
+    box-shadow: var(--shadow-2xs);
+  }
+
+  [data-theme-preset]:not([data-theme-preset="default"]) .shadow-xs {
+    box-shadow: var(--shadow-xs);
+  }
+
+  [data-theme-preset]:not([data-theme-preset="default"]) .shadow-sm {
+    box-shadow: var(--shadow-sm);
+  }
+
+  [data-theme-preset]:not([data-theme-preset="default"]) .shadow {
+    box-shadow: var(--shadow);
+  }
+
+  [data-theme-preset]:not([data-theme-preset="default"]) .shadow-md {
+    box-shadow: var(--shadow-md);
+  }
+
+  [data-theme-preset]:not([data-theme-preset="default"]) .shadow-lg {
+    box-shadow: var(--shadow-lg);
+  }
+
+  [data-theme-preset]:not([data-theme-preset="default"]) .shadow-xl {
+    box-shadow: var(--shadow-xl);
+  }
+
+  [data-theme-preset]:not([data-theme-preset="default"]) .shadow-2xl {
+    box-shadow: var(--shadow-2xl);
+  }
+
+  html[data-font="inter"] body {
+    --font-sans: var(--font-inter);
+  }
+  html[data-font="roboto"] body {
+    --font-sans: var(--font-roboto);
+  }
+  html[data-font="poppins"] body {
+    --font-sans: var(--font-poppins);
+  }
+  html[data-font="geist"] body {
+    --font-sans: var(--font-geist);
+  }
+  html[data-font="geistMono"] body {
+    --font-sans: var(--font-geist-mono);
+  }
+  html[data-font="jakarta"] body {
+    --font-sans: var(--font-jakarta);
+  }
+  html[data-font="nunito"] body {
+    --font-sans: var(--font-nunito);
+  }
+  html[data-font="gabriela"] body {
+    --font-sans: var(--font-gabriela);
+  }
+  html[data-font="outfit"] body {
+    --font-sans: var(--font-outfit);
+  }
+  html[data-font="manrope"] body {
+    --font-sans: var(--font-manrope);
+  }
+  html[data-font="dmSans"] body {
+    --font-sans: var(--font-dm-sans);
+  }
+  html[data-font="greatVibes"] body {
+    --font-sans: var(--font-great-vibes);
+  }
+}
+
+html {
+  overscroll-behavior: none;
+}
+
+.disable-transitions * {
+  transition: none !important;
+}

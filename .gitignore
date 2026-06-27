@@ -1,0 +1,97 @@
+# ── Secrets & credentials ─────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+web-client-google.json
+oopslab-apple-developer-id-signing-bundle/
+
+# ── Claude Code ───────────────────────────────────────────────────────
+.claude/
+.mcp.json
+
+# ── Cloudflare ────────────────────────────────────────────────────────
+.wrangler/
+
+# (amplify outputs covered by **/amplify_outputs*.json below)
+
+# ── Python ────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+/venv
+
+# ── Node ──────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+
+# ── Data files (never commit user data) ──────────────────────────────
+*.csv
+*.xlsx
+*.xls
+
+# ── Build artifacts ──────────────────────────────────────────────────
+*.exe
+*.dmg
+*.AppImage
+*.deb
+*.snap
+*.blockmap
+dist/
+out/
+
+# ── OS ────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+
+# ── Astro / Vite cache ────────────────────────────────────────────────
+.astro/
+
+# ── Python tooling ────────────────────────────────────────────────────
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── TypeScript build info ────────────────────────────────────────────
+*.tsbuildinfo
+
+# ── Test coverage ────────────────────────────────────────────────────
+coverage/
+
+# ── Playwright ───────────────────────────────────────────────────────
+test-results/
+playwright-report/
+tests/.env.test
+tests/.auth-state.json
+!tests/.env.test.example
+
+# ── Amplify outputs (all locations) ──────────────────────────────────
+**/amplify_outputs*.json
+!shared/
+!shared/amplify_outputs.json
+
+# ── Amplify build cache ──────────────────────────────────────────────
+.amplify/
+
+# ── Misc generated files ─────────────────────────────────────────────
+mcp_stderr.txt
+*.log
+.playwright-mcp/
+tests/screenshots/
+.tmp-hardening-artifacts/
+.codex
+engine/build/
+docs/me/
+
+# Marketing review outputs and generated bundles
+dark-*.png
+marketing/review/
+marketing/*.zip

@@ -1,0 +1,126 @@
+---
+import "@/styles/globals.css";
+
+// biome-ignore lint/correctness/noUnusedImports: Astro uses this React island in markup below.
+import App from "@/components/dashboard/App";
+
+export function getStaticPaths() {
+  return [
+    "login",
+    "register",
+    "confirm",
+    "forgot-password",
+    "invite",
+    "redeem",
+    "welcome",
+    "unauthorized",
+    "buildings",
+    "devices",
+    "tags",
+    "participants",
+    "alerts",
+    "team",
+    "billing",
+    "settings",
+    "admin/orgs",
+    "admin/grants",
+    "admin/users",
+  ].map((path) => ({ params: { path } }));
+}
+---
+
+<html
+  lang="en"
+  data-theme-mode="light"
+  data-theme-preset="default"
+  data-content-layout="centered"
+  data-navbar-style="sticky"
+  data-sidebar-variant="inset"
+  data-sidebar-collapsible="icon"
+  data-font="outfit"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WanderAware Dashboard</title>
+    <meta name="description" content="WanderAware facility, reader, tag, alert, team, and billing management" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gabriela&family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --font-inter: "Inter", sans-serif;
+        --font-roboto: "Roboto", sans-serif;
+        --font-poppins: "Poppins", sans-serif;
+        --font-geist: "Geist", sans-serif;
+        --font-geist-mono: "Geist Mono", monospace;
+        --font-jakarta: "Plus Jakarta Sans", sans-serif;
+        --font-nunito: "Nunito", sans-serif;
+        --font-gabriela: "Gabriela", serif;
+        --font-outfit: "Outfit", sans-serif;
+        --font-manrope: "Manrope", sans-serif;
+        --font-dm-sans: "DM Sans", sans-serif;
+        --font-great-vibes: "Great Vibes", cursive;
+      }
+    </style>
+
+    <script is:inline>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var defaults = {
+            theme_mode: "light",
+            theme_preset: "default",
+            font: "outfit",
+            content_layout: "centered",
+            navbar_style: "sticky",
+            sidebar_variant: "inset",
+            sidebar_collapsible: "icon"
+          };
+
+          function readCookie(name) {
+            var match = document.cookie.split("; ").find(function(c) {
+              return c.startsWith(name + "=");
+            });
+            return match ? decodeURIComponent(match.split("=")[1]) : null;
+          }
+
+          function preference(key) {
+            return readCookie(key) || defaults[key];
+          }
+
+          var mode = preference("theme_mode");
+          var resolvedMode =
+            mode === "system" && window.matchMedia
+              ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+              : mode;
+
+          root.classList.toggle("dark", resolvedMode === "dark");
+          root.setAttribute("data-theme-mode", mode);
+          root.setAttribute("data-theme-preset", preference("theme_preset"));
+          root.setAttribute("data-font", preference("font"));
+          root.setAttribute("data-content-layout", preference("content_layout"));
+          root.setAttribute("data-navbar-style", preference("navbar_style"));
+          root.setAttribute("data-sidebar-variant", preference("sidebar_variant"));
+          root.setAttribute("data-sidebar-collapsible", preference("sidebar_collapsible"));
+          root.style.colorScheme = resolvedMode === "dark" ? "dark" : "light";
+        } catch (e) {
+          console.warn("ThemeBootScript error:", e);
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen antialiased">
+    <App client:only="react">
+      <div slot="fallback" class="flex h-dvh items-center justify-center bg-background">
+        <div class="size-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+      </div>
+    </App>
+  </body>
+</html>

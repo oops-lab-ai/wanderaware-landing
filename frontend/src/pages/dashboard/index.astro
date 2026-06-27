@@ -1,0 +1,156 @@
+---
+import "@/styles/globals.css";
+
+// biome-ignore lint/correctness/noUnusedImports: Astro uses this React island in markup below.
+import App from "@/components/dashboard/App";
+---
+
+<html
+  lang="en"
+  data-theme-mode="dark"
+  data-theme-preset="default"
+  data-content-layout="centered"
+  data-navbar-style="sticky"
+  data-sidebar-variant="inset"
+  data-sidebar-collapsible="icon"
+  data-font="outfit"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WanderAware Dashboard</title>
+    <meta name="description" content="WanderAware — Plan and subscription management" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gabriela&family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font CSS variable definitions -->
+    <style>
+      :root {
+        --font-inter: "Inter", sans-serif;
+        --font-roboto: "Roboto", sans-serif;
+        --font-poppins: "Poppins", sans-serif;
+        /* Geist fonts are not on Google Fonts — install @fontsource/geist-sans if needed */
+        --font-geist: "Geist", sans-serif;
+        --font-geist-mono: "Geist Mono", monospace;
+        --font-jakarta: "Plus Jakarta Sans", sans-serif;
+        --font-nunito: "Nunito", sans-serif;
+        --font-gabriela: "Gabriela", serif;
+        --font-outfit: "Outfit", sans-serif;
+        --font-manrope: "Manrope", sans-serif;
+        --font-dm-sans: "DM Sans", sans-serif;
+        --font-great-vibes: "Great Vibes", cursive;
+      }
+    </style>
+
+    <!-- ThemeBootScript: reads preferences from cookies before React mounts to prevent FOUC -->
+    <script is:inline>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var PERSISTENCE = {
+            theme_mode: "client-cookie",
+            theme_preset: "client-cookie",
+            font: "client-cookie",
+            content_layout: "client-cookie",
+            navbar_style: "client-cookie",
+            sidebar_variant: "client-cookie",
+            sidebar_collapsible: "client-cookie"
+          };
+          var DEFAULTS = {
+            theme_mode: "dark",
+            theme_preset: "default",
+            font: "outfit",
+            content_layout: "centered",
+            navbar_style: "sticky",
+            sidebar_variant: "inset",
+            sidebar_collapsible: "icon"
+          };
+
+          function readCookie(name) {
+            var match = document.cookie.split("; ").find(function(c) {
+              return c.startsWith(name + "=");
+            });
+            return match ? decodeURIComponent(match.split("=")[1]) : null;
+          }
+
+          function readLocal(name) {
+            try {
+              return window.localStorage.getItem(name);
+            } catch (e) {
+              return null;
+            }
+          }
+
+          function readPreference(key, fallback) {
+            var mode = PERSISTENCE[key];
+            var value = null;
+
+            if (mode === "localStorage") {
+              value = readLocal(key);
+            }
+
+            if (!value && (mode === "client-cookie" || mode === "server-cookie")) {
+              value = readCookie(key);
+            }
+
+            if (!value || typeof value !== "string") {
+              return fallback;
+            }
+
+            return value;
+          }
+
+          var rawMode = readPreference("theme_mode", DEFAULTS.theme_mode);
+          var rawPreset = readPreference("theme_preset", DEFAULTS.theme_preset);
+          var rawFont = readPreference("font", DEFAULTS.font);
+          var rawContentLayout = readPreference("content_layout", DEFAULTS.content_layout);
+          var rawNavbarStyle = readPreference("navbar_style", DEFAULTS.navbar_style);
+          var rawSidebarVariant = readPreference("sidebar_variant", DEFAULTS.sidebar_variant);
+          var rawSidebarCollapsible = readPreference("sidebar_collapsible", DEFAULTS.sidebar_collapsible);
+
+          var isValidMode = rawMode === "dark" || rawMode === "light" || rawMode === "system";
+          var mode = isValidMode ? rawMode : DEFAULTS.theme_mode;
+          var resolvedMode =
+            mode === "system" && window.matchMedia
+              ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+              : mode;
+          var preset = rawPreset || DEFAULTS.theme_preset;
+          var font = rawFont || DEFAULTS.font;
+          var contentLayout = rawContentLayout || DEFAULTS.content_layout;
+          var navbarStyle = rawNavbarStyle || DEFAULTS.navbar_style;
+          var sidebarVariant = rawSidebarVariant || DEFAULTS.sidebar_variant;
+          var sidebarCollapsible = rawSidebarCollapsible || DEFAULTS.sidebar_collapsible;
+
+          root.classList.toggle("dark", resolvedMode === "dark");
+          root.setAttribute("data-theme-mode", mode);
+          root.setAttribute("data-theme-preset", preset);
+          root.setAttribute("data-font", font);
+          root.setAttribute("data-content-layout", contentLayout);
+          root.setAttribute("data-navbar-style", navbarStyle);
+          root.setAttribute("data-sidebar-variant", sidebarVariant);
+          root.setAttribute("data-sidebar-collapsible", sidebarCollapsible);
+
+          root.style.colorScheme = resolvedMode === "dark" ? "dark" : "light";
+        } catch (e) {
+          console.warn("ThemeBootScript error:", e);
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen antialiased">
+    <App client:only="react">
+      <!-- Shown instantly (pre-React) while the client bundle downloads and hydrates.
+           Must be pure HTML/CSS — no React components. Kills the blank-page flash on cold load. -->
+      <div slot="fallback" class="flex h-dvh items-center justify-center bg-background">
+        <div class="size-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+      </div>
+    </App>
+  </body>
+</html>

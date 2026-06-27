@@ -1,0 +1,53 @@
+{
+    "name": "@wanderaware/backend",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "main": "amplify/backend.ts",
+    "types": "amplify/data/resource.ts",
+    "exports": {
+        ".": {
+            "types": "./amplify/backend.ts",
+            "import": "./amplify/backend.ts"
+        },
+        "./schema": {
+            "types": "./amplify/data/resource.ts",
+            "default": "./amplify/data/resource.ts"
+        }
+    },
+    "scripts": {
+        "sandbox:start": "npx @dotenvx/dotenvx run --env-file=.env -- npx ampx sandbox --profile admin-amplify-1 --stream-function-logs --outputs-out-dir ../shared",
+        "sandbox:delete": "npx @dotenvx/dotenvx run --env-file=.env -- npx ampx sandbox delete --profile admin-amplify-1",
+        "audit:data-access": "node scripts/audit-amplify-data-access.mjs"
+    },
+    "devDependencies": {
+        "@aws-amplify/backend": "^1.21.0",
+        "@aws-amplify/backend-cli": "^1.4.10",
+        "@aws-sdk/client-amplify": "^3.624.0",
+        "@aws-sdk/types": "^3.734.0",
+        "@types/node": "^25.2.1",
+        "@types/xml-js": "^1.0.0",
+        "aws-cdk": "^2",
+        "aws-cdk-lib": "^2",
+        "constructs": "^10.0.0",
+        "esbuild": "^0.25.0",
+        "tsx": "^4.19.3",
+        "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "@aws-amplify/data-schema": "^1.25.1",
+        "@aws-sdk/client-appsync": "^3.1021.0",
+        "@aws-sdk/client-cognito-identity-provider": "^3.1019.0",
+        "@aws-sdk/client-dynamodb": "^3.1008.0",
+        "@aws-sdk/client-s3": "^3.972.0",
+        "@aws-sdk/client-ses": "^3.970.0",
+        "@aws-sdk/lib-dynamodb": "^3.1008.0",
+        "@turf/boolean-point-in-polygon": "^7.3.4",
+        "@turf/helpers": "^7.3.4",
+        "@types/geojson": "^7946.0.16",
+        "aws-amplify": "^6.16.2",
+        "flatbush": "^4.5.0",
+        "stripe": "^22.0.0",
+        "xml-js": "^1.6.11"
+    }
+}

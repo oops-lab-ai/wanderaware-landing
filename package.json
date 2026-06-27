@@ -1,0 +1,24 @@
+{
+  "name": "wanderaware-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WanderAware Amplify web app and backend",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "preview": "cd frontend && npm run preview",
+    "check:frontend": "cd frontend && npm run build && npm run check",
+    "check:backend": "cd backend && npx tsc --noEmit -p amplify\\tsconfig.json",
+    "check": "npm run check:frontend && npm run check:backend",
+    "sandbox:start": "cd backend && npm run sandbox:start",
+    "sandbox:delete": "cd backend && npm run sandbox:delete"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.1028.0",
+    "@aws-sdk/client-dynamodb": "^3.1028.0",
+    "@aws-sdk/credential-providers": "^3.1028.0",
+    "@types/node": "^25.5.2",
+    "aws-amplify": "^6.16.3",
+    "dotenv": "^17.4.1"
+  }
+}

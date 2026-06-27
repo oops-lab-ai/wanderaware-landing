@@ -1,0 +1,51 @@
+version: 1
+applications:
+    - appRoot: frontend
+      backend:
+          phases:
+              preBuild:
+                  commands:
+                      - nvm install 22
+                      - nvm use 22
+                      - cd ../backend && npm install
+              build:
+                  commands:
+                      - bash ../backend/scripts/deploy/amplify-deploy.sh
+      frontend:
+          phases:
+              preBuild:
+                  commands:
+                      - nvm install 22
+                      - nvm use 22
+              build:
+                  commands:
+                      - mkdir -p ../shared
+                      - cd ../backend && npm install
+                      - cd ../backend && npx ampx generate outputs --branch "$AWS_BRANCH" --app-id "$AWS_APP_ID" --out-dir ../shared --outputs-version 1
+                      - test -f ../shared/amplify_outputs.json
+                      - cd ../frontend && npm install
+                      - cd ../frontend && npm run build
+              postBuild:
+                  commands:
+                      - |
+                          python3 -c "
+                          import json, subprocess
+                          rules = [
+                              {'source': '/dashboard', 'target': '/dashboard/index.html', 'status': '200'},
+                              {'source': '/dashboard/<*>', 'target': '/dashboard/index.html', 'status': '200'}
+                          ]
+                          subprocess.run([
+                              'aws', 'amplify', 'update-app',
+                              '--app-id', '${AWS_APP_ID}',
+                              '--custom-rules', json.dumps(rules),
+                              '--region', '${AWS_REGION}'
+                          ], check=True)
+                          print('SPA rewrite rules applied')
+                          "
+          artifacts:
+              baseDirectory: dist
+              files:
+                  - '**/*'
+          cache:
+              paths:
+                  - node_modules/**/*
