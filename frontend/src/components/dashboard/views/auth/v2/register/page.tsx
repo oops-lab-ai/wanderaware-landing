@@ -21,7 +21,7 @@ export default function RegisterV2() {
 
         <div className="space-y-4">
           <SocialButtons providers={SOCIAL_PROVIDERS} />
-          <SocialDivider label="or sign up with email" />
+          {SOCIAL_PROVIDERS.length > 0 ? <SocialDivider label="or sign up with email" /> : null}
           <RegisterForm
             onSuccess={() => {
               toast.success("Account created successfully!");

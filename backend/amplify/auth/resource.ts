@@ -1,4 +1,4 @@
-import { defineAuth, secret } from '@aws-amplify/backend';
+import { defineAuth } from '@aws-amplify/backend';
 import { customMessage } from '../functions/customMessage/resource';
 import { postAuthentication } from '../functions/postAuthentication/resource';
 import { postConfirmation } from '../functions/postConfirmation/resource';
@@ -24,19 +24,23 @@ export const auth = defineAuth({
     groups: ['admins'],
     loginWith: {
         email: true,
-        externalProviders: {
-            google: {
-                clientId: secret('GOOGLE_CLIENT_ID'),
-                clientSecret: secret('GOOGLE_CLIENT_SECRET'),
-                scopes: ['profile', 'email', 'openid'],
-                attributeMapping: {
-                    email: 'email',
-                    emailVerified: 'email_verified',
-                    fullname: 'name',
-                },
-            },
-            callbackUrls: [`${localWebAppUrl}/dashboard`, `${devWebAppUrl}/dashboard`, `${webAppUrl}/dashboard`],
-            logoutUrls: [localWebAppUrl, devWebAppUrl, webAppUrl],
-        },
+        // Google OAuth is intentionally disabled for the first WanderAware deploy.
+        // Re-enable after restoring the `secret` import and creating
+        // GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET with Amplify secrets.
+        //
+        // externalProviders: {
+        //     google: {
+        //         clientId: secret('GOOGLE_CLIENT_ID'),
+        //         clientSecret: secret('GOOGLE_CLIENT_SECRET'),
+        //         scopes: ['profile', 'email', 'openid'],
+        //         attributeMapping: {
+        //             email: 'email',
+        //             emailVerified: 'email_verified',
+        //             fullname: 'name',
+        //         },
+        //     },
+        //     callbackUrls: [`${localWebAppUrl}/dashboard`, `${devWebAppUrl}/dashboard`, `${webAppUrl}/dashboard`],
+        //     logoutUrls: [localWebAppUrl, devWebAppUrl, webAppUrl],
+        // },
     },
 });

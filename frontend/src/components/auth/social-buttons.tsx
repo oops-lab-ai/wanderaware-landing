@@ -11,11 +11,9 @@ import { Button } from "@/components/ui/button";
 export type SocialProvider = "Google" | "Apple" | "Facebook" | "Amazon";
 
 // Single source of truth for which providers are enabled across the auth UI.
-// To add another provider: provision its OAuth app, set its secrets via
-// `npx ampx sandbox --profile admin-amplify-1 secret set …`, uncomment its
-// block in backend/amplify/auth/resource.ts, add it to PROVIDER_NAME_BY_PREFIX
-// in preSignUp/handler.ts, and add it to this list.
-export const SOCIAL_PROVIDERS: readonly SocialProvider[] = ["Google"];
+// Google is disabled for the first deploy. Re-enable it here after the matching
+// backend OAuth block and Amplify secrets are restored.
+export const SOCIAL_PROVIDERS: readonly SocialProvider[] = [];
 
 interface SocialButtonsProps {
   providers: readonly SocialProvider[];

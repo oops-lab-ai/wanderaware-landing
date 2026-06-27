@@ -39,7 +39,7 @@ export default function LoginV2() {
         {hasAmplifyAuthConfig() ? (
           <div className="space-y-4">
             <SocialButtons providers={SOCIAL_PROVIDERS} />
-            <SocialDivider />
+            {SOCIAL_PROVIDERS.length > 0 ? <SocialDivider /> : null}
             <LoginForm
               onSuccess={handleLoginSuccess}
               onConfirmSignUpRequired={(email) =>

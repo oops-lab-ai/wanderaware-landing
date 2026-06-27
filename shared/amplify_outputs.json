@@ -1,1 +1,5487 @@
-{"auth":{},"data":{}}
+{
+  "auth": {
+    "user_pool_id": "us-east-1_ACimyfQKl",
+    "aws_region": "us-east-1",
+    "user_pool_client_id": "1a089meqcdocotgucgpu6l0shu",
+    "identity_pool_id": "us-east-1:1df73128-0cb7-486f-a59f-d5a70cf78167",
+    "mfa_methods": [],
+    "standard_required_attributes": [
+      "email"
+    ],
+    "username_attributes": [
+      "email"
+    ],
+    "user_verification_types": [
+      "email"
+    ],
+    "groups": [
+      {
+        "admins": {
+          "precedence": 0
+        }
+      }
+    ],
+    "mfa_configuration": "NONE",
+    "password_policy": {
+      "min_length": 8,
+      "require_lowercase": true,
+      "require_numbers": true,
+      "require_symbols": true,
+      "require_uppercase": true
+    },
+    "unauthenticated_identities_enabled": true
+  },
+  "data": {
+    "url": "https://hyqpaibde5d4pm7vmmbniunbqa.appsync-api.us-east-1.amazonaws.com/graphql",
+    "aws_region": "us-east-1",
+    "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
+    "authorization_types": [
+      "AWS_IAM"
+    ],
+    "model_introspection": {
+      "version": 1,
+      "models": {
+        "Profile": {
+          "name": "Profile",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newsLetter": {
+              "name": "newsLetter",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "hasUsedTrial": {
+              "name": "hasUsedTrial",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "owner": {
+              "name": "owner",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Profiles",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "profilesByEmail",
+                "queryField": "listProfileByEmail",
+                "fields": [
+                  "email"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update"
+                    ],
+                    "identityClaim": "cognito:username"
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Organization": {
+          "name": "Organization",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "ownerId": {
+              "name": "ownerId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "stripeCustomerId": {
+              "name": "stripeCustomerId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": {
+                "enum": "OrganizationPlanTier"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "planSource": {
+              "name": "planSource",
+              "isArray": false,
+              "type": {
+                "enum": "OrganizationPlanSource"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "cancelAtPeriodEnd": {
+              "name": "cancelAtPeriodEnd",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "currentPeriodEnd": {
+              "name": "currentPeriodEnd",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "subscriptionStatus": {
+              "name": "subscriptionStatus",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "scheduledDowngradeTier": {
+              "name": "scheduledDowngradeTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "scheduledDowngradeDate": {
+              "name": "scheduledDowngradeDate",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletesTtl": {
+              "name": "deletesTtl",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "grantExpiresAt": {
+              "name": "grantExpiresAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "memberships": {
+              "name": "memberships",
+              "isArray": true,
+              "type": {
+                "model": "Membership"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "organizationId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Organizations",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "organizationsByOwnerId",
+                "queryField": "listOrganizationByOwnerId",
+                "fields": [
+                  "ownerId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "organizationsByStripeCustomerId",
+                "queryField": "listOrganizationByStripeCustomerId",
+                "fields": [
+                  "stripeCustomerId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "ownerId",
+                    "allow": "owner",
+                    "identityClaim": "cognito:username",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Membership": {
+          "name": "Membership",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "MembershipRole"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "organization": {
+              "name": "organization",
+              "isArray": false,
+              "type": {
+                "model": "Organization"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "organizationId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Memberships",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "membershipsByUserId",
+                "queryField": "listMembershipByUserId",
+                "fields": [
+                  "userId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "membershipsByOrganizationId",
+                "queryField": "listMembershipByOrganizationId",
+                "fields": [
+                  "organizationId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "userId",
+                    "allow": "owner",
+                    "identityClaim": "cognito:username",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Building": {
+          "name": "Building",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "addressLine1": {
+              "name": "addressLine1",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "addressLine2": {
+              "name": "addressLine2",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "city": {
+              "name": "city",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "state": {
+              "name": "state",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "postalCode": {
+              "name": "postalCode",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "timezone": {
+              "name": "timezone",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "BuildingStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Buildings",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "buildingsByOrganizationId",
+                "queryField": "listBuildingByOrganizationId",
+                "fields": [
+                  "organizationId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Device": {
+          "name": "Device",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "buildingId": {
+              "name": "buildingId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "serialNumber": {
+              "name": "serialNumber",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "locationLabel": {
+              "name": "locationLabel",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "DeviceStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastSeenAt": {
+              "name": "lastSeenAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "firmwareVersion": {
+              "name": "firmwareVersion",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Devices",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "devicesByOrganizationId",
+                "queryField": "listDeviceByOrganizationId",
+                "fields": [
+                  "organizationId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "devicesByBuildingId",
+                "queryField": "listDeviceByBuildingId",
+                "fields": [
+                  "buildingId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "devicesByDeviceId",
+                "queryField": "listDeviceByDeviceId",
+                "fields": [
+                  "deviceId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Participant": {
+          "name": "Participant",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "buildingId": {
+              "name": "buildingId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "displayName": {
+              "name": "displayName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "externalId": {
+              "name": "externalId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "ParticipantStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "wanderRisk": {
+              "name": "wanderRisk",
+              "isArray": false,
+              "type": {
+                "enum": "ParticipantWanderRisk"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "notes": {
+              "name": "notes",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Participants",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "participantsByOrganizationId",
+                "queryField": "listParticipantByOrganizationId",
+                "fields": [
+                  "organizationId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "participantsByBuildingId",
+                "queryField": "listParticipantByBuildingId",
+                "fields": [
+                  "buildingId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "RfidTag": {
+          "name": "RfidTag",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "buildingId": {
+              "name": "buildingId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "tagUid": {
+              "name": "tagUid",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "assignmentStatus": {
+              "name": "assignmentStatus",
+              "isArray": false,
+              "type": {
+                "enum": "RfidTagAssignmentStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "participantId": {
+              "name": "participantId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastSeenAt": {
+              "name": "lastSeenAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "RfidTags",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "rfidTagsByOrganizationId",
+                "queryField": "listRfidTagByOrganizationId",
+                "fields": [
+                  "organizationId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "rfidTagsByBuildingId",
+                "queryField": "listRfidTagByBuildingId",
+                "fields": [
+                  "buildingId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "rfidTagsByTagUid",
+                "queryField": "listRfidTagByTagUid",
+                "fields": [
+                  "tagUid"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Alert": {
+          "name": "Alert",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "buildingId": {
+              "name": "buildingId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "tagUid": {
+              "name": "tagUid",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "participantId": {
+              "name": "participantId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "AlertStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "severity": {
+              "name": "severity",
+              "isArray": false,
+              "type": {
+                "enum": "AlertSeverity"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "triggeredAt": {
+              "name": "triggeredAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "acknowledgedAt": {
+              "name": "acknowledgedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "acknowledgedBy": {
+              "name": "acknowledgedBy",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "resolvedAt": {
+              "name": "resolvedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "locationLabel": {
+              "name": "locationLabel",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Alerts",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "alertsByOrganizationId",
+                "queryField": "listAlertByOrganizationId",
+                "fields": [
+                  "organizationId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "alertsByBuildingId",
+                "queryField": "listAlertByBuildingId",
+                "fields": [
+                  "buildingId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "alertsByStatus",
+                "queryField": "listAlertByStatus",
+                "fields": [
+                  "status"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "DeviceActivation": {
+          "name": "DeviceActivation",
+          "fields": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "deviceName": {
+              "name": "deviceName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "activatedAt": {
+              "name": "activatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "lastValidatedAt": {
+              "name": "lastValidatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "DeviceActivations",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "userId",
+                  "deviceId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "deviceActivationsByUserId",
+                "queryField": "listDeviceActivationByUserId",
+                "fields": [
+                  "userId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "deviceActivationsByOrganizationId",
+                "queryField": "listDeviceActivationByOrganizationId",
+                "fields": [
+                  "organizationId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": []
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "userId",
+            "sortKeyFieldNames": [
+              "deviceId"
+            ]
+          }
+        },
+        "PromoCode": {
+          "name": "PromoCode",
+          "fields": {
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "label": {
+              "name": "label",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxRedemptions": {
+              "name": "maxRedemptions",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "redemptionCount": {
+              "name": "redemptionCount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "expiresAt": {
+              "name": "expiresAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "expiresInDays": {
+              "name": "expiresInDays",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": {
+                "enum": "PromoCodePlanTier"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "PromoCodes",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "code"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": []
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "code",
+            "sortKeyFieldNames": []
+          }
+        },
+        "AdminPlanAudit": {
+          "name": "AdminPlanAudit",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "actorUserId": {
+              "name": "actorUserId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "action": {
+              "name": "action",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "oldPlanTier": {
+              "name": "oldPlanTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newPlanTier": {
+              "name": "newPlanTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "oldPlanSource": {
+              "name": "oldPlanSource",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newPlanSource": {
+              "name": "newPlanSource",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "oldMaxSeats": {
+              "name": "oldMaxSeats",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newMaxSeats": {
+              "name": "newMaxSeats",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "oldGrantExpiresAt": {
+              "name": "oldGrantExpiresAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newGrantExpiresAt": {
+              "name": "newGrantExpiresAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "reason": {
+              "name": "reason",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "AdminPlanAudits",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "adminPlanAuditsByOrganizationId",
+                "queryField": "listAdminPlanAuditByOrganizationId",
+                "fields": [
+                  "organizationId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": []
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "PromoRedemption": {
+          "name": "PromoRedemption",
+          "fields": {
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "redeemedAt": {
+              "name": "redeemedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "PromoRedemptions",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "code",
+                  "userId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "promoRedemptionsByCode",
+                "queryField": "listPromoRedemptionByCode",
+                "fields": [
+                  "code"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "promoRedemptionsByUserId",
+                "queryField": "listPromoRedemptionByUserId",
+                "fields": [
+                  "userId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": []
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "code",
+            "sortKeyFieldNames": [
+              "userId"
+            ]
+          }
+        },
+        "EmailSuppressionList": {
+          "name": "EmailSuppressionList",
+          "fields": {
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "reason": {
+              "name": "reason",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "bounceType": {
+              "name": "bounceType",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "bounceSubType": {
+              "name": "bounceSubType",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "complaintFeedbackType": {
+              "name": "complaintFeedbackType",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "originalError": {
+              "name": "originalError",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "suppressedAt": {
+              "name": "suppressedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "expiresAt": {
+              "name": "expiresAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "EmailSuppressionLists",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "email"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "emailSuppressionListsBySuppressedAt",
+                "queryField": "listEmailSuppressionListBySuppressedAt",
+                "fields": [
+                  "suppressedAt"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": []
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "email",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Invitation": {
+          "name": "Invitation",
+          "fields": {
+            "tokenHash": {
+              "name": "tokenHash",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "InvitationRole"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "InvitationStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "invitedBy": {
+              "name": "invitedBy",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "expiresAt": {
+              "name": "expiresAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": true,
+              "attributes": []
+            },
+            "ttl": {
+              "name": "ttl",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Invitations",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "tokenHash"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "invitationsByOrganizationId",
+                "queryField": "listInvitationByOrganizationId",
+                "fields": [
+                  "organizationId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "invitationsByEmail",
+                "queryField": "listInvitationByEmail",
+                "fields": [
+                  "email"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "private",
+                    "operations": []
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "tokenHash",
+            "sortKeyFieldNames": []
+          }
+        }
+      },
+      "enums": {
+        "SendEmailType": {
+          "name": "SendEmailType",
+          "values": [
+            "contact",
+            "notification",
+            "welcome"
+          ]
+        },
+        "OrganizationPlanTier": {
+          "name": "OrganizationPlanTier",
+          "values": [
+            "free",
+            "basic",
+            "professional",
+            "enterprise"
+          ]
+        },
+        "OrganizationPlanSource": {
+          "name": "OrganizationPlanSource",
+          "values": [
+            "stripe",
+            "grant",
+            "manual"
+          ]
+        },
+        "MembershipRole": {
+          "name": "MembershipRole",
+          "values": [
+            "owner",
+            "admin",
+            "viewer"
+          ]
+        },
+        "BuildingStatus": {
+          "name": "BuildingStatus",
+          "values": [
+            "active",
+            "inactive"
+          ]
+        },
+        "DeviceStatus": {
+          "name": "DeviceStatus",
+          "values": [
+            "online",
+            "offline",
+            "needs_attention",
+            "inactive"
+          ]
+        },
+        "ParticipantStatus": {
+          "name": "ParticipantStatus",
+          "values": [
+            "active",
+            "inactive"
+          ]
+        },
+        "ParticipantWanderRisk": {
+          "name": "ParticipantWanderRisk",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "RfidTagAssignmentStatus": {
+          "name": "RfidTagAssignmentStatus",
+          "values": [
+            "unassigned",
+            "assigned",
+            "lost",
+            "retired"
+          ]
+        },
+        "AlertStatus": {
+          "name": "AlertStatus",
+          "values": [
+            "open",
+            "acknowledged",
+            "resolved",
+            "false_alarm"
+          ]
+        },
+        "AlertSeverity": {
+          "name": "AlertSeverity",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "PromoCodePlanTier": {
+          "name": "PromoCodePlanTier",
+          "values": [
+            "free",
+            "basic",
+            "professional",
+            "enterprise"
+          ]
+        },
+        "InvitationRole": {
+          "name": "InvitationRole",
+          "values": [
+            "admin",
+            "viewer"
+          ]
+        },
+        "InvitationStatus": {
+          "name": "InvitationStatus",
+          "values": [
+            "pending",
+            "accepted",
+            "declined"
+          ]
+        },
+        "InviteMemberRole": {
+          "name": "InviteMemberRole",
+          "values": [
+            "admin",
+            "viewer"
+          ]
+        },
+        "UpdateMemberRoleRole": {
+          "name": "UpdateMemberRoleRole",
+          "values": [
+            "admin",
+            "viewer"
+          ]
+        }
+      },
+      "nonModels": {
+        "SubscriptionProduct": {
+          "name": "SubscriptionProduct",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "price": {
+              "name": "price",
+              "isArray": false,
+              "type": "Float",
+              "isRequired": false,
+              "attributes": []
+            },
+            "priceId": {
+              "name": "priceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "type": {
+              "name": "type",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planId": {
+              "name": "planId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "tier": {
+              "name": "tier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "marketingFeatures": {
+              "name": "marketingFeatures",
+              "isArray": true,
+              "type": "String",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "interval": {
+              "name": "interval",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "intervalCount": {
+              "name": "intervalCount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "isRecommended": {
+              "name": "isRecommended",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "UserOrgItem": {
+          "name": "UserOrgItem",
+          "fields": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "membershipId": {
+              "name": "membershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "OrgMemberItem": {
+          "name": "OrgMemberItem",
+          "fields": {
+            "membershipId": {
+              "name": "membershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "joinedAt": {
+              "name": "joinedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "InvitationItem": {
+          "name": "InvitationItem",
+          "fields": {
+            "tokenHash": {
+              "name": "tokenHash",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "invitedBy": {
+              "name": "invitedBy",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "inviterEmail": {
+              "name": "inviterEmail",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationName": {
+              "name": "organizationName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "expiresAt": {
+              "name": "expiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "KickableDevice": {
+          "name": "KickableDevice",
+          "fields": {
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deviceName": {
+              "name": "deviceName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastValidatedAt": {
+              "name": "lastValidatedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "DeviceItem": {
+          "name": "DeviceItem",
+          "fields": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deviceName": {
+              "name": "deviceName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "activatedAt": {
+              "name": "activatedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastValidatedAt": {
+              "name": "lastValidatedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "isOnline": {
+              "name": "isOnline",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminGrantItem": {
+          "name": "AdminGrantItem",
+          "fields": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationName": {
+              "name": "organizationName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "ownerEmail": {
+              "name": "ownerEmail",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planSource": {
+              "name": "planSource",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "grantExpiresAt": {
+              "name": "grantExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "sourceCode": {
+              "name": "sourceCode",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminCodeItem": {
+          "name": "AdminCodeItem",
+          "fields": {
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "label": {
+              "name": "label",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxRedemptions": {
+              "name": "maxRedemptions",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "redemptionCount": {
+              "name": "redemptionCount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "expiresAt": {
+              "name": "expiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "expiresInDays": {
+              "name": "expiresInDays",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminUserSearchItem": {
+          "name": "AdminUserSearchItem",
+          "fields": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "orgCount": {
+              "name": "orgCount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "enabled": {
+              "name": "enabled",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "userStatus": {
+              "name": "userStatus",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastModifiedAt": {
+              "name": "lastModifiedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminUserOrgItem": {
+          "name": "AdminUserOrgItem",
+          "fields": {
+            "membershipId": {
+              "name": "membershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationName": {
+              "name": "organizationName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planSource": {
+              "name": "planSource",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "grantExpiresAt": {
+              "name": "grantExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminUserRedemption": {
+          "name": "AdminUserRedemption",
+          "fields": {
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "redeemedAt": {
+              "name": "redeemedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminUserDetail": {
+          "name": "AdminUserDetail",
+          "fields": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newsLetter": {
+              "name": "newsLetter",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "enabled": {
+              "name": "enabled",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "userStatus": {
+              "name": "userStatus",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastModifiedAt": {
+              "name": "lastModifiedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminOrgSearchItem": {
+          "name": "AdminOrgSearchItem",
+          "fields": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "ownerId": {
+              "name": "ownerId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "ownerEmail": {
+              "name": "ownerEmail",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planSource": {
+              "name": "planSource",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "subscriptionStatus": {
+              "name": "subscriptionStatus",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "stripeCustomerId": {
+              "name": "stripeCustomerId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "seatsUsed": {
+              "name": "seatsUsed",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deviceCount": {
+              "name": "deviceCount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "grantExpiresAt": {
+              "name": "grantExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "memberCount": {
+              "name": "memberCount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminOrgMember": {
+          "name": "AdminOrgMember",
+          "fields": {
+            "membershipId": {
+              "name": "membershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminOrgDevice": {
+          "name": "AdminOrgDevice",
+          "fields": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deviceName": {
+              "name": "deviceName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "activatedAt": {
+              "name": "activatedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastValidatedAt": {
+              "name": "lastValidatedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminOrgDetail": {
+          "name": "AdminOrgDetail",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "ownerId": {
+              "name": "ownerId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "stripeCustomerId": {
+              "name": "stripeCustomerId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "planSource": {
+              "name": "planSource",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "seatsUsed": {
+              "name": "seatsUsed",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deviceCount": {
+              "name": "deviceCount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "subscriptionStatus": {
+              "name": "subscriptionStatus",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "cancelAtPeriodEnd": {
+              "name": "cancelAtPeriodEnd",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "currentPeriodEnd": {
+              "name": "currentPeriodEnd",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "scheduledDowngradeTier": {
+              "name": "scheduledDowngradeTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "scheduledDowngradeDate": {
+              "name": "scheduledDowngradeDate",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "grantExpiresAt": {
+              "name": "grantExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminPlanAuditItem": {
+          "name": "AdminPlanAuditItem",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "actorUserId": {
+              "name": "actorUserId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "action": {
+              "name": "action",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "oldPlanTier": {
+              "name": "oldPlanTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newPlanTier": {
+              "name": "newPlanTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "oldPlanSource": {
+              "name": "oldPlanSource",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newPlanSource": {
+              "name": "newPlanSource",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "oldMaxSeats": {
+              "name": "oldMaxSeats",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newMaxSeats": {
+              "name": "newMaxSeats",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "oldGrantExpiresAt": {
+              "name": "oldGrantExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newGrantExpiresAt": {
+              "name": "newGrantExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "reason": {
+              "name": "reason",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "GetProductsReturnType": {
+          "name": "GetProductsReturnType",
+          "fields": {
+            "subscriptionProducts": {
+              "name": "subscriptionProducts",
+              "isArray": true,
+              "type": {
+                "nonModel": "SubscriptionProduct"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "CreateCheckoutSessionReturnType": {
+          "name": "CreateCheckoutSessionReturnType",
+          "fields": {
+            "sessionId": {
+              "name": "sessionId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "url": {
+              "name": "url",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "CreateBillingPortalReturnType": {
+          "name": "CreateBillingPortalReturnType",
+          "fields": {
+            "url": {
+              "name": "url",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "EndTrialEarlyReturnType": {
+          "name": "EndTrialEarlyReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "subscriptionId": {
+              "name": "subscriptionId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newStatus": {
+              "name": "newStatus",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "SendEmailReturnType": {
+          "name": "SendEmailReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "SendContactFormReturnType": {
+          "name": "SendContactFormReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "ListUserOrganizationsReturnType": {
+          "name": "ListUserOrganizationsReturnType",
+          "fields": {
+            "organizations": {
+              "name": "organizations",
+              "isArray": true,
+              "type": {
+                "nonModel": "UserOrgItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "SetupOrganizationReturnType": {
+          "name": "SetupOrganizationReturnType",
+          "fields": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "membershipId": {
+              "name": "membershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "ListOrgMembersReturnType": {
+          "name": "ListOrgMembersReturnType",
+          "fields": {
+            "members": {
+              "name": "members",
+              "isArray": true,
+              "type": {
+                "nonModel": "OrgMemberItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "InviteMemberReturnType": {
+          "name": "InviteMemberReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AcceptInvitationReturnType": {
+          "name": "AcceptInvitationReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "DeclineInvitationReturnType": {
+          "name": "DeclineInvitationReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "RemoveMemberReturnType": {
+          "name": "RemoveMemberReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "UpdateMemberRoleReturnType": {
+          "name": "UpdateMemberRoleReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "TransferOwnershipReturnType": {
+          "name": "TransferOwnershipReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "FetchInvitationsReturnType": {
+          "name": "FetchInvitationsReturnType",
+          "fields": {
+            "invitations": {
+              "name": "invitations",
+              "isArray": true,
+              "type": {
+                "nonModel": "InvitationItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "ListMyInvitationsReturnType": {
+          "name": "ListMyInvitationsReturnType",
+          "fields": {
+            "invitations": {
+              "name": "invitations",
+              "isArray": true,
+              "type": {
+                "nonModel": "InvitationItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "RevokeInvitationReturnType": {
+          "name": "RevokeInvitationReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "RemoveOrganizationReturnType": {
+          "name": "RemoveOrganizationReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "expiresAt": {
+              "name": "expiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "RestoreOrganizationReturnType": {
+          "name": "RestoreOrganizationReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "LeaveOrganizationReturnType": {
+          "name": "LeaveOrganizationReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "ChangePlanReturnType": {
+          "name": "ChangePlanReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "effectiveDate": {
+              "name": "effectiveDate",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newTier": {
+              "name": "newTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "PreviewPlanChangeReturnType": {
+          "name": "PreviewPlanChangeReturnType",
+          "fields": {
+            "direction": {
+              "name": "direction",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "prorationAmount": {
+              "name": "prorationAmount",
+              "isArray": false,
+              "type": "Float",
+              "isRequired": false,
+              "attributes": []
+            },
+            "creditAmount": {
+              "name": "creditAmount",
+              "isArray": false,
+              "type": "Float",
+              "isRequired": false,
+              "attributes": []
+            },
+            "chargeAmount": {
+              "name": "chargeAmount",
+              "isArray": false,
+              "type": "Float",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newMonthlyAmount": {
+              "name": "newMonthlyAmount",
+              "isArray": false,
+              "type": "Float",
+              "isRequired": false,
+              "attributes": []
+            },
+            "currentMonthlyAmount": {
+              "name": "currentMonthlyAmount",
+              "isArray": false,
+              "type": "Float",
+              "isRequired": false,
+              "attributes": []
+            },
+            "effectiveDate": {
+              "name": "effectiveDate",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "periodEnd": {
+              "name": "periodEnd",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "blocked": {
+              "name": "blocked",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "blockReason": {
+              "name": "blockReason",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "seatsUsed": {
+              "name": "seatsUsed",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "newTierMaxSeats": {
+              "name": "newTierMaxSeats",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "CancelDowngradeReturnType": {
+          "name": "CancelDowngradeReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "ClaimDeviceCapacityReturnType": {
+          "name": "ClaimDeviceCapacityReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "plan": {
+              "name": "plan",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "orgName": {
+              "name": "orgName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "errorCode": {
+              "name": "errorCode",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "kickableDevices": {
+              "name": "kickableDevices",
+              "isArray": true,
+              "type": {
+                "nonModel": "KickableDevice"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "ValidateDeviceCapacityReturnType": {
+          "name": "ValidateDeviceCapacityReturnType",
+          "fields": {
+            "valid": {
+              "name": "valid",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "plan": {
+              "name": "plan",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "orgName": {
+              "name": "orgName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "ReleaseDeviceReturnType": {
+          "name": "ReleaseDeviceReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "ListOrgDevicesReturnType": {
+          "name": "ListOrgDevicesReturnType",
+          "fields": {
+            "devices": {
+              "name": "devices",
+              "isArray": true,
+              "type": {
+                "nonModel": "DeviceItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "totalDevicesUsed": {
+              "name": "totalDevicesUsed",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "GetOrgUsageReturnType": {
+          "name": "GetOrgUsageReturnType",
+          "fields": {
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "seatsUsed": {
+              "name": "seatsUsed",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "maxDevicesPerUser": {
+              "name": "maxDevicesPerUser",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "RedeemPromoCodeReturnType": {
+          "name": "RedeemPromoCodeReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationName": {
+              "name": "organizationName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "grantExpiresAt": {
+              "name": "grantExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminListGrantsReturnType": {
+          "name": "AdminListGrantsReturnType",
+          "fields": {
+            "grants": {
+              "name": "grants",
+              "isArray": true,
+              "type": {
+                "nonModel": "AdminGrantItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "totalActive": {
+              "name": "totalActive",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "totalExpiringSoon": {
+              "name": "totalExpiringSoon",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "totalEverGranted": {
+              "name": "totalEverGranted",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminUpdateGrantReturnType": {
+          "name": "AdminUpdateGrantReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "grantExpiresAt": {
+              "name": "grantExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminGrantOrgReturnType": {
+          "name": "AdminGrantOrgReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminUpdateOrgPlanReturnType": {
+          "name": "AdminUpdateOrgPlanReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminListCodesReturnType": {
+          "name": "AdminListCodesReturnType",
+          "fields": {
+            "codes": {
+              "name": "codes",
+              "isArray": true,
+              "type": {
+                "nonModel": "AdminCodeItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "AdminCreateCodeReturnType": {
+          "name": "AdminCreateCodeReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminRevokeCodeReturnType": {
+          "name": "AdminRevokeCodeReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminSearchUsersReturnType": {
+          "name": "AdminSearchUsersReturnType",
+          "fields": {
+            "users": {
+              "name": "users",
+              "isArray": true,
+              "type": {
+                "nonModel": "AdminUserSearchItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "AdminGetUserReturnType": {
+          "name": "AdminGetUserReturnType",
+          "fields": {
+            "user": {
+              "name": "user",
+              "isArray": false,
+              "type": {
+                "nonModel": "AdminUserDetail"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizations": {
+              "name": "organizations",
+              "isArray": true,
+              "type": {
+                "nonModel": "AdminUserOrgItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "redemptions": {
+              "name": "redemptions",
+              "isArray": true,
+              "type": {
+                "nonModel": "AdminUserRedemption"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "AdminSearchOrgsReturnType": {
+          "name": "AdminSearchOrgsReturnType",
+          "fields": {
+            "organizations": {
+              "name": "organizations",
+              "isArray": true,
+              "type": {
+                "nonModel": "AdminOrgSearchItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "AdminGetOrgReturnType": {
+          "name": "AdminGetOrgReturnType",
+          "fields": {
+            "organization": {
+              "name": "organization",
+              "isArray": false,
+              "type": {
+                "nonModel": "AdminOrgDetail"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "members": {
+              "name": "members",
+              "isArray": true,
+              "type": {
+                "nonModel": "AdminOrgMember"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "devices": {
+              "name": "devices",
+              "isArray": true,
+              "type": {
+                "nonModel": "AdminOrgDevice"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "auditLog": {
+              "name": "auditLog",
+              "isArray": true,
+              "type": {
+                "nonModel": "AdminPlanAuditItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "AdminUpdateOrgMemberRoleReturnType": {
+          "name": "AdminUpdateOrgMemberRoleReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminRemoveOrgMemberReturnType": {
+          "name": "AdminRemoveOrgMemberReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminReleaseOrgDeviceReturnType": {
+          "name": "AdminReleaseOrgDeviceReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminRestoreOrgReturnType": {
+          "name": "AdminRestoreOrgReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminDisableUserReturnType": {
+          "name": "AdminDisableUserReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminEnableUserReturnType": {
+          "name": "AdminEnableUserReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminSignOutUserReturnType": {
+          "name": "AdminSignOutUserReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminResetUserPasswordReturnType": {
+          "name": "AdminResetUserPasswordReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "AdminDeleteUserReturnType": {
+          "name": "AdminDeleteUserReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "GetAuthMethodsReturnType": {
+          "name": "GetAuthMethodsReturnType",
+          "fields": {
+            "linkedProviders": {
+              "name": "linkedProviders",
+              "isArray": true,
+              "type": "String",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        },
+        "DisconnectProviderReturnType": {
+          "name": "DisconnectProviderReturnType",
+          "fields": {
+            "success": {
+              "name": "success",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        }
+      },
+      "queries": {
+        "GetProducts": {
+          "name": "GetProducts",
+          "isArray": false,
+          "type": {
+            "nonModel": "GetProductsReturnType"
+          },
+          "isRequired": false
+        },
+        "CreateCheckoutSession": {
+          "name": "CreateCheckoutSession",
+          "isArray": false,
+          "type": {
+            "nonModel": "CreateCheckoutSessionReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "productId": {
+              "name": "productId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "priceId": {
+              "name": "priceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "successUrl": {
+              "name": "successUrl",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "cancelUrl": {
+              "name": "cancelUrl",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "includeTrial": {
+              "name": "includeTrial",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false
+            },
+            "baseUrl": {
+              "name": "baseUrl",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "CreateBillingPortal": {
+          "name": "CreateBillingPortal",
+          "isArray": false,
+          "type": {
+            "nonModel": "CreateBillingPortalReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "returnUrl": {
+              "name": "returnUrl",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "baseUrl": {
+              "name": "baseUrl",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "EndTrialEarly": {
+          "name": "EndTrialEarly",
+          "isArray": false,
+          "type": {
+            "nonModel": "EndTrialEarlyReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "ListUserOrganizations": {
+          "name": "ListUserOrganizations",
+          "isArray": false,
+          "type": {
+            "nonModel": "ListUserOrganizationsReturnType"
+          },
+          "isRequired": false
+        },
+        "ListOrgMembers": {
+          "name": "ListOrgMembers",
+          "isArray": false,
+          "type": {
+            "nonModel": "ListOrgMembersReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "GetInvitationDetails": {
+          "name": "GetInvitationDetails",
+          "isArray": false,
+          "type": {
+            "nonModel": "InvitationItem"
+          },
+          "isRequired": false,
+          "arguments": {
+            "token": {
+              "name": "token",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "FetchInvitations": {
+          "name": "FetchInvitations",
+          "isArray": false,
+          "type": {
+            "nonModel": "FetchInvitationsReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "ListMyInvitations": {
+          "name": "ListMyInvitations",
+          "isArray": false,
+          "type": {
+            "nonModel": "ListMyInvitationsReturnType"
+          },
+          "isRequired": false
+        },
+        "PreviewPlanChange": {
+          "name": "PreviewPlanChange",
+          "isArray": false,
+          "type": {
+            "nonModel": "PreviewPlanChangeReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "newPriceId": {
+              "name": "newPriceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "ValidateDeviceCapacity": {
+          "name": "ValidateDeviceCapacity",
+          "isArray": false,
+          "type": {
+            "nonModel": "ValidateDeviceCapacityReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "ListOrgDevices": {
+          "name": "ListOrgDevices",
+          "isArray": false,
+          "type": {
+            "nonModel": "ListOrgDevicesReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "GetOrgUsage": {
+          "name": "GetOrgUsage",
+          "isArray": false,
+          "type": {
+            "nonModel": "GetOrgUsageReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminListGrants": {
+          "name": "AdminListGrants",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminListGrantsReturnType"
+          },
+          "isRequired": false
+        },
+        "AdminListCodes": {
+          "name": "AdminListCodes",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminListCodesReturnType"
+          },
+          "isRequired": false
+        },
+        "AdminSearchUsers": {
+          "name": "AdminSearchUsers",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminSearchUsersReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "query": {
+              "name": "query",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "AdminGetUser": {
+          "name": "AdminGetUser",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminGetUserReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminSearchOrgs": {
+          "name": "AdminSearchOrgs",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminSearchOrgsReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "query": {
+              "name": "query",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "AdminGetOrg": {
+          "name": "AdminGetOrg",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminGetOrgReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "GetAuthMethods": {
+          "name": "GetAuthMethods",
+          "isArray": false,
+          "type": {
+            "nonModel": "GetAuthMethodsReturnType"
+          },
+          "isRequired": false
+        }
+      },
+      "mutations": {
+        "SendEmail": {
+          "name": "SendEmail",
+          "isArray": false,
+          "type": {
+            "nonModel": "SendEmailReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "type": {
+              "name": "type",
+              "isArray": false,
+              "type": {
+                "enum": "SendEmailType"
+              },
+              "isRequired": false
+            },
+            "recipientEmail": {
+              "name": "recipientEmail",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": false
+            },
+            "data": {
+              "name": "data",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": true
+            }
+          }
+        },
+        "SendContactForm": {
+          "name": "SendContactForm",
+          "isArray": false,
+          "type": {
+            "nonModel": "SendContactFormReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true
+            },
+            "message": {
+              "name": "message",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "SetupOrganization": {
+          "name": "SetupOrganization",
+          "isArray": false,
+          "type": {
+            "nonModel": "SetupOrganizationReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "InviteMember": {
+          "name": "InviteMember",
+          "isArray": false,
+          "type": {
+            "nonModel": "InviteMemberReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "InviteMemberRole"
+              },
+              "isRequired": false
+            }
+          }
+        },
+        "AcceptInvitation": {
+          "name": "AcceptInvitation",
+          "isArray": false,
+          "type": {
+            "nonModel": "AcceptInvitationReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "token": {
+              "name": "token",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "DeclineInvitation": {
+          "name": "DeclineInvitation",
+          "isArray": false,
+          "type": {
+            "nonModel": "DeclineInvitationReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "token": {
+              "name": "token",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "RemoveMember": {
+          "name": "RemoveMember",
+          "isArray": false,
+          "type": {
+            "nonModel": "RemoveMemberReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "membershipId": {
+              "name": "membershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "UpdateMemberRole": {
+          "name": "UpdateMemberRole",
+          "isArray": false,
+          "type": {
+            "nonModel": "UpdateMemberRoleReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "membershipId": {
+              "name": "membershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "UpdateMemberRoleRole"
+              },
+              "isRequired": false
+            }
+          }
+        },
+        "TransferOwnership": {
+          "name": "TransferOwnership",
+          "isArray": false,
+          "type": {
+            "nonModel": "TransferOwnershipReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "newOwnerMembershipId": {
+              "name": "newOwnerMembershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "RevokeInvitation": {
+          "name": "RevokeInvitation",
+          "isArray": false,
+          "type": {
+            "nonModel": "RevokeInvitationReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "token": {
+              "name": "token",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "RemoveOrganization": {
+          "name": "RemoveOrganization",
+          "isArray": false,
+          "type": {
+            "nonModel": "RemoveOrganizationReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "confirmName": {
+              "name": "confirmName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "RestoreOrganization": {
+          "name": "RestoreOrganization",
+          "isArray": false,
+          "type": {
+            "nonModel": "RestoreOrganizationReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "LeaveOrganization": {
+          "name": "LeaveOrganization",
+          "isArray": false,
+          "type": {
+            "nonModel": "LeaveOrganizationReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "ChangePlan": {
+          "name": "ChangePlan",
+          "isArray": false,
+          "type": {
+            "nonModel": "ChangePlanReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "newPriceId": {
+              "name": "newPriceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "CancelDowngrade": {
+          "name": "CancelDowngrade",
+          "isArray": false,
+          "type": {
+            "nonModel": "CancelDowngradeReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "ClaimDeviceCapacity": {
+          "name": "ClaimDeviceCapacity",
+          "isArray": false,
+          "type": {
+            "nonModel": "ClaimDeviceCapacityReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "deviceName": {
+              "name": "deviceName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "ReleaseDevice": {
+          "name": "ReleaseDevice",
+          "isArray": false,
+          "type": {
+            "nonModel": "ReleaseDeviceReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "targetUserId": {
+              "name": "targetUserId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "RedeemPromoCode": {
+          "name": "RedeemPromoCode",
+          "isArray": false,
+          "type": {
+            "nonModel": "RedeemPromoCodeReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminUpdateGrant": {
+          "name": "AdminUpdateGrant",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminUpdateGrantReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "action": {
+              "name": "action",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "extensionDays": {
+              "name": "extensionDays",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "customExpiresAt": {
+              "name": "customExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "AdminGrantOrg": {
+          "name": "AdminGrantOrg",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminGrantOrgReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "targetUserId": {
+              "name": "targetUserId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "expiresInDays": {
+              "name": "expiresInDays",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            }
+          }
+        },
+        "AdminUpdateOrgPlan": {
+          "name": "AdminUpdateOrgPlan",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminUpdateOrgPlanReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "planSource": {
+              "name": "planSource",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "grantExpiresAt": {
+              "name": "grantExpiresAt",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "reason": {
+              "name": "reason",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            }
+          }
+        },
+        "AdminCreateCode": {
+          "name": "AdminCreateCode",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminCreateCodeReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "label": {
+              "name": "label",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "maxRedemptions": {
+              "name": "maxRedemptions",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "expiresInDays": {
+              "name": "expiresInDays",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "codeExpiresInDays": {
+              "name": "codeExpiresInDays",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            },
+            "planTier": {
+              "name": "planTier",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false
+            },
+            "maxDevices": {
+              "name": "maxDevices",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false
+            }
+          }
+        },
+        "AdminRevokeCode": {
+          "name": "AdminRevokeCode",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminRevokeCodeReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "code": {
+              "name": "code",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminUpdateOrgMemberRole": {
+          "name": "AdminUpdateOrgMemberRole",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminUpdateOrgMemberRoleReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "membershipId": {
+              "name": "membershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminRemoveOrgMember": {
+          "name": "AdminRemoveOrgMember",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminRemoveOrgMemberReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "membershipId": {
+              "name": "membershipId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminReleaseOrgDevice": {
+          "name": "AdminReleaseOrgDevice",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminReleaseOrgDeviceReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "deviceId": {
+              "name": "deviceId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminRestoreOrg": {
+          "name": "AdminRestoreOrg",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminRestoreOrgReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "organizationId": {
+              "name": "organizationId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminDisableUser": {
+          "name": "AdminDisableUser",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminDisableUserReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminEnableUser": {
+          "name": "AdminEnableUser",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminEnableUserReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminSignOutUser": {
+          "name": "AdminSignOutUser",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminSignOutUserReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminResetUserPassword": {
+          "name": "AdminResetUserPassword",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminResetUserPasswordReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "AdminDeleteUser": {
+          "name": "AdminDeleteUser",
+          "isArray": false,
+          "type": {
+            "nonModel": "AdminDeleteUserReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        },
+        "DisconnectProvider": {
+          "name": "DisconnectProvider",
+          "isArray": false,
+          "type": {
+            "nonModel": "DisconnectProviderReturnType"
+          },
+          "isRequired": false,
+          "arguments": {
+            "providerName": {
+              "name": "providerName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            },
+            "newPassword": {
+              "name": "newPassword",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "version": "1.4",
+  "custom": {
+    "customLoginDomain": "",
+    "buildEnv": "dev"
+  }
+}

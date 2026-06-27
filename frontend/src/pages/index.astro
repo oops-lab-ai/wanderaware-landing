@@ -2108,6 +2108,12 @@
 <script>
   window.dataLayer = window.dataLayer || [];
 
+  window.renderLucideIcons = function renderLucideIcons() {
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  };
+
   const TRACKING_PARAM_KEYS = [
     'utm_source',
     'utm_medium',
@@ -2334,7 +2340,7 @@
       waitlistSuccess.style.display = 'flex';
       const emailEl = document.getElementById('waitlist-success-email');
       if (emailEl) emailEl.textContent = email;
-      lucide.createIcons();
+      window.renderLucideIcons();
     });
   }
 
@@ -2390,7 +2396,7 @@
       resSuccess.style.display = 'flex';
       const emailEl = document.getElementById('res-success-email');
       if (emailEl) emailEl.textContent = email;
-      lucide.createIcons();
+      window.renderLucideIcons();
     });
   }
 
@@ -2487,6 +2493,12 @@
   }
 </script>
 
-<script>lucide.createIcons();</script>
+<script>
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => window.renderLucideIcons?.(), { once: true });
+  } else {
+    window.renderLucideIcons?.();
+  }
+</script>
 </body>
 </html>
