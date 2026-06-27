@@ -100,7 +100,7 @@ export const handler: Schema['ClaimDeviceCapacity']['functionHandler'] = async (
 
     // ── Per-user device cap check (industry standard) ────────────────────
     // A single user can only have N devices active in the same org at once.
-    // This stops one member from consuming all of an org's seats with multiple
+    // This stops one member from consuming all of an org's capacity with multiple
     // installs. Limits live in tierConstants.ts and are tier-dependent.
     // When this fails we return a `kickableDevices` payload so the web's
     // LoginScreen can render a "sign out from one of these devices?" modal
@@ -123,7 +123,7 @@ export const handler: Schema['ClaimDeviceCapacity']['functionHandler'] = async (
         };
     }
 
-    // ── Org-wide seat cap check ───────────────────────────────────────────
+    // ── Org-wide device capacity check ────────────────────────────────────
     const orgActivations = await client.models.DeviceActivation.listDeviceActivationByOrganizationId({
         organizationId: targetOrg.orgId,
     });
@@ -131,8 +131,8 @@ export const handler: Schema['ClaimDeviceCapacity']['functionHandler'] = async (
 
     if (seatCount >= targetOrg.maxDevices) {
         // Eventual consistency / duplicate browser-callback guard: if this exact
-        // device already owns the seat, the claim is idempotent and should not flash
-        // an org-seat-limit failure on the web.
+        // device already owns the slot, the claim is idempotent and should not flash
+        // an org-capacity-limit failure on the web.
         const latestExisting = await client.models.DeviceActivation.get({ userId, deviceId });
         if (latestExisting.data) {
             await client.models.DeviceActivation.update({
@@ -141,7 +141,7 @@ export const handler: Schema['ClaimDeviceCapacity']['functionHandler'] = async (
                 lastValidatedAt: new Date().toISOString(),
                 organizationId: targetOrg.orgId,
             });
-            console.log(`[claimDeviceCapacity] Existing activation accepted after full-seat recheck for user ${userId}, device ${deviceId}`);
+            console.log(`[claimDeviceCapacity] Existing activation accepted after full-capacity recheck for user ${userId}, device ${deviceId}`);
             return {
                 success: true,
                 plan: targetOrg.planTier,
@@ -154,7 +154,7 @@ export const handler: Schema['ClaimDeviceCapacity']['functionHandler'] = async (
         return {
             success: false,
             errorCode: 'ORG_SEAT_LIMIT',
-            message: `Org seat limit reached: ${seatCount}/${targetOrg.maxDevices}. Ask your admin to upgrade or revoke an unused device.`,
+            message: `Org device capacity reached: ${seatCount}/${targetOrg.maxDevices}. Ask your admin to upgrade or revoke an unused device.`,
         };
     }
 
@@ -179,7 +179,7 @@ export const handler: Schema['ClaimDeviceCapacity']['functionHandler'] = async (
         return {
             success: false,
             errorCode: 'ORG_SEAT_LIMIT',
-            message: `Org seat limit reached (concurrent claim). Try again.`,
+            message: `Org device capacity reached (concurrent claim). Try again.`,
         };
     }
 

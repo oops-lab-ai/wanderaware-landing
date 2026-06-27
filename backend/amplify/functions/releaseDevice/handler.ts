@@ -53,12 +53,12 @@ export const handler: Schema['ReleaseDevice']['functionHandler'] = async (event)
         }
     }
 
-    // Delete the activation (release the seat)
+    // Delete the activation and release the device capacity slot.
     const deleteResult = await client.models.DeviceActivation.delete({ userId: ownerUserId, deviceId });
     assertNoGraphqlErrors('DeviceActivation.delete', deleteResult.errors);
 
     console.log(
-        `[releaseDevice] Released seat for user ${ownerUserId}, device ${deviceId}, org ${activation.organizationId} (caller: ${callerId})`,
+        `[releaseDevice] Released capacity for user ${ownerUserId}, device ${deviceId}, org ${activation.organizationId} (caller: ${callerId})`,
     );
     return { success: true, message: 'Device revoked. Seat released.' };
 };

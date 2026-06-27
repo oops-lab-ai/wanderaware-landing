@@ -71,7 +71,7 @@ export const handler: Schema['AdminGrantOrg']['functionHandler'] = async (event)
         return { success: false, organizationId: null, message: 'maxDevices must be a non-negative integer' };
     }
     if (tier !== 'free' && seats === 0) {
-        return { success: false, organizationId: null, message: 'Granted tiers require at least one seat' };
+        return { success: false, organizationId: null, message: 'Granted tiers require at least one device slot' };
     }
 
     // Stockpile guard
@@ -128,7 +128,7 @@ export const handler: Schema['AdminGrantOrg']['functionHandler'] = async (event)
     });
 
     console.log(
-        `[adminGrantOrg] Granted ${tier} org ${newOrg.data.id} to ${targetUserId} seats=${seats} expires=${grantExpiresAt ?? 'never'}`,
+        `[adminGrantOrg] Granted ${tier} org ${newOrg.data.id} to ${targetUserId} deviceSlots=${seats} expires=${grantExpiresAt ?? 'never'}`,
     );
 
     return {

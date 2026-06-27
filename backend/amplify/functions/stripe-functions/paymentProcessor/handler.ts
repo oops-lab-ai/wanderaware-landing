@@ -97,7 +97,7 @@ function safeStripePriceToTier(tierMetadata: string | null | undefined, context:
     }
 }
 
-// Runtime safety net — when a sub transitions to a lower tier (or DDB ends up over-seated
+// Runtime safety net: when a subscription transitions to a lower tier (or DynamoDB ends up over capacity)
 // for any reason), revoke excess DeviceActivation rows to bring the count back within
 // newMaxSeats. Newest activations are revoked first (sorted by activatedAt DESC). The org
 // owner is protected from being kicked off entirely: if they have any device, their oldest
@@ -118,8 +118,8 @@ const revokeExcessSeats = async (
 
     all.sort((a, b) => new Date(b.activatedAt ?? 0).getTime() - new Date(a.activatedAt ?? 0).getTime());
 
-    // Owner protection: pick the oldest owner-owned device to reserve (so they keep at
-    // least one seat). If owner has no devices, no reservation needed.
+    // Owner protection: pick the oldest owner-owned device to reserve so they keep at
+    // least one slot. If owner has no devices, no reservation needed.
     const ownerActivations = all.filter((a) => a.userId === ownerId);
     const reservedKey = ownerActivations.length > 0
         ? `${ownerActivations[ownerActivations.length - 1].userId}:${ownerActivations[ownerActivations.length - 1].deviceId}`
@@ -366,7 +366,7 @@ const handleSubscriptionUpdated = async (subscription: Stripe.Subscription) => {
             );
 
             // On a downgrade, revoke excess DeviceActivation rows so the org doesn't end
-            // up with more seats consumed than the new tier allows. This is the runtime
+            // up with more device slots consumed than the new tier allows. This is the runtime
             // safety net; preview/submit-time blocks in changePlan/previewPlanChange catch
             // most cases before they get here. See revokeExcessSeats() for ordering rules.
             const oldRank = org.planTier ? TIER_RANK[org.planTier] ?? 0 : 0;

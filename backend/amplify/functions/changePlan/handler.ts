@@ -156,7 +156,7 @@ export const handler: Schema['ChangePlan']['functionHandler'] = async (event) =>
         // User keeps their current (higher) plan until the period ends, then switches to the lower plan.
         // Uses Stripe Subscription Schedules to defer the change.
 
-        // Defense-in-depth: re-check seat count here in case the user bypassed the
+        // Defense-in-depth: re-check active capacity here in case the user bypassed the
         // preview dialog (direct GraphQL call) or activated new devices after preview
         // ran. Mirrors the check in previewPlanChange. The frontend toast surfaces
         // this thrown message via the existing mutation result.message pattern.
@@ -169,7 +169,7 @@ export const handler: Schema['ChangePlan']['functionHandler'] = async (event) =>
         if (seatsUsed > newLimits.maxDevices) {
             const excess = seatsUsed - newLimits.maxDevices;
             throw new Error(
-                `Your org has ${seatsUsed} active device plan${seatsUsed === 1 ? '' : 's'} but ${getTierDisplayName(newTier)} supports ${newLimits.maxDevices}. Revoke ${excess} device plan${excess === 1 ? '' : 's'} before downgrading.`,
+                `Your org has ${seatsUsed} active device slot${seatsUsed === 1 ? '' : 's'} but ${getTierDisplayName(newTier)} supports ${newLimits.maxDevices}. Revoke ${excess} device slot${excess === 1 ? '' : 's'} before downgrading.`,
             );
         }
 

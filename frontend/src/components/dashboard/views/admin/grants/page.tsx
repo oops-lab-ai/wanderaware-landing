@@ -50,8 +50,8 @@ import { useIsAdmin } from "@/hooks/use-is-admin";
 import type { AdminCodeItem, AdminGrantItem } from "@/lib/amplify/data-client";
 
 const PLAN_OPTIONS = [
-  { value: "free", label: "Free", defaultSeats: 1 },
-  { value: "basic", label: "Basic", defaultSeats: 1 },
+  { value: "free", label: "Granted", defaultSeats: 1 },
+  { value: "basic", label: "Starter", defaultSeats: 1 },
   { value: "professional", label: "Professional", defaultSeats: 5 },
   { value: "enterprise", label: "Enterprise", defaultSeats: 999999 },
 ];
@@ -180,7 +180,7 @@ function GrantsTab() {
               <TableCell className="font-medium">{g.organizationName}</TableCell>
               <TableCell className="text-sm">
                 <div className="capitalize">{g.planTier ?? "free"}</div>
-                <div className="text-muted-foreground text-xs">{g.maxDevices ?? 1} seats</div>
+                <div className="text-muted-foreground text-xs">{g.maxDevices ?? 1} device slots</div>
               </TableCell>
               <TableCell className="text-muted-foreground text-sm">{g.ownerEmail ?? "—"}</TableCell>
               <TableCell className="text-muted-foreground text-sm">{formatDate(g.createdAt)}</TableCell>
@@ -418,7 +418,7 @@ function CodesTab() {
                   </TableCell>
                   <TableCell className="text-muted-foreground text-sm">
                     <div className="text-foreground capitalize">{c.planTier ?? "free"}</div>
-                    <div>{c.maxDevices ?? 1} seats</div>
+                    <div>{c.maxDevices ?? 1} device slots</div>
                     <div>{c.expiresInDays ? `${c.expiresInDays} days` : "Indefinite"}</div>
                   </TableCell>
                   <TableCell className="text-muted-foreground text-sm">
@@ -542,7 +542,8 @@ function CodesTab() {
                     <SelectContent>
                       {PLAN_OPTIONS.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
-                          {option.label} ({option.defaultSeats === 999999 ? "unlimited" : option.defaultSeats} seats)
+                          {option.label} ({option.defaultSeats === 999999 ? "unlimited" : option.defaultSeats} device
+                          slots)
                         </SelectItem>
                       ))}
                     </SelectContent>

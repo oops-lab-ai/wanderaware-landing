@@ -1,97 +1,67 @@
-# ── Secrets & credentials ─────────────────────────────────────────────
+# Secrets and credentials
 .env
 .env.*
 !.env.example
 *.pem
 *.key
 web-client-google.json
-oopslab-apple-developer-id-signing-bundle/
 
-# ── Claude Code ───────────────────────────────────────────────────────
+# Local agent/tooling
 .claude/
 .mcp.json
+.codex
+.playwright-mcp/
+mcp_stderr.txt
 
-# ── Cloudflare ────────────────────────────────────────────────────────
-.wrangler/
-
-# (amplify outputs covered by **/amplify_outputs*.json below)
-
-# ── Python ────────────────────────────────────────────────────────────
-__pycache__/
-*.pyc
-*.pyo
-*.egg-info/
-/venv
-
-# ── Node ──────────────────────────────────────────────────────────────
+# Node
 node_modules/
 npm-debug.log*
 
-# ── Data files (never commit user data) ──────────────────────────────
-*.csv
-*.xlsx
-*.xls
-
-# ── Build artifacts ──────────────────────────────────────────────────
-*.exe
-*.dmg
-*.AppImage
-*.deb
-*.snap
-*.blockmap
+# Frontend/build artifacts
 dist/
 out/
-
-# ── OS ────────────────────────────────────────────────────────────────
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# ── Editor ────────────────────────────────────────────────────────────
-.vscode/settings.json
-.idea/
-
-# ── Astro / Vite cache ────────────────────────────────────────────────
 .astro/
-
-# ── Python tooling ────────────────────────────────────────────────────
-.venv/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
-# ── TypeScript build info ────────────────────────────────────────────
-*.tsbuildinfo
-
-# ── Test coverage ────────────────────────────────────────────────────
 coverage/
-
-# ── Playwright ───────────────────────────────────────────────────────
 test-results/
 playwright-report/
-tests/.env.test
-tests/.auth-state.json
-!tests/.env.test.example
+*.tsbuildinfo
 
-# ── Amplify outputs (all locations) ──────────────────────────────────
+# Backend/AWS
+.amplify/
 **/amplify_outputs*.json
 !shared/
 !shared/amplify_outputs.json
 
-# ── Amplify build cache ──────────────────────────────────────────────
-.amplify/
+# Firmware / PlatformIO
+firmware/.pio/
+firmware/.vscode/.browse_c_cpp.db*
+firmware/.vscode/c_cpp_properties.json
+firmware/.vscode/launch.json
+firmware/.vscode/ipch/
 
-# ── Misc generated files ─────────────────────────────────────────────
-mcp_stderr.txt
+# Python/tool caches
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# User data and generated review artifacts
+*.csv
+*.xlsx
+*.xls
 *.log
-.playwright-mcp/
-tests/screenshots/
-.tmp-hardening-artifacts/
-.codex
-engine/build/
-docs/me/
-
-# Marketing review outputs and generated bundles
-dark-*.png
 marketing/review/
 marketing/*.zip
+dark-*.png
+
+# OS/editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/settings.json

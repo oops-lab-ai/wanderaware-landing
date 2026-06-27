@@ -2,7 +2,7 @@
   "name": "wanderaware-workspace",
   "version": "1.0.0",
   "private": true,
-  "description": "WanderAware Amplify web app and backend",
+  "description": "WanderAware Amplify web app, backend, and firmware monorepo",
   "scripts": {
     "dev": "cd frontend && npm run dev",
     "build": "cd frontend && npm run build",
@@ -11,7 +11,10 @@
     "check:backend": "cd backend && npx tsc --noEmit -p amplify\\tsconfig.json",
     "check": "npm run check:frontend && npm run check:backend",
     "sandbox:start": "cd backend && npm run sandbox:start",
-    "sandbox:delete": "cd backend && npm run sandbox:delete"
+    "sandbox:delete": "cd backend && npm run sandbox:delete",
+    "firmware:build": "platformio run -d firmware",
+    "firmware:upload": "platformio run -d firmware -t upload",
+    "firmware:monitor": "platformio device monitor -d firmware"
   },
   "devDependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.1028.0",

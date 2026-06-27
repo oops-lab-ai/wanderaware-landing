@@ -619,7 +619,8 @@ const schema = a
                     // Downgrade-only fields. When the org has more active device device capacity
                     // than the target tier supports, the preview returns blocked=true and
                     // the dashboard renders an explanatory dialog instead of the proration
-                    // breakdown. seatsUsed/newTierMaxSeats let the UI render exact numbers.
+                    // breakdown. seatsUsed/newTierMaxSeats are legacy response field names
+                    // for active device capacity counts.
                     blocked: a.boolean(),
                     blockReason: a.string(),
                     seatsUsed: a.integer(),
@@ -636,7 +637,7 @@ const schema = a
             .handler(a.handler.function(cancelDowngrade))
             .authorization((allow) => allow.authenticated()),
 
-        // ── Web login-based seat management ───────────────────────────────
+        // Web login-based device capacity management.
 
         // Reusable type for the "you've hit your per-user device limit" rejection
         // payload. Lists the user's currently-active devices in the org so the

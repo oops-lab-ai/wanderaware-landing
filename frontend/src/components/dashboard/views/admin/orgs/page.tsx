@@ -50,8 +50,8 @@ import { useIsAdmin } from "@/hooks/use-is-admin";
 import type { AdminOrgSearchItem } from "@/lib/amplify/data-client";
 
 const PLAN_OPTIONS = [
-  { value: "free", label: "Free", defaultSeats: 1 },
-  { value: "basic", label: "Basic", defaultSeats: 1 },
+  { value: "free", label: "Granted", defaultSeats: 1 },
+  { value: "basic", label: "Starter", defaultSeats: 1 },
   { value: "professional", label: "Professional", defaultSeats: 5 },
   { value: "enterprise", label: "Enterprise", defaultSeats: 999999 },
 ];
@@ -445,7 +445,7 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
               step={1}
               value={seatDraft}
               onChange={(event) => setSeatDraft(event.target.value)}
-              aria-label="Max seats"
+              aria-label="Max device slots"
             />
             <Input
               type="date"
@@ -488,7 +488,7 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
             {plannedRevocations > 0 && (
               <p className="text-amber-700 text-xs md:col-span-5">
                 Saving this plan will revoke {plannedRevocations} active device slot
-                {plannedRevocations === 1 ? "" : "s"} newest-first. If at least one seat remains, the owner&apos;s
+                {plannedRevocations === 1 ? "" : "s"} newest-first. If at least one slot remains, the owner&apos;s
                 oldest device is preserved.
               </p>
             )}
@@ -733,8 +733,8 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
         <CardHeader className="pb-3">
           <CardTitle className="text-base">Devices ({data?.devices.length ?? 0})</CardTitle>
           <p className="text-muted-foreground text-xs">
-            Shown newest first. Downgrades revoke newest seats first while preserving the owner&apos;s oldest device
-            when at least one seat remains.
+            Shown newest first. Downgrades revoke newest device slots first while preserving the owner&apos;s oldest
+            device when at least one slot remains.
           </p>
         </CardHeader>
         <CardContent>
@@ -777,7 +777,7 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
                             <AlertDialogHeader>
                               <AlertDialogTitle>Release this device slot?</AlertDialogTitle>
                               <AlertDialogDescription>
-                                The device will need to claim a seat again before pland web use continues.
+                                The device will need to claim capacity again before planned web use continues.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>

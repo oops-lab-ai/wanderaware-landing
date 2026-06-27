@@ -5,22 +5,22 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 const tiers = [
     {
-        name: 'Individual',
-        price: 49.0,
+        name: 'Starter',
+        price: 79.0,
         metadata: { planId: 'basic-monthly', tier: 'basic' },
-        features: ['1 user', '3 devices per user', 'Full analysis engine', 'Email support']
+        features: ['Single building', 'Small door-reader capacity', 'Email support']
     },
     {
-        name: 'Team',
+        name: 'Professional',
         price: 99.0,
         metadata: { planId: 'professional-monthly', tier: 'professional', isRecommended: '1' },
-        features: ['5 users', '3 devices per user', 'Full analysis engine', 'Priority support']
+        features: ['Multi-door center', 'Expanded reader capacity', 'Priority support']
     },
     {
         name: 'Enterprise',
         price: 249.0,
         metadata: { planId: 'enterprise-monthly', tier: 'enterprise' },
-        features: ['Unlimited users', '5 devices per user', 'Full analysis engine', 'Dedicated support']
+        features: ['Multi-location operations', 'Custom reader capacity', 'Dedicated support']
     }
 ];
 
@@ -36,7 +36,7 @@ export const handler = async () => {
         if (!subscriptionProduct) {
             subscriptionProduct = await stripe.products.create({
                 name: 'WanderAware',
-                description: 'Web adult day care wandering awareness for standardized compound identification',
+                description: 'RFID-based wandering awareness for adult day care operations',
                 metadata: {
                     productType: 'wanderaware-subscription'
                 }

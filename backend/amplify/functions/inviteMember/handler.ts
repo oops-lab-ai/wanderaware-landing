@@ -165,7 +165,7 @@ export const handler: Schema['InviteMember']['functionHandler'] = async (event) 
                     </div>
                 </div>
                 <div style="color: #6b6770; font-family: 'Inter', sans-serif; font-size: 14px; margin-top: 8px; font-weight: 500; letter-spacing: 0.5px;">
-                    Metabolomics Data Analysis
+                    Adult day care wandering awareness
                 </div>
                 <!-- Nav tag badge -->
                 <div style="display: inline-block; margin-top: 16px; padding: 5px 14px; border: 1px solid rgba(232, 168, 124, 0.3); border-radius: 4px; background-color: rgba(232, 168, 124, 0.06);">

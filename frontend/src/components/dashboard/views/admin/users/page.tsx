@@ -52,8 +52,8 @@ import type { AdminUserSearchItem } from "@/lib/amplify/data-client";
 
 const USER_ROW_SKELETON_KEYS = ["user-row-1", "user-row-2", "user-row-3", "user-row-4", "user-row-5"];
 const PLAN_OPTIONS = [
-  { value: "free", label: "Free", defaultSeats: 1 },
-  { value: "basic", label: "Basic", defaultSeats: 1 },
+  { value: "free", label: "Granted", defaultSeats: 1 },
+  { value: "basic", label: "Starter", defaultSeats: 1 },
   { value: "professional", label: "Professional", defaultSeats: 5 },
   { value: "enterprise", label: "Enterprise", defaultSeats: 999999 },
 ];
@@ -503,8 +503,8 @@ function UserDetailView({ userId }: { userId: string }) {
                 </div>
                 <p className="text-muted-foreground text-xs">
                   {PLAN_OPTIONS.find((option) => option.value === grantPlan)?.label} grants use{" "}
-                  {defaultSeatsForPlan(grantPlan) === 999999 ? "unlimited" : defaultSeatsForPlan(grantPlan)} seats by
-                  default. Leave duration blank for indefinite access.
+                  {defaultSeatsForPlan(grantPlan) === 999999 ? "unlimited" : defaultSeatsForPlan(grantPlan)} device
+                  slots by default. Leave duration blank for indefinite access.
                 </p>
               </div>
             </div>

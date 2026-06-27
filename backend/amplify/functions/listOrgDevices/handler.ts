@@ -48,7 +48,7 @@ export const handler: Schema['ListOrgDevices']['functionHandler'] = async (event
     }
     const isAdminOrOwner = callerMembership.role === 'owner' || callerMembership.role === 'admin';
 
-    // Fetch the org for seat counts
+    // Fetch the org for capacity counts
     const orgResult = await client.models.Organization.get({ id: organizationId });
     const org = orgResult.data;
     if (!org) throw new Error('Organization not found');
@@ -67,7 +67,7 @@ export const handler: Schema['ListOrgDevices']['functionHandler'] = async (event
         : activationRows.filter((a) => a.userId === callerId);
 
     // Join user emails — owners/admins need them, viewers don't (they only see themselves).
-    // Email lookup is the only N+1 cost; it's bounded by org seat count which is small (<=999).
+    // Email lookup is the only N+1 cost; it is bounded by org capacity which is small (<=999).
     const now = Date.now();
     const devices = await Promise.all(
         visibleRows.map(async (row) => {

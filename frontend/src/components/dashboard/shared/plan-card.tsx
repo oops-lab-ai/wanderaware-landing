@@ -59,7 +59,7 @@ export function PlanCard({
         )}
         {/* Tier subtitle only when it's distinct from the marketing name. Without
             this guard, Enterprise renders "Enterprise / Enterprise" — a duplicate
-            label that's noise (the other tiers — Individual/Basic, Team/Professional —
+            label that's noise (the other tiers - Starter and Professional -
             convey the internal id meaningfully). */}
         {product.tier && product.tier.toLowerCase() !== (product.name ?? "").toLowerCase() && (
           <Badge variant="outline" className="mx-auto mt-2 capitalize">

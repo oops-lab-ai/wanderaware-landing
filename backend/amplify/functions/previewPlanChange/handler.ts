@@ -165,11 +165,11 @@ export const handler: Schema['PreviewPlanChange']['functionHandler'] = async (ev
     } else {
         const periodEnd = currentItem.current_period_end ? new Date(currentItem.current_period_end * 1000).toISOString() : null;
 
-        // Block downgrade if active device plan count exceeds the target tier. A "seat"
+        // Block downgrade if active device capacity exceeds the target tier.
         // = one DeviceActivation row (per getOrgUsage). The frontend renders a different
         // dialog when blocked=true and disables the Confirm button. See changePlan handler
         // for the matching submit-time guard (defense-in-depth) and paymentProcessor for
-        // the runtime safety net that auto-revokes excess seats at billing transition.
+        // the runtime safety net that auto-revokes excess device slots at billing transition.
         const newLimits = tierToLimits(newTier);
         const activations = await client.models.DeviceActivation.listDeviceActivationByOrganizationId({
             organizationId,
@@ -181,7 +181,7 @@ export const handler: Schema['PreviewPlanChange']['functionHandler'] = async (ev
             return {
                 direction: 'downgrade',
                 blocked: true,
-                blockReason: `Your org has ${seatsUsed} active device plan${seatsUsed === 1 ? '' : 's'} but ${getTierDisplayName(newTier)} supports ${newLimits.maxDevices}. Revoke ${excess} device plan${excess === 1 ? '' : 's'} before downgrading.`,
+                blockReason: `Your org has ${seatsUsed} active device slot${seatsUsed === 1 ? '' : 's'} but ${getTierDisplayName(newTier)} supports ${newLimits.maxDevices}. Revoke ${excess} device slot${excess === 1 ? '' : 's'} before downgrading.`,
                 seatsUsed,
                 newTierMaxSeats: newLimits.maxDevices,
                 prorationAmount: 0,

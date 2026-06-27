@@ -108,7 +108,7 @@ export const handler: Schema['AdminUpdateOrgPlan']['functionHandler'] = async (e
         return { success: false, message: 'maxDevices must be a non-negative integer' };
     }
     if (tier !== 'free' && seats === 0) {
-        return { success: false, message: 'Paid-style admin tiers require at least one seat' };
+        return { success: false, message: 'Paid-style admin tiers require at least one device slot' };
     }
 
     const devices = await client.models.DeviceActivation.listDeviceActivationByOrganizationId({ organizationId });

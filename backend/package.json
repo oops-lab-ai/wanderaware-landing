@@ -18,7 +18,9 @@
     "scripts": {
         "sandbox:start": "npx @dotenvx/dotenvx run --env-file=.env -- npx ampx sandbox --profile admin-amplify-1 --stream-function-logs --outputs-out-dir ../shared",
         "sandbox:delete": "npx @dotenvx/dotenvx run --env-file=.env -- npx ampx sandbox delete --profile admin-amplify-1",
-        "audit:data-access": "node scripts/audit-amplify-data-access.mjs"
+        "audit:data-access": "node scripts/audit-amplify-data-access.mjs",
+        "stripe:seed-products": "tsx scripts/seed-stripe-products.ts",
+        "promo:create": "tsx scripts/create-promo-code.ts"
     },
     "devDependencies": {
         "@aws-amplify/backend": "^1.21.0",

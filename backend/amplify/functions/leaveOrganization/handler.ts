@@ -17,7 +17,7 @@ const client = generateClient<Schema>();
  *     each org always has exactly one owner, this rarely fires.)
  *
  * METABOLOMICS-SPECIFIC: also cascades a release of the leaving user's web
- * seats in this org. Without this, the user keeps ghost DeviceActivation rows
+ * device capacity in this org. Without this, the user keeps ghost DeviceActivation rows
  * that still count against Organization.maxDevices. Other members' devices are
  * untouched — we filter the user's activations server-side by org id, not by
  * caller membership.
@@ -70,8 +70,8 @@ export const handler: Schema['LeaveOrganization']['functionHandler'] = async (ev
             }
         }
     } catch (err) {
-        // Don't block the leave on a seat-release failure — log and continue.
-        // The seat record becoming an orphan is preferable to the user being trapped.
+        // Don't block the leave on a capacity-release failure; log and continue.
+        // The activation record becoming an orphan is preferable to the user being trapped.
         console.error('[leaveOrganization] Failed to cascade-release device capacity:', err);
     }
 
