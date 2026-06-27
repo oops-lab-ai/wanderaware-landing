@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useSessionContext } from "@/contexts/session-context";
 
 const alerts = [
   {
@@ -23,6 +24,8 @@ const alerts = [
 ];
 
 export default function AlertsPage() {
+  const { organization } = useSessionContext();
+
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -30,7 +33,9 @@ export default function AlertsPage() {
           <Bell className="size-6" />
           Alerts
         </h1>
-        <p className="text-muted-foreground text-sm">Review wandering and doorway proximity events.</p>
+        <p className="text-muted-foreground text-sm">
+          Review wandering and doorway proximity events for {organization.name}.
+        </p>
       </div>
       <Card>
         <CardContent className="pt-6">

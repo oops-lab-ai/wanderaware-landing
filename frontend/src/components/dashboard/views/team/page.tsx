@@ -79,7 +79,7 @@ export default function TeamPage() {
           <p className="text-muted-foreground text-sm">
             {canManage
               ? `Manage team members and roles for ${organization.name}`
-              : `Members of ${organization.name} · Contact your owner to invite or remove members`}
+              : `Members of ${organization.name} - contact your owner to invite or remove members`}
           </p>
         </div>
         {canManage && (
@@ -226,7 +226,7 @@ function MyInvitationsCard() {
             {visible.length}
           </span>
         </CardTitle>
-        <CardDescription>Organizations that have invited you to join</CardDescription>
+        <CardDescription>Buildings that have invited you to join</CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
         {visible.map((inv) => (
@@ -236,7 +236,7 @@ function MyInvitationsCard() {
           >
             <div className="flex min-w-0 flex-1 flex-col gap-1">
               <div className="flex items-center gap-2">
-                <span className="truncate font-medium">{inv.organizationName ?? "Unnamed organization"}</span>
+                <span className="truncate font-medium">{inv.organizationName ?? "Unnamed building"}</span>
                 <Badge variant={roleBadgeVariant(inv.role)}>{capitalize(inv.role)}</Badge>
               </div>
               <p className="truncate text-muted-foreground text-xs">
@@ -255,7 +255,7 @@ function MyInvitationsCard() {
               </Button>
               <Button
                 size="sm"
-                onClick={() => inv.tokenHash && handleAccept(inv.tokenHash, inv.organizationName ?? "organization")}
+                onClick={() => inv.tokenHash && handleAccept(inv.tokenHash, inv.organizationName ?? "building")}
                 disabled={acceptMutation.isPending || declineMutation.isPending}
               >
                 {acceptMutation.isPending ? <Loader2 className="size-4 animate-spin" /> : <Check className="size-4" />}
@@ -438,8 +438,8 @@ function MembersTable({
                           <AlertDialogHeader>
                             <AlertDialogTitle>Remove Member</AlertDialogTitle>
                             <AlertDialogDescription>
-                              Are you sure you want to remove <strong>{member.email}</strong> from this organization?
-                              They will lose access immediately.
+                              Are you sure you want to remove <strong>{member.email}</strong> from this building? They
+                              will lose access immediately.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
@@ -650,7 +650,7 @@ function InviteDialog({
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Invite Member</DialogTitle>
-          <DialogDescription>Send an invitation to join this organization.</DialogDescription>
+          <DialogDescription>Send an invitation to join this building.</DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">

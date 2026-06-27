@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useSessionContext } from "@/contexts/session-context";
 
 const tags = [
   { uid: "RFID-8A92-144C", participant: "M. Rivera", status: "Assigned", lastSeen: "Front entrance, 4 min ago" },
@@ -12,6 +13,8 @@ const tags = [
 ];
 
 export default function TagsPage() {
+  const { organization } = useSessionContext();
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -20,7 +23,9 @@ export default function TagsPage() {
             <Tag className="size-6" />
             RFID Tags
           </h1>
-          <p className="text-muted-foreground text-sm">Track shoe, clothing, and wearable UHF tag assignments.</p>
+          <p className="text-muted-foreground text-sm">
+            Track shoe, clothing, and wearable UHF tag assignments for {organization.name}.
+          </p>
         </div>
         <Button>
           <Plus className="size-4" />

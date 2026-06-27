@@ -2,7 +2,6 @@ import { Outlet } from "react-router";
 
 import { AppSidebar } from "@/components/dashboard/sidebar/app-sidebar";
 import { LayoutControls } from "@/components/dashboard/sidebar/layout-controls";
-import { OrgSwitcher } from "@/components/dashboard/sidebar/org-switcher";
 import { SearchDialog } from "@/components/dashboard/sidebar/search-dialog";
 import { ThemeSwitcher } from "@/components/dashboard/sidebar/theme-switcher";
 import { Separator } from "@/components/ui/separator";
@@ -53,7 +52,6 @@ export default function Layout() {
               <SearchDialog />
             </div>
             <div className="flex items-center gap-2">
-              <OrgSwitcher />
               <LayoutControls />
               <ThemeSwitcher />
             </div>

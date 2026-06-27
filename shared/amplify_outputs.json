@@ -1,9 +1,9 @@
 {
   "auth": {
-    "user_pool_id": "us-east-1_ACimyfQKl",
+    "user_pool_id": "us-east-1_irkGsBVDy",
     "aws_region": "us-east-1",
-    "user_pool_client_id": "1a089meqcdocotgucgpu6l0shu",
-    "identity_pool_id": "us-east-1:1df73128-0cb7-486f-a59f-d5a70cf78167",
+    "user_pool_client_id": "3tntt7ib6uoj2e9ukv06fosef0",
+    "identity_pool_id": "us-east-1:b5598191-760c-4dd2-bbc8-85569eefe31a",
     "mfa_methods": [],
     "standard_required_attributes": [
       "email"
@@ -13,13 +13,6 @@
     ],
     "user_verification_types": [
       "email"
-    ],
-    "groups": [
-      {
-        "admins": {
-          "precedence": 0
-        }
-      }
     ],
     "mfa_configuration": "NONE",
     "password_policy": {
@@ -32,7 +25,7 @@
     "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://hyqpaibde5d4pm7vmmbniunbqa.appsync-api.us-east-1.amazonaws.com/graphql",
+    "url": "https://z7johdrsjzdvhpwgl6iujlzsau.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_region": "us-east-1",
     "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
     "authorization_types": [
@@ -452,138 +445,6 @@
             "sortKeyFieldNames": []
           }
         },
-        "Building": {
-          "name": "Building",
-          "fields": {
-            "id": {
-              "name": "id",
-              "isArray": false,
-              "type": "ID",
-              "isRequired": true,
-              "attributes": []
-            },
-            "organizationId": {
-              "name": "organizationId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "name": {
-              "name": "name",
-              "isArray": false,
-              "type": "String",
-              "isRequired": true,
-              "attributes": []
-            },
-            "addressLine1": {
-              "name": "addressLine1",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "addressLine2": {
-              "name": "addressLine2",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "city": {
-              "name": "city",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "state": {
-              "name": "state",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "postalCode": {
-              "name": "postalCode",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "timezone": {
-              "name": "timezone",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "status": {
-              "name": "status",
-              "isArray": false,
-              "type": {
-                "enum": "BuildingStatus"
-              },
-              "isRequired": false,
-              "attributes": []
-            },
-            "createdAt": {
-              "name": "createdAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            },
-            "updatedAt": {
-              "name": "updatedAt",
-              "isArray": false,
-              "type": "AWSDateTime",
-              "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
-            }
-          },
-          "syncable": true,
-          "pluralName": "Buildings",
-          "attributes": [
-            {
-              "type": "model",
-              "properties": {}
-            },
-            {
-              "type": "key",
-              "properties": {
-                "name": "buildingsByOrganizationId",
-                "queryField": "listBuildingByOrganizationId",
-                "fields": [
-                  "organizationId"
-                ]
-              }
-            },
-            {
-              "type": "auth",
-              "properties": {
-                "rules": [
-                  {
-                    "allow": "private",
-                    "operations": [
-                      "create",
-                      "update",
-                      "delete",
-                      "read"
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "primaryKeyInfo": {
-            "isCustomPrimaryKey": false,
-            "primaryKeyFieldName": "id",
-            "sortKeyFieldNames": []
-          }
-        },
         "Device": {
           "name": "Device",
           "fields": {
@@ -599,13 +460,6 @@
               "isArray": false,
               "type": "String",
               "isRequired": true,
-              "attributes": []
-            },
-            "buildingId": {
-              "name": "buildingId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
               "attributes": []
             },
             "deviceId": {
@@ -696,16 +550,6 @@
             {
               "type": "key",
               "properties": {
-                "name": "devicesByBuildingId",
-                "queryField": "listDeviceByBuildingId",
-                "fields": [
-                  "buildingId"
-                ]
-              }
-            },
-            {
-              "type": "key",
-              "properties": {
                 "name": "devicesByDeviceId",
                 "queryField": "listDeviceByDeviceId",
                 "fields": [
@@ -751,13 +595,6 @@
               "isArray": false,
               "type": "String",
               "isRequired": true,
-              "attributes": []
-            },
-            "buildingId": {
-              "name": "buildingId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
               "attributes": []
             },
             "displayName": {
@@ -834,16 +671,6 @@
               }
             },
             {
-              "type": "key",
-              "properties": {
-                "name": "participantsByBuildingId",
-                "queryField": "listParticipantByBuildingId",
-                "fields": [
-                  "buildingId"
-                ]
-              }
-            },
-            {
               "type": "auth",
               "properties": {
                 "rules": [
@@ -881,13 +708,6 @@
               "isArray": false,
               "type": "String",
               "isRequired": true,
-              "attributes": []
-            },
-            "buildingId": {
-              "name": "buildingId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
               "attributes": []
             },
             "tagUid": {
@@ -957,16 +777,6 @@
             {
               "type": "key",
               "properties": {
-                "name": "rfidTagsByBuildingId",
-                "queryField": "listRfidTagByBuildingId",
-                "fields": [
-                  "buildingId"
-                ]
-              }
-            },
-            {
-              "type": "key",
-              "properties": {
                 "name": "rfidTagsByTagUid",
                 "queryField": "listRfidTagByTagUid",
                 "fields": [
@@ -1012,13 +822,6 @@
               "isArray": false,
               "type": "String",
               "isRequired": true,
-              "attributes": []
-            },
-            "buildingId": {
-              "name": "buildingId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
               "attributes": []
             },
             "deviceId": {
@@ -1133,16 +936,6 @@
                 "queryField": "listAlertByOrganizationId",
                 "fields": [
                   "organizationId"
-                ]
-              }
-            },
-            {
-              "type": "key",
-              "properties": {
-                "name": "alertsByBuildingId",
-                "queryField": "listAlertByBuildingId",
-                "fields": [
-                  "buildingId"
                 ]
               }
             },
@@ -1943,13 +1736,6 @@
             "owner",
             "admin",
             "viewer"
-          ]
-        },
-        "BuildingStatus": {
-          "name": "BuildingStatus",
-          "values": [
-            "active",
-            "inactive"
           ]
         },
         "DeviceStatus": {
@@ -5482,6 +5268,6 @@
   "version": "1.4",
   "custom": {
     "customLoginDomain": "",
-    "buildEnv": "dev"
+    "buildEnv": "prod"
   }
 }

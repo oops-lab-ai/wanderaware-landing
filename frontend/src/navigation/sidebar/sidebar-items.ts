@@ -109,7 +109,7 @@ export const sidebarItems: NavGroup[] = [
     label: "Admin",
     items: [
       {
-        title: "Organizations",
+        title: "Buildings",
         url: "/admin/orgs",
         icon: Building2,
       },

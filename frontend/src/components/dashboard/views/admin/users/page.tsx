@@ -327,14 +327,14 @@ function UserDetailView({ userId }: { userId: string }) {
         </CardContent>
       </Card>
 
-      {/* Organizations card */}
+      {/* Buildings card */}
       <Card>
         <CardHeader className="pb-3">
-          <CardTitle className="text-base">Organizations ({data.organizations.length})</CardTitle>
+          <CardTitle className="text-base">Buildings ({data.organizations.length})</CardTitle>
         </CardHeader>
         <CardContent>
           {data.organizations.length === 0 ? (
-            <p className="text-muted-foreground text-sm">No organizations.</p>
+            <p className="text-muted-foreground text-sm">No buildings.</p>
           ) : (
             <Table>
               <TableHeader>
@@ -379,7 +379,7 @@ function UserDetailView({ userId }: { userId: string }) {
               <TableHeader>
                 <TableRow>
                   <TableHead>Code</TableHead>
-                  <TableHead>Organization</TableHead>
+                  <TableHead>Building</TableHead>
                   <TableHead>Redeemed</TableHead>
                 </TableRow>
               </TableHeader>
@@ -452,8 +452,8 @@ function UserDetailView({ userId }: { userId: string }) {
                 <div>
                   <p className="font-medium text-sm">Grant admin plan</p>
                   <p className="text-muted-foreground text-xs">
-                    Creates a new non-Stripe organization for this user. Duplicate active admin-granted plans are
-                    blocked server-side.
+                    Creates a new non-Stripe building for this user. Duplicate active admin-granted plans are blocked
+                    server-side.
                   </p>
                 </div>
                 <div className="grid gap-2 md:grid-cols-[180px_160px_auto]">
@@ -519,7 +519,7 @@ function UserDetailView({ userId }: { userId: string }) {
                     <p className="font-medium text-destructive text-sm">Delete user</p>
                     <p className="text-muted-foreground text-xs">
                       Hard delete — removes from Cognito and cascade-cleans Profile, Memberships, devices, and
-                      solo-owned orgs. Multi-member owned orgs must be transferred first.
+                      solo-owned buildings. Multi-member owned buildings must be transferred first.
                     </p>
                   </div>
                 </div>
@@ -533,7 +533,7 @@ function UserDetailView({ userId }: { userId: string }) {
                 <AlertDialogTitle>Delete {user.email ?? user.userId}?</AlertDialogTitle>
                 <AlertDialogDescription>
                   This is irreversible. The user&apos;s Cognito entry, Profile, Memberships, and DeviceActivations will
-                  be deleted. Any organizations they solo-own will be soft-deleted with a 30-day grace period.
+                  be deleted. Any buildings they solo-own will be soft-deleted with a 30-day grace period.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <div className="space-y-2 py-2">

@@ -4,14 +4,17 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useSessionContext } from "@/contexts/session-context";
 
 const participants = [
-  { name: "M. Rivera", building: "Main Day Center", externalId: "ADC-1042", risk: "High", status: "Active" },
-  { name: "J. Coleman", building: "Main Day Center", externalId: "ADC-1098", risk: "Medium", status: "Active" },
-  { name: "S. Patel", building: "Memory Care Annex", externalId: "ADC-1120", risk: "Low", status: "Inactive" },
+  { name: "M. Rivera", externalId: "ADC-1042", risk: "High", status: "Active" },
+  { name: "J. Coleman", externalId: "ADC-1098", risk: "Medium", status: "Active" },
+  { name: "S. Patel", externalId: "ADC-1120", risk: "Low", status: "Inactive" },
 ];
 
 export default function ParticipantsPage() {
+  const { organization } = useSessionContext();
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -21,7 +24,7 @@ export default function ParticipantsPage() {
             Participants
           </h1>
           <p className="text-muted-foreground text-sm">
-            Operational profiles only. Medical diagnosis details are intentionally out of scope.
+            Operational profiles for {organization.name}. Medical diagnosis details are intentionally out of scope.
           </p>
         </div>
         <Button>
@@ -45,7 +48,7 @@ export default function ParticipantsPage() {
               {participants.map((participant) => (
                 <TableRow key={participant.externalId}>
                   <TableCell className="font-medium">{participant.name}</TableCell>
-                  <TableCell>{participant.building}</TableCell>
+                  <TableCell>{organization.name}</TableCell>
                   <TableCell>{participant.externalId}</TableCell>
                   <TableCell>
                     <Badge variant={participant.risk === "High" ? "destructive" : "outline"}>{participant.risk}</Badge>

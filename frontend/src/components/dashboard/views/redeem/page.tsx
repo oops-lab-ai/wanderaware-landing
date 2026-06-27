@@ -68,7 +68,7 @@ export default function RedeemPage() {
           // Auto-redirect to dashboard after a brief success display
           setTimeout(() => {
             navigate("/", { replace: true });
-            toast.success(`Welcome to ${result.organizationName ?? "your care center workspace"}!`);
+            toast.success(`Welcome to ${result.organizationName ?? "your building"}!`);
           }, 1500);
         } else {
           setErrorMessage(result.message ?? "Could not redeem code.");
@@ -102,7 +102,7 @@ export default function RedeemPage() {
           </div>
           <CardTitle className="text-xl">
             {authState === "checking" && "Checking your sign-in..."}
-            {redemptionState === "redeeming" && "Activating your care center workspace..."}
+            {redemptionState === "redeeming" && "Activating your building..."}
             {redemptionState === "success" && "You're in!"}
             {redemptionState === "error" && "Couldn't redeem code"}
             {redemptionState === "idle" && authState === "authenticated" && "Redeem code"}
@@ -120,7 +120,7 @@ export default function RedeemPage() {
             <>
               <div className="flex items-center justify-center gap-2 text-emerald-600 dark:text-emerald-500">
                 <CheckCircle2 className="size-4" />
-                <span>{orgName ?? "Your care center workspace"} is ready</span>
+                <span>{orgName ?? "Your building"} is ready</span>
               </div>
               <p className="text-muted-foreground">Redirecting to your dashboard...</p>
             </>

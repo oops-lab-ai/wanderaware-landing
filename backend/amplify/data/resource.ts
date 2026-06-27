@@ -195,6 +195,9 @@ const schema = a
             .authorization((allow) => allow.owner().to(['read', 'update']))
             .secondaryIndexes((index) => [index('email')]),
 
+        // Billable building account. The model name remains Organization for now
+        // because the auth, team, Stripe, and admin functions already use this
+        // stable internal contract. Product-facing UI calls this a Building.
         Organization: a
             .model({
                 name: a.string().required(),
@@ -219,7 +222,7 @@ const schema = a
                 scheduledDowngradeDate: a.datetime(),
                 deletedAt: a.datetime(),
                 deletesTtl: a.integer(),
-                // For care center-plan / promo orgs (planTier === 'free'): when this grant expires.
+                // For care center-plan / promo building accounts (planTier === 'free'): when this grant expires.
                 // null = indefinite access. Set at redemption time from PromoCode.expiresInDays,
                 // or set to a past time by an admin to revoke. Enforced by claimDeviceCapacity
                 // and validateDeviceCapacity. Ignored for paid orgs.
@@ -245,25 +248,9 @@ const schema = a
             .authorization((allow) => [allow.ownerDefinedIn('userId')])
             .secondaryIndexes((index) => [index('userId'), index('organizationId')]),
 
-        Building: a
-            .model({
-                organizationId: a.string().required(),
-                name: a.string().required(),
-                addressLine1: a.string(),
-                addressLine2: a.string(),
-                city: a.string(),
-                state: a.string(),
-                postalCode: a.string(),
-                timezone: a.string().default('America/New_York'),
-                status: a.enum(['active', 'inactive']),
-            })
-            .authorization((allow) => [allow.authenticated()])
-            .secondaryIndexes((index) => [index('organizationId')]),
-
         Device: a
             .model({
                 organizationId: a.string().required(),
-                buildingId: a.string(),
                 deviceId: a.string().required(),
                 serialNumber: a.string(),
                 name: a.string().required(),
@@ -273,12 +260,11 @@ const schema = a
                 firmwareVersion: a.string(),
             })
             .authorization((allow) => [allow.authenticated()])
-            .secondaryIndexes((index) => [index('organizationId'), index('buildingId'), index('deviceId')]),
+            .secondaryIndexes((index) => [index('organizationId'), index('deviceId')]),
 
         Participant: a
             .model({
                 organizationId: a.string().required(),
-                buildingId: a.string(),
                 displayName: a.string().required(),
                 externalId: a.string(),
                 status: a.enum(['active', 'inactive']),
@@ -286,24 +272,22 @@ const schema = a
                 notes: a.string(),
             })
             .authorization((allow) => [allow.authenticated()])
-            .secondaryIndexes((index) => [index('organizationId'), index('buildingId')]),
+            .secondaryIndexes((index) => [index('organizationId')]),
 
         RfidTag: a
             .model({
                 organizationId: a.string().required(),
-                buildingId: a.string(),
                 tagUid: a.string().required(),
                 assignmentStatus: a.enum(['unassigned', 'assigned', 'lost', 'retired']),
                 participantId: a.string(),
                 lastSeenAt: a.datetime(),
             })
             .authorization((allow) => [allow.authenticated()])
-            .secondaryIndexes((index) => [index('organizationId'), index('buildingId'), index('tagUid')]),
+            .secondaryIndexes((index) => [index('organizationId'), index('tagUid')]),
 
         Alert: a
             .model({
                 organizationId: a.string().required(),
-                buildingId: a.string(),
                 deviceId: a.string(),
                 tagUid: a.string(),
                 participantId: a.string(),
@@ -317,7 +301,7 @@ const schema = a
                 message: a.string(),
             })
             .authorization((allow) => [allow.authenticated()])
-            .secondaryIndexes((index) => [index('organizationId'), index('buildingId'), index('status')]),
+            .secondaryIndexes((index) => [index('organizationId'), index('status')]),
 
         DeviceActivation: a
             .model({

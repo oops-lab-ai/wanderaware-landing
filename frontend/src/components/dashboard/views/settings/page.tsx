@@ -80,10 +80,10 @@ export default function SettingsPage() {
         setConfirmName("");
         handlePostExit(`${organization.name} deleted`);
       } else {
-        toast.error(result.message ?? "Failed to delete organization");
+        toast.error(result.message ?? "Failed to delete building");
       }
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Failed to delete organization");
+      toast.error(e instanceof Error ? e.message : "Failed to delete building");
     }
   };
 
@@ -94,10 +94,10 @@ export default function SettingsPage() {
         setLeaveDialogOpen(false);
         handlePostExit(`You have left ${organization.name}`);
       } else {
-        toast.error(result.message ?? "Failed to leave organization");
+        toast.error(result.message ?? "Failed to leave building");
       }
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Failed to leave organization");
+      toast.error(e instanceof Error ? e.message : "Failed to leave building");
     }
   };
 
@@ -128,7 +128,7 @@ export default function SettingsPage() {
   const handleOrgNameSave = async () => {
     const newName = normalizeOrganizationName(orgName);
     if (!newName) {
-      toast.error("Organization name cannot be empty");
+      toast.error("Building name cannot be empty");
       return;
     }
     setOrgNameSaving(true);
@@ -151,9 +151,9 @@ export default function SettingsPage() {
       // Also invalidate the heavyweight ["organization", id] query so Billing's
       // useOrganization hook picks up any other org-level fields that may have changed.
       queryClient.invalidateQueries({ queryKey: ["organization", organization.id] });
-      toast.success("Organization name updated");
+      toast.success("Building name updated");
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Failed to update organization name");
+      toast.error(e instanceof Error ? e.message : "Failed to update building name");
     } finally {
       setOrgNameSaving(false);
     }
@@ -163,7 +163,7 @@ export default function SettingsPage() {
     try {
       await navigator.clipboard.writeText(organization.id);
       setCopiedOrgId(true);
-      toast.success("Organization ID copied to clipboard");
+      toast.success("Building ID copied to clipboard");
       setTimeout(() => setCopiedOrgId(false), 2000);
     } catch (_e) {
       toast.error("Failed to copy to clipboard");
@@ -174,7 +174,7 @@ export default function SettingsPage() {
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="font-semibold text-2xl tracking-tight">Settings</h1>
-        <p className="text-muted-foreground text-sm">Manage your profile and organization</p>
+        <p className="text-muted-foreground text-sm">Manage your profile and active building account</p>
       </div>
 
       {/* Profile section */}
@@ -218,23 +218,23 @@ export default function SettingsPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Shield className="size-4" />
-            Organization
+            Building Account
           </CardTitle>
           <CardDescription>
-            {isOwner ? "Manage your organization details" : `You're a member of ${organization.name}`}
+            {isOwner ? "Manage this building account" : `You're a member of ${organization.name}`}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {isOwner && (
             <>
               <div className="space-y-2">
-                <Label htmlFor="org-name">Organization Name</Label>
+                <Label htmlFor="org-name">Building Name</Label>
                 <div className="flex gap-2">
                   <Input
                     id="org-name"
                     value={orgName}
                     onChange={(e) => setOrgName(e.target.value)}
-                    placeholder="My Organization"
+                    placeholder="Main Day Center"
                     maxLength={MAX_ORGANIZATION_NAME_LENGTH}
                   />
                   <Button onClick={handleOrgNameSave} disabled={orgNameSaving}>
@@ -251,12 +251,12 @@ export default function SettingsPage() {
           )}
 
           <div className="space-y-2">
-            <Label>Organization ID</Label>
+            <Label>Building ID</Label>
             <div className="flex items-center gap-2">
               <code className="flex-1 rounded-md border bg-muted/50 px-3 py-2 font-mono text-sm">
                 {organization.id}
               </code>
-              <Button variant="outline" size="sm" onClick={handleCopyOrgId} aria-label="Copy organization ID">
+              <Button variant="outline" size="sm" onClick={handleCopyOrgId} aria-label="Copy building ID">
                 {copiedOrgId ? <Check className="size-4" /> : <Copy className="size-4" />}
               </Button>
             </div>
@@ -283,15 +283,15 @@ export default function SettingsPage() {
           </CardTitle>
           <CardDescription>
             {isOwner
-              ? "Permanently remove access to this organization for all members."
-              : "Remove yourself from this organization."}
+              ? "Permanently remove access to this building for all members."
+              : "Remove yourself from this building."}
           </CardDescription>
         </CardHeader>
         <CardContent>
           {isOwner ? (
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-1">
-                <p className="font-medium text-sm">Delete this organization</p>
+                <p className="font-medium text-sm">Delete this building</p>
                 <p className="text-muted-foreground text-sm">
                   All members will lose access immediately. Active Stripe subscriptions must be cancelled first.
                 </p>
@@ -306,15 +306,15 @@ export default function SettingsPage() {
                 <AlertDialogTrigger asChild>
                   <Button variant="destructive" size="sm">
                     <Trash2 className="size-4" />
-                    Delete Organization
+                    Delete Building
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Delete {organization.name}?</AlertDialogTitle>
                     <AlertDialogDescription>
-                      This will remove access to the organization. All members will lose access immediately and all web
-                      sessions for this org will be released. If this organization has an active Stripe subscription,
+                      This will remove access to the building. All members will lose access immediately and all web
+                      sessions for this building will be released. If this building has an active Stripe subscription,
                       you'll need to cancel it from the Billing page first.
                       <br />
                       <br />
@@ -322,7 +322,7 @@ export default function SettingsPage() {
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <div className="space-y-2 py-2">
-                    <Label htmlFor="confirm-org-name">Organization name</Label>
+                    <Label htmlFor="confirm-org-name">Building name</Label>
                     <Input
                       id="confirm-org-name"
                       value={confirmName}
@@ -339,7 +339,7 @@ export default function SettingsPage() {
                       disabled={confirmName !== organization.name || removeOrgMutation.isPending}
                     >
                       {removeOrgMutation.isPending ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
-                      Delete Organization
+                      Delete Building
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
@@ -348,25 +348,25 @@ export default function SettingsPage() {
           ) : (
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-1">
-                <p className="font-medium text-sm">Leave this organization</p>
+                <p className="font-medium text-sm">Leave this building</p>
                 <p className="text-muted-foreground text-sm">
                   You'll lose access to {organization.name} immediately. Any web devices you've signed in on for this
-                  org will be released.
+                  building will be released.
                 </p>
               </div>
               <AlertDialog open={leaveDialogOpen} onOpenChange={setLeaveDialogOpen}>
                 <AlertDialogTrigger asChild>
                   <Button variant="outline" size="sm">
                     <DoorOpen className="size-4" />
-                    Leave Organization
+                    Leave Building
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Leave {organization.name}?</AlertDialogTitle>
                     <AlertDialogDescription>
-                      You'll lose access immediately and your web sessions for this org will be released. The
-                      organization itself stays intact for the other members.
+                      You'll lose access immediately and your web sessions for this building will be released. The
+                      building account stays intact for the other members.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>

@@ -3,10 +3,9 @@
 Core backend concepts:
 
 - `Profile`: authenticated user profile.
-- `Organization`: customer account, owner, plan tier, and max device capacity.
-- `Membership`: user role within an organization.
-- `Building`: organization-owned care site or facility.
-- `Device`: RFID door reader assigned to a building.
+- `Organization`: internal name for the billable building account: owner, plan tier, and max device capacity.
+- `Membership`: user role within a building account.
+- `Device`: RFID door reader assigned to the selected building account.
 - `RfidTag`: passive tag UID and assignment state.
 - `Participant`: operational participant record. Avoid medical diagnosis details in v1.
 - `Alert`: wandering/proximity event placeholder for future ingestion.
@@ -15,6 +14,6 @@ Core backend concepts:
 
 ## Role Model
 
-- `owner`: billing, buildings, devices, team, settings.
-- `admin`: buildings, devices, alerts, participants.
+- `owner`: billing, devices, team, settings, and building account management.
+- `admin`: devices, alerts, participants, and team operations.
 - `viewer`: read-only dashboard access.

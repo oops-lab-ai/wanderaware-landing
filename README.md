@@ -41,4 +41,4 @@ npm run firmware:build
 
 ## Product Model
 
-WanderAware organizations manage buildings, RFID door readers, RFID tags, participants, alerts, team members, and Stripe-backed device capacity. Real IoT ingestion is intentionally out of scope for this migration; the dashboard models and placeholder screens are ready for that integration.
+WanderAware is building-first: each billable building account has its own Stripe plan, device capacity, team members, RFID door readers, RFID tags, participants, and alerts. The backend still uses some `Organization` names internally for inherited auth/team/billing plumbing, but product-facing flows treat that record as the active building. Real IoT ingestion is intentionally out of scope for this migration; the dashboard models and placeholder screens are ready for that integration.

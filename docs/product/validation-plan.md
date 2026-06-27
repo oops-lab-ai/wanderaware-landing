@@ -7,7 +7,7 @@ WanderAware is currently in startup validation mode. The landing page and dashbo
 - Track outreach links with UTM parameters and non-PII lead identifiers.
 - Measure landing page views, CTA clicks, form starts, waitlist submits, reservation attempts, and reservation submits.
 - Keep the waitlist CTA lighter than reservation while preserving reservation as a higher-intent action.
-- Use dashboard scaffolding to demo organization, building, device, participant, tag, alert, team, billing, and admin flows.
+- Use dashboard scaffolding to demo building, device, participant, tag, alert, team, billing, and admin flows.
 
 ## Product Boundaries
 

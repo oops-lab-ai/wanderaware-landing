@@ -144,10 +144,10 @@ function OrgSearchView() {
       <div>
         <h1 className="flex items-center gap-2 font-semibold text-2xl tracking-tight">
           <Building2 className="size-6" />
-          Organizations
+          Buildings
         </h1>
         <p className="text-muted-foreground text-sm">
-          Search every organization, including paid Stripe orgs, free grants, and soft-deleted records.
+          Search every billable building account, including paid Stripe plans, free grants, and soft-deleted records.
         </p>
       </div>
 
@@ -160,7 +160,7 @@ function OrgSearchView() {
             <div className="relative">
               <Search className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 size-4 text-muted-foreground" />
               <Input
-                placeholder="Search by org name, owner email, or exact org id..."
+                placeholder="Search by building name, owner email, or exact building id..."
                 className="pl-9"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -171,7 +171,7 @@ function OrgSearchView() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All orgs</SelectItem>
+                <SelectItem value="all">All buildings</SelectItem>
                 <SelectItem value="active-stripe">Active Stripe</SelectItem>
                 <SelectItem value="stripe">All Stripe</SelectItem>
                 <SelectItem value="grants">Admin grants</SelectItem>
@@ -181,7 +181,7 @@ function OrgSearchView() {
               </SelectContent>
             </Select>
           </div>
-          <p className="mt-2 text-muted-foreground text-xs">Leave blank to list the first 50 organizations.</p>
+          <p className="mt-2 text-muted-foreground text-xs">Leave blank to list the first 50 buildings.</p>
         </CardContent>
       </Card>
 
@@ -194,12 +194,12 @@ function OrgSearchView() {
               <Skeleton className="h-10 w-full" />
             </div>
           ) : organizations.length === 0 ? (
-            <p className="text-muted-foreground text-sm">No organizations found.</p>
+            <p className="text-muted-foreground text-sm">No buildings found.</p>
           ) : (
             <Table className="table-fixed">
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[27%]">Organization</TableHead>
+                  <TableHead className="w-[27%]">Building</TableHead>
                   <TableHead className="w-[16%]">Owner</TableHead>
                   <TableHead className="w-[13%]">Plan</TableHead>
                   <TableHead className="w-[18%]">Subscription</TableHead>
@@ -300,11 +300,11 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
         <Button asChild variant="outline" size="sm" className="w-fit">
           <Link to="/admin/orgs">
             <ArrowLeft className="size-4" />
-            Back to organizations
+            Back to buildings
           </Link>
         </Button>
         <Card>
-          <CardContent className="pt-6 text-muted-foreground text-sm">Organization not found.</CardContent>
+          <CardContent className="pt-6 text-muted-foreground text-sm">Building not found.</CardContent>
         </Card>
       </div>
     );
@@ -336,7 +336,7 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
         <Button asChild variant="outline" size="sm" className="mb-2 w-fit">
           <Link to="/admin/orgs">
             <ArrowLeft className="size-4" />
-            Back to organizations
+            Back to buildings
           </Link>
         </Button>
         <div className="flex flex-wrap items-start justify-between gap-4">
@@ -401,7 +401,7 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
       {isPaidOrg && (
         <Card className="border-amber-300 bg-amber-50/50 dark:bg-amber-950/20">
           <CardContent className="min-h-0 px-4 py-3 text-sm">
-            Paid Stripe orgs are read-only here. Use Stripe/billing workflows for subscription changes.
+            Paid Stripe buildings are read-only here. Use Stripe/billing workflows for subscription changes.
           </CardContent>
         </Card>
       )}
@@ -482,8 +482,8 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
               aria-label="Plan change reason"
             />
             <p className="text-muted-foreground text-xs md:col-span-5">
-              Only non-Stripe organizations can be edited here. Stripe-backed organizations stay read-only so billing
-              and licensing do not drift apart.
+              Only non-Stripe buildings can be edited here. Stripe-backed buildings stay read-only so billing and device
+              capacity do not drift apart.
             </p>
             {plannedRevocations > 0 && (
               <p className="text-amber-700 text-xs md:col-span-5">
@@ -499,13 +499,13 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
       {org.deletedAt && (
         <Card className="border-destructive/40">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base">Deleted organization</CardTitle>
+            <CardTitle className="text-base">Deleted building</CardTitle>
           </CardHeader>
           <CardContent className="flex items-center justify-between gap-4">
             <p className="text-muted-foreground text-sm">Deleted {formatDate(org.deletedAt)}.</p>
             <Button
               variant="outline"
-              onClick={() => runAction("Restore organization", () => restoreOrg.mutateAsync(org.id))}
+              onClick={() => runAction("Restore building", () => restoreOrg.mutateAsync(org.id))}
               disabled={restoreOrg.isPending}
             >
               {restoreOrg.isPending ? <Loader2 className="size-4 animate-spin" /> : <Undo2 className="size-4" />}
@@ -697,8 +697,8 @@ function OrgDetailView({ organizationId }: { organizationId: string }) {
                             <AlertDialogHeader>
                               <AlertDialogTitle>Remove member?</AlertDialogTitle>
                               <AlertDialogDescription>
-                                This removes {member.email ?? member.userId} from the organization and releases their
-                                device capacity.
+                                This removes {member.email ?? member.userId} from the building and releases their device
+                                capacity.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>

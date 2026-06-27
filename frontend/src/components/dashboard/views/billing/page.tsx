@@ -284,7 +284,9 @@ export default function BillingPage() {
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="font-semibold text-2xl tracking-tight">Billing</h1>
-        <p className="text-muted-foreground text-sm">Manage your subscription and billing details</p>
+        <p className="text-muted-foreground text-sm">
+          Manage the plan, device capacity, and Stripe billing for {organization.name}.
+        </p>
       </div>
 
       {/* Current plan section */}
@@ -293,13 +295,13 @@ export default function BillingPage() {
           <div className="flex items-center gap-3">
             <CreditCard className="size-5 text-muted-foreground" />
             <div>
-              <CardTitle>Current Plan</CardTitle>
+              <CardTitle>Current Building Plan</CardTitle>
             </div>
           </div>
           {isOwner && fullOrg?.stripeCustomerId && (
             <Button variant="outline" onClick={handleManageBilling} disabled={portal.isPending}>
               <ExternalLink className="size-4" />
-              {portal.isPending ? "Opening..." : "Manage Subscription"}
+              {portal.isPending ? "Opening..." : "Manage Billing"}
             </Button>
           )}
         </CardHeader>
@@ -408,8 +410,8 @@ export default function BillingPage() {
         <Alert>
           <AlertCircle className="size-4" />
           <AlertDescription>
-            Only the organization owner can manage billing or change plans. Contact your owner to upgrade or modify the
-            subscription.
+            Only the building owner can manage billing or change plans. Contact your owner to upgrade or modify this
+            building plan.
           </AlertDescription>
         </Alert>
       )}
@@ -417,7 +419,9 @@ export default function BillingPage() {
       {/* Plan cards section — owners only */}
       {isOwner && (
         <div>
-          <h2 className="mb-4 font-semibold text-lg">{hasPaidPlan ? "Available Plans" : "Choose a Plan"}</h2>
+          <h2 className="mb-4 font-semibold text-lg">
+            {hasPaidPlan ? "Available Building Plans" : "Choose a Building Plan"}
+          </h2>
           {productsLoading ? (
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {BILLING_PLAN_SKELETON_KEYS.map((key) => (
@@ -578,15 +582,15 @@ export default function BillingPage() {
                 ) : previewData?.blocked ? (
                   <>
                     <p>
-                      You'd like to downgrade to <strong>{confirmProduct?.name}</strong>, but your org has more active
-                      device device capacity than that plan supports.
+                      You'd like to downgrade to <strong>{confirmProduct?.name}</strong>, but this building has more
+                      active device capacity than that plan supports.
                     </p>
                     <div className="space-y-3 rounded-lg border border-destructive/50 bg-destructive/5 p-4 text-sm">
                       <div className="font-medium text-destructive">Downgrade blocked</div>
                       <p className="text-foreground">{previewData.blockReason}</p>
                       {previewData.seatsUsed !== null && previewData.newTierMaxSeats !== null && (
                         <div className="flex justify-between text-muted-foreground text-xs">
-                          <span>Active device device capacity</span>
+                          <span>Active device capacity</span>
                           <span>
                             <strong className="text-destructive">{previewData.seatsUsed}</strong> used /{" "}
                             <strong>{previewData.newTierMaxSeats}</strong> allowed on {confirmProduct?.name}
@@ -594,7 +598,7 @@ export default function BillingPage() {
                         </div>
                       )}
                       <Button asChild size="sm" className="w-fit">
-                        <Link to="/devices">Manage Device Device Capacity</Link>
+                        <Link to="/devices">Manage Device Capacity</Link>
                       </Button>
                     </div>
                   </>

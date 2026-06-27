@@ -4,18 +4,18 @@
 
 Admins can manage:
 
-- organizations
+- buildings
 - users
 - plan/device-capacity grants
 - promo codes
-- organization restoration/removal flows
+- building restoration/removal flows
 
 ## Customer Onboarding
 
 Initial onboarding should collect:
 
-- organization name
-- building/site name
+- building name
+- site address/time zone
 - exit doors to monitor
 - approximate number of at-risk participants
 - team members who need dashboard access

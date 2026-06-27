@@ -12,6 +12,6 @@ The v1 app supports customer validation and dashboard readiness. Real IoT ingest
 ## Primary Flows
 
 - Public visitors land on `/`, join the waitlist, reserve interest, or click outreach links tracked by PostHog.
-- Owners sign up, create an organization, invite team members, and manage plan/device capacity.
-- Organizations manage buildings, readers, tags, participants, and alerts.
-- Admins manage organizations, users, plan grants, and capacity exceptions.
+- Owners sign up, add a building, invite team members, and manage that building's plan/device capacity.
+- The selected building account manages readers, tags, participants, and alerts.
+- Admins manage buildings, users, plan grants, and capacity exceptions.

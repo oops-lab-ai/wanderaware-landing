@@ -75,7 +75,7 @@ export default function WelcomePage() {
           </div>
           <h1 className="font-semibold text-2xl tracking-tight">Welcome, {auth.data.email}</h1>
           <p className="text-muted-foreground text-sm">
-            You're not in any organization yet. Accept a pending invitation, or start your own workspace.
+            You're not in any building yet. Accept a pending invitation, or add your first building.
           </p>
         </div>
 
@@ -159,7 +159,7 @@ function PendingInvitationsCard({ userId }: { userId: string }) {
             </span>
           )}
         </CardTitle>
-        <CardDescription>Organizations that have invited you to join</CardDescription>
+        <CardDescription>Buildings that have invited you to join</CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
         {isLoading ? (
@@ -174,7 +174,7 @@ function PendingInvitationsCard({ userId }: { userId: string }) {
             >
               <div className="flex min-w-0 flex-1 flex-col gap-1">
                 <div className="flex items-center gap-2">
-                  <span className="truncate font-medium">{inv.organizationName ?? "Unnamed organization"}</span>
+                  <span className="truncate font-medium">{inv.organizationName ?? "Unnamed building"}</span>
                   <Badge variant={roleBadgeVariant(inv.role)}>{capitalize(inv.role)}</Badge>
                 </div>
                 <p className="truncate text-muted-foreground text-xs">
@@ -193,7 +193,7 @@ function PendingInvitationsCard({ userId }: { userId: string }) {
                 </Button>
                 <Button
                   size="sm"
-                  onClick={() => inv.tokenHash && handleAccept(inv.tokenHash, inv.organizationName ?? "organization")}
+                  onClick={() => inv.tokenHash && handleAccept(inv.tokenHash, inv.organizationName ?? "building")}
                   disabled={acceptMutation.isPending || declineMutation.isPending}
                 >
                   {acceptMutation.isPending ? (
@@ -223,7 +223,7 @@ function CreateOrganizationCard({ userId }: { userId: string }) {
   const handleCreate = async () => {
     const trimmed = normalizeOrganizationName(name);
     if (!trimmed) {
-      toast.error("Please enter an organization name");
+      toast.error("Please enter a building name");
       return;
     }
     try {
@@ -238,10 +238,10 @@ function CreateOrganizationCard({ userId }: { userId: string }) {
         queryClient.removeQueries({ queryKey: ["auth"] });
         navigate("/", { replace: true });
       } else {
-        toast.error("Could not create organization");
+        toast.error("Could not create building");
       }
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Could not create organization");
+      toast.error(e instanceof Error ? e.message : "Could not create building");
     }
   };
 
@@ -250,13 +250,13 @@ function CreateOrganizationCard({ userId }: { userId: string }) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Building2 className="size-4" />
-          Start your own
+          Add your first building
         </CardTitle>
-        <CardDescription>Create a new workspace and become its owner</CardDescription>
+        <CardDescription>Create a building account and become its owner</CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
         <div className="space-y-2">
-          <Label htmlFor="welcome-org-name">Organization name</Label>
+          <Label htmlFor="welcome-org-name">Building name</Label>
           <Input
             id="welcome-org-name"
             value={name}
@@ -274,7 +274,7 @@ function CreateOrganizationCard({ userId }: { userId: string }) {
         </div>
         <Button onClick={handleCreate} disabled={createOrg.isPending} className="w-full">
           {createOrg.isPending ? <Loader2 className="mr-2 size-4 animate-spin" /> : <Plus className="mr-2 size-4" />}
-          Create Organization
+          Add Building
         </Button>
       </CardContent>
     </Card>

@@ -45,7 +45,7 @@ export default function OverviewPage() {
         <div>
           <h1 className="font-semibold text-2xl tracking-tight">Overview</h1>
           <p className="text-muted-foreground text-sm">
-            {organization.name} reader coverage, tag assignments, and alert activity.
+            Selected building: {organization.name}. Review reader coverage, tag assignments, and alert activity.
           </p>
         </div>
         {isOwner && (
@@ -78,7 +78,7 @@ export default function OverviewPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="font-medium text-muted-foreground text-sm">Plan</CardTitle>
+            <CardTitle className="font-medium text-muted-foreground text-sm">Building Plan</CardTitle>
             <CreditCard className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>

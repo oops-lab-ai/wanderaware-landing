@@ -11,7 +11,6 @@ import { useUsage } from "@/hooks/use-usage";
 const readers = [
   {
     name: "Front Lobby UHF Reader",
-    building: "Main Day Center",
     location: "Front entrance",
     status: "Online",
     lastSeen: "2 minutes ago",
@@ -19,7 +18,6 @@ const readers = [
   },
   {
     name: "Garden Door Reader",
-    building: "Main Day Center",
     location: "Garden exit",
     status: "Needs attention",
     lastSeen: "32 minutes ago",
@@ -27,7 +25,6 @@ const readers = [
   },
   {
     name: "Van Bay Reader",
-    building: "Main Day Center",
     location: "Transportation door",
     status: "Offline",
     lastSeen: "Yesterday",
@@ -50,7 +47,9 @@ export default function DevicesPage() {
             <RadioTower className="size-6" />
             Door Readers
           </h1>
-          <p className="text-muted-foreground text-sm">Track UHF RFID readers by building, doorway, and status.</p>
+          <p className="text-muted-foreground text-sm">
+            Track UHF RFID readers for {organization.name} by doorway and status.
+          </p>
         </div>
         <Button>
           <Plus className="size-4" />
@@ -88,7 +87,7 @@ export default function DevicesPage() {
               {readers.map((reader) => (
                 <TableRow key={reader.name}>
                   <TableCell className="font-medium">{reader.name}</TableCell>
-                  <TableCell>{reader.building}</TableCell>
+                  <TableCell>{organization.name}</TableCell>
                   <TableCell>{reader.location}</TableCell>
                   <TableCell>
                     <Badge variant={reader.status === "Online" ? "secondary" : "outline"}>

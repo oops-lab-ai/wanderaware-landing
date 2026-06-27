@@ -40,20 +40,20 @@ export function OrgSwitcher() {
   const handleCreateOrg = async () => {
     const name = newOrgName.trim();
     if (!name) {
-      toast.error("Organization name is required");
+      toast.error("Building name is required");
       return;
     }
 
     try {
       const result = await createOrg.mutateAsync({ name });
       if (result.organizationId) {
-        toast.success("Organization created");
+        toast.success("Building created");
         switchOrganization(result.organizationId);
       }
       setCreateDialogOpen(false);
       setNewOrgName("");
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Failed to create organization");
+      toast.error(e instanceof Error ? e.message : "Failed to create building");
     }
   };
 
@@ -61,17 +61,20 @@ export function OrgSwitcher() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="h-8 gap-1.5">
-            <Building2 className="size-3.5" />
-            <span className="max-w-[120px] truncate font-medium text-xs">{organization.name}</span>
-            <Badge variant={roleBadgeVariant(membership.role)} className="px-1 py-0 text-[10px]">
+          <Button variant="outline" className="h-auto w-full justify-start gap-2 px-3 py-2 text-left">
+            <Building2 className="size-4 shrink-0 text-primary" />
+            <span className="min-w-0 flex-1">
+              <span className="block text-[11px] text-muted-foreground leading-tight">Active building</span>
+              <span className="block truncate font-medium text-sm leading-tight">{organization.name}</span>
+            </span>
+            <Badge variant={roleBadgeVariant(membership.role)} className="shrink-0 px-1 py-0 text-[10px]">
               {membership.role ?? "member"}
             </Badge>
-            <ChevronsUpDown className="size-3 opacity-50" />
+            <ChevronsUpDown className="size-3 shrink-0 opacity-50" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-80">
-          <DropdownMenuLabel className="text-muted-foreground text-xs">Organizations</DropdownMenuLabel>
+          <DropdownMenuLabel className="text-muted-foreground text-xs">Buildings</DropdownMenuLabel>
           <DropdownMenuGroup>
             {organizations.map((org) => {
               const isActive = org.organizationId === organization.id;
@@ -86,7 +89,7 @@ export function OrgSwitcher() {
                   }}
                 >
                   <Building2 className="size-3.5 shrink-0" />
-                  <span className="flex-1 truncate text-sm">{org.name ?? "Unnamed"}</span>
+                  <span className="flex-1 truncate text-sm">{org.name ?? "Unnamed building"}</span>
                   {/* Plan-status chip — closes the multi-org panic case ("I just paid, why
                       is it asking me again?"). Two states: outline "No Plan" for unsubscribed,
                       secondary tier name for paid. Trial / past_due sub-states aren't on
@@ -111,7 +114,7 @@ export function OrgSwitcher() {
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer gap-2" onClick={() => setCreateDialogOpen(true)}>
             <Plus className="size-3.5" />
-            <span className="text-sm">Create Organization</span>
+            <span className="text-sm">Add Building</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -119,16 +122,18 @@ export function OrgSwitcher() {
       <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Create Organization</DialogTitle>
-            <DialogDescription>Create a new organization to manage device capacity and team members.</DialogDescription>
+            <DialogTitle>Add Building</DialogTitle>
+            <DialogDescription>
+              Add a facility with its own plan, device capacity, team access, and billing.
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-2">
-            <Label htmlFor="new-org-name">Organization Name</Label>
+            <Label htmlFor="new-org-name">Building Name</Label>
             <Input
               id="new-org-name"
               value={newOrgName}
               onChange={(e) => setNewOrgName(e.target.value)}
-              placeholder="My Organization"
+              placeholder="Main Day Center"
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleCreateOrg();
               }}

@@ -65,7 +65,7 @@ export default function AcceptInvitePage() {
             // the setter silently drops the write (no active user → no persist).
             if (userId) setActiveUser(userId);
             setActiveOrgId(result.organizationId);
-            toast.success(`Joined ${invitation?.organizationName ?? "organization"}!`);
+            toast.success(`Joined ${invitation?.organizationName ?? "building"}!`);
             // Wipe auth cache so AuthGuard flashes MoleculeLoader instead of
             // showing stale pre-accept data during the background refetch.
             queryClient.removeQueries({ queryKey: ["auth"] });
@@ -155,7 +155,7 @@ export default function AcceptInvitePage() {
         <ErrorCard
           icon={<Clock className="size-8 text-muted-foreground" />}
           title="Invitation expired"
-          description="This invitation has expired. Please ask the organization admin to send a new one."
+          description="This invitation has expired. Please ask the building admin to send a new one."
         />
       </PageShell>
     );
