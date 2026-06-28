@@ -1,6 +1,19 @@
 import { useState } from "react";
 
-import { Building2, Check, Loader2, Plus } from "lucide-react";
+import { useNavigate } from "react-router";
+
+import {
+  Building2,
+  Check,
+  CreditCard,
+  Loader2,
+  MoreHorizontal,
+  Plus,
+  RadioTower,
+  Settings,
+  Shield,
+  Users,
+} from "lucide-react";
 import { toast } from "sonner";
 
 import { Badge } from "@/components/ui/badge";
@@ -14,9 +27,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSessionContext } from "@/contexts/session-context";
+import { useIsAdmin } from "@/hooks/use-is-admin";
 import { useCreateOrganization } from "@/hooks/use-mutations";
 import { roleBadgeVariant } from "@/lib/dashboard-utils";
 import { MAX_ORGANIZATION_NAME_LENGTH, normalizeOrganizationName } from "@/lib/organization-name";
@@ -25,6 +46,8 @@ import { cn } from "@/lib/utils";
 
 export default function BuildingsPage() {
   const { organization, organizations, switchOrganization } = useSessionContext();
+  const navigate = useNavigate();
+  const { isAdmin } = useIsAdmin();
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [newBuildingName, setNewBuildingName] = useState("");
   const createBuilding = useCreateOrganization();
@@ -47,6 +70,17 @@ export default function BuildingsPage() {
     } catch (e) {
       toast.error(e instanceof Error ? e.message : "Failed to add building");
     }
+  }
+
+  function selectBuilding(buildingId: string) {
+    if (buildingId !== organization.id) {
+      switchOrganization(buildingId);
+    }
+  }
+
+  function selectAndNavigate(buildingId: string, path: string) {
+    selectBuilding(buildingId);
+    navigate(path);
   }
 
   return (
@@ -75,21 +109,65 @@ export default function BuildingsPage() {
           const planLabel = building.planTier ? getTierDisplayName(building.planTier) : "No plan";
 
           return (
-            <Card key={buildingId} className={cn(isActive && "border-primary bg-primary/5")}>
+            <Card
+              key={buildingId}
+              className={cn(
+                "transition-colors",
+                isActive ? "border-primary bg-primary/5 shadow-sm ring-2 ring-primary/15" : "hover:border-primary/40",
+              )}
+            >
               <CardHeader className="space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <CardTitle className="truncate text-base">{building.name ?? "Unnamed building"}</CardTitle>
                     <CardDescription className="mt-1">Billable building account</CardDescription>
                   </div>
-                  {isActive ? (
-                    <Badge className="gap-1">
-                      <Check className="size-3" />
-                      Active
-                    </Badge>
-                  ) : (
-                    <Badge variant="outline">Available</Badge>
-                  )}
+                  <div className="flex shrink-0 items-center gap-2">
+                    {isActive ? (
+                      <Badge className="gap-1">
+                        <Check className="size-3" />
+                        Active
+                      </Badge>
+                    ) : (
+                      <Badge variant="outline">Available</Badge>
+                    )}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon" className="size-8" aria-label="Building actions">
+                          <MoreHorizontal className="size-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-48">
+                        <DropdownMenuItem onClick={() => selectAndNavigate(buildingId, "/settings")}>
+                          <Settings className="size-4" />
+                          Settings
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => selectAndNavigate(buildingId, "/billing")}>
+                          <CreditCard className="size-4" />
+                          Billing
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => selectAndNavigate(buildingId, "/team")}>
+                          <Users className="size-4" />
+                          Team
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => selectAndNavigate(buildingId, "/devices")}>
+                          <RadioTower className="size-4" />
+                          Devices
+                        </DropdownMenuItem>
+                        {isAdmin && (
+                          <>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem
+                              onClick={() => selectAndNavigate(buildingId, `/admin/orgs/${buildingId}`)}
+                            >
+                              <Shield className="size-4" />
+                              Admin details
+                            </DropdownMenuItem>
+                          </>
+                        )}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -115,7 +193,7 @@ export default function BuildingsPage() {
                   variant={isActive ? "secondary" : "outline"}
                   className="w-full"
                   disabled={isActive}
-                  onClick={() => switchOrganization(buildingId)}
+                  onClick={() => selectBuilding(buildingId)}
                 >
                   {isActive ? "Current Building" : "Switch to Building"}
                 </Button>

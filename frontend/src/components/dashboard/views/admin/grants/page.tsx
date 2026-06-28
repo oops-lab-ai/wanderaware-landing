@@ -154,7 +154,7 @@ function GrantsTab() {
     return (
       <div className="rounded-md border border-dashed py-12 text-center">
         <FlaskConical className="mx-auto size-10 text-muted-foreground/50" />
-        <p className="mt-4 text-muted-foreground text-sm">No granted plan grants yet.</p>
+        <p className="mt-4 text-muted-foreground text-sm">No building plan grants yet.</p>
       </div>
     );
   }
@@ -164,7 +164,7 @@ function GrantsTab() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Org</TableHead>
+            <TableHead>Building</TableHead>
             <TableHead>Plan</TableHead>
             <TableHead>Owner</TableHead>
             <TableHead>Granted</TableHead>
@@ -633,7 +633,7 @@ export default function AdminGrantsPage() {
   const { data: grantsData } = useAdminGrants();
 
   // Frontend gate: even though the AppSync schema rejects non-admin queries,
-  // we don't want the admin UI shell ("Manage plan grant grants and promo codes…")
+  // we don't want the admin UI shell ("Manage building plan grants and promo codes…")
   // to flash for non-admins. Show a loader while Cognito resolves, then redirect.
   if (isChecking) {
     return (
@@ -655,7 +655,7 @@ export default function AdminGrantsPage() {
           Grants
         </h1>
         <p className="text-muted-foreground text-sm">
-          Manage plan grant grants and promo codes. Changes are real-time — web sessions get kicked within minutes of
+          Manage building plan grants and promo codes. Changes are real-time — web sessions get kicked within minutes of
           revocation.
         </p>
       </div>

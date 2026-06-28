@@ -73,7 +73,7 @@ export function OrgSwitcher() {
             <ChevronsUpDown className="size-3 shrink-0 opacity-50" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="w-80">
+        <DropdownMenuContent align="start" className="w-96 max-w-[calc(100vw-2rem)]">
           <DropdownMenuLabel className="text-muted-foreground text-xs">Buildings</DropdownMenuLabel>
           <DropdownMenuGroup>
             {organizations.map((org) => {
