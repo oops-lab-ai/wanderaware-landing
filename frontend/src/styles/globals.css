@@ -65,8 +65,8 @@ These serve as the fallback; there is no separate default.css file. */
   --secondary-foreground: #12413d;
   --muted: #f1f5f3;
   --muted-foreground: #66736f;
-  --accent: #f97316;
-  --accent-foreground: #ffffff;
+  --accent: #fff0e6;
+  --accent-foreground: #9a3412;
   --destructive: #dc2626;
   --border: #dce6e3;
   --input: #dce6e3;
